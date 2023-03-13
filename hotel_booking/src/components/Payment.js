@@ -1,4 +1,4 @@
-import './Payment.css';
+import './assets/styles/Payment.css';
 
 const Payment = () => { 
 

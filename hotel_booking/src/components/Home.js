@@ -1,7 +1,7 @@
 import Navbar from "./Navbar";
 import SearchBar from "./Searchbar";
 
-import './Home.css';
+import './assets/styles/Home.css';
 import Footer from "./Footer";
 
 const Home = () => {

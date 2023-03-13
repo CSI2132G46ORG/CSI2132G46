@@ -40,7 +40,7 @@ app.use(express.json());
 app.get("/city", async(req, res) => {
     try {
         console.log(res.status);
-        const allLocations = await pool.query("SELECT id, city, country FROM hotelchain");
+        const allLocations = await pool.query("SELECT DISTINCT id, city, country FROM hotel");
         res.json(allLocations.rows);
     } catch (error) {
         console.log("err " +error.message);
