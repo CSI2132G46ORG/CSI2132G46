@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './styles/PeoplePicker.css';
 
 function PeoplePicker() {
   const [numPeople, setNumPeople] = useState(1);
@@ -9,19 +10,18 @@ function PeoplePicker() {
   };
 
   return (
-    <div>
-    <div>
-      <label htmlFor="num-people">Number of People:</label>
-    </div>
-    <div>
-      <input 
-        type="number" 
-        id="num-people" 
-        value={numPeople} 
-        onChange={handleNumPeopleChange} 
-      />
-    </div>
-
+    <div className="people-pickers-container">
+        <div className="people-picker">
+            <label htmlFor="num-people">Number of People:</label>
+        </div>
+        <div className="people-picker">
+            <input 
+                type="number" 
+                id="num-people" 
+                value={numPeople} 
+                onChange={handleNumPeopleChange} 
+            />
+        </div>
     </div>
 
   );

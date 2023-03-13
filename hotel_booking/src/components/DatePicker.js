@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
-import '../App.js'
 import 'react-datepicker/dist/react-datepicker.css';
+import './styles/DatePicker.css';
 
 function DatePickers() {
   const [checkInDate, setCheckInDate] = useState(null);
@@ -18,21 +18,23 @@ function DatePickers() {
   };
 
   return (
-    <div>
-      <div>
+    <div className="date-pickers-container">
+      <div className="date-picker">
         <label htmlFor="checkin">Check-in Date: </label>
         <DatePicker
           id="checkin"
           selected={checkInDate}
           onChange={handleCheckInDateChange}
+          dateFormat="dd/MM/yyyy"
         />
       </div>
-      <div>
+      <div className="date-picker">
         <label htmlFor="checkout">Check-out Date: </label>
         <DatePicker
           id="checkout"
           selected={checkOutDate}
           onChange={handleCheckOutDateChange}
+          dateFormat="dd/MM/yyyy"
         />
       </div>
     </div>
