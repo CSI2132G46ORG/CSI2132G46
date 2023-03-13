@@ -1,0 +1,14 @@
+.people-pickers-container {
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .people-picker {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+  }
+  
+  .people-picker label {
+    margin-bottom: 10px;
+  }
