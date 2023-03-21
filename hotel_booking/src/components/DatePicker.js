@@ -25,7 +25,7 @@ function DatePickers() {
           id="checkin"
           selected={checkInDate}
           onChange={handleCheckInDateChange}
-          dateFormat="dd/MM/yyyy"
+          dateFormat="yyyy/MM/dd"
         />
       </div>
       <div className="date-picker">

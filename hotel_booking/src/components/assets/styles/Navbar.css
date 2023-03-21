@@ -1,0 +1,73 @@
+.navbar{
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    padding-bottom: 4px;
+    z-index: 5;
+    transition: background-color 0.2s;
+}
+
+.navbar {
+    background-color: #fafafa;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.navbar.solid ul li a{
+    color: black;
+}
+
+.navbar ul li{
+    float: right;
+    padding-bottom: 2px;
+    color: blue;
+}
+
+.navbar .logo:hover{
+    color: blue;
+    transition: color 0.3s;
+}
+
+
+.navbar.solid .logo:hover{
+    color: black;
+    transition: color 0.3s;
+}
+
+.navbar ul li:last-child {
+    float: left;
+}
+
+.navbar ul li a{
+    display: block;
+    text-align: center;
+    padding: 10px 16px;
+    text-decoration: none;
+    color: blue;
+}
+
+.navbar ul li a:hover {
+    color: blue;
+    transition: color 0.3s;
+}
+
+.navbar ul{
+    list-style: none;
+    flex-grow: 1;
+}
+
+/*Booking*/
+
+.booking .navbar {
+    background-color: #fafafa;
+    /* padding-top: 60px; */
+    padding: 0 auto;
+    margin-bottom: 100px;
+    overflow: hidden;
+}
+
+.booking .navbar ul li a{
+    color: black;
+}
