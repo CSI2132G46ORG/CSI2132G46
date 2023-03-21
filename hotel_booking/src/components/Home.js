@@ -7,11 +7,12 @@ import Footer from "./Footer";
 const Home = () => {
     return (
         <div className="home">
-            {/* <Navbar/> */}
+            <Navbar/>
             <div>
+                <h1>Enjoy The Best Hotels in North America</h1>
                 <SearchBar/>
             </div>
-            {/* <Footer/> */}
+            <Footer/>
         </div>
     );
 };
