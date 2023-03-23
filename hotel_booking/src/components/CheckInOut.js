@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './styles/CheckInOut.css'
+import './assets/styles/CheckInOut.css'
 import DatePickers from './DatePicker';
 import PeoplePicker from './PeoplePicker';
 import SearchButton from './SearchButton';

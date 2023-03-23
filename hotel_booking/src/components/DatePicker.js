@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import './styles/DatePicker.css';
+import './assets/styles/DatePicker.css';
 
 function DatePickers() {
   const [checkInDate, setCheckInDate] = useState(null);

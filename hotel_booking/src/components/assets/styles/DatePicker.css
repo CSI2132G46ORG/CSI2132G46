@@ -1,0 +1,15 @@
+.date-pickers-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .date-picker {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+  }
+  
+  .date-picker label {
+    margin-bottom: 10px;
+  }

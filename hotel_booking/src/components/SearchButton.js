@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './styles/SearchButton.css';
+import './assets/styles/SearchButton.css';
 
 function SearchButton() {
 

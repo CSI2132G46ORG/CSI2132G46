@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './styles/PeoplePicker.css';
+import './assets/styles/PeoplePicker.css';
 
 function PeoplePicker() {
   const [numPeople, setNumPeople] = useState(1);

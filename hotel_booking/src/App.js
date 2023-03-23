@@ -1,14 +1,20 @@
+
+import './App.css';
+import  { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import Home from './components/Home.js';
 import React, {useState} from 'react';
-import './App.css'
 import CheckInOut from './components/CheckInOut';
 
 function App() {
   return (
-    <div className="App">
-      <div className="container">
-        <CheckInOut />
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route exact path='/reservio' element = {<Home/>}/>
+          <Route path='/checkinout' element={<CheckInOut/>}/>
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 
