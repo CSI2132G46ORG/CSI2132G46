@@ -1,6 +1,8 @@
+
 import './App.css';
 import  { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Home from './components/Home.js';
+import React, {useState} from 'react';
 import CheckInOut from './components/CheckInOut';
 
 function App() {
