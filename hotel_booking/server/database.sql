@@ -36,7 +36,7 @@ CREATE TABLE hotel (
     Postal_code_or_zip_code VARCHAR(255) NOT NULL,
     country VARCHAR(255) NOT NULL,
     contact_email VARCHAR(255) NOT NULL,
-    hotel_chain_id VARCHAR(10) NOT NULL,
+    hotel_chain_id INT NOT NULL,
     PRIMARY KEY (ID),
     FOREIGN KEY (hotel_chain_id) REFERENCES hotelChain(ID) ON DELETE CASCADE
 );
@@ -59,7 +59,7 @@ CREATE TABLE employee (
     country VARCHAR(255) NOT NULL,
     SSN_SIN INT NOT NULL UNIQUE,
     role VARCHAR(255) NOT NULL,
-    hotel_id VARCHAR(10) NOT NULL,
+    hotel_id INT NOT NULL,
     PRIMARY KEY (ID),
     FOREIGN KEY (hotel_id) REFERENCES hotel(ID) ON DELETE CASCADE
 );
@@ -76,16 +76,17 @@ CREATE TABLE room (
     View VARCHAR(255) NOT NULL CHECK(LOWER(View) IN ('sea', 'mountain')),
     Extended BOOLEAN NOT NULL,
     Problems BOOLEAN NOT NULL,
-    hotel_id VARCHAR(10) NOT NULL,
+    hotel_id INT NOT NULL,
     PRIMARY KEY (room_number, hotel_id),
     FOREIGN KEY (hotel_id) REFERENCES hotel(ID) ON DELETE CASCADE
 );
 
 CREATE TABLE amenity (
     room_number INT NOT NULL,
+    hotel_id INT NOT NULL,
     amenity VARCHAR(255) not NULL,
-    PRIMARY KEY (room_number, amenity),
-    FOREIGN KEY (room_number) REFERENCES room ON DELETE CASCADE
+    PRIMARY KEY (room_number, hotel_id, amenity),
+    FOREIGN KEY (room_number, hotel_id) REFERENCES room ON DELETE CASCADE
 );
 
 CREATE TABLE customer (
@@ -103,7 +104,7 @@ CREATE TABLE customer (
     PRIMARY KEY (id)
 );
 CREATE TABLE booking(
-    booking_id SERIAL NOT NULL AUTO_INCREMENT,
+    booking_id SERIAL,
     customer_id INT NOT NULL,
     room_id INT NOT NULL,
     hotel_id INT NOT NULL,
@@ -111,7 +112,7 @@ CREATE TABLE booking(
     checkout_date DATE NOT NULL,
     PRIMARY KEY (booking_id),
     FOREIGN KEY (customer_id) REFERENCES customer(ID),
-    FOREIGN KEY (room_id) REFERENCES room(room_number)
+    FOREIGN KEY (room_id, hotel_id) REFERENCES room(room_number, hotel_id)
 );
 CREATE TABLE renting (
     renting_id SERIAL NOT NULL,
@@ -121,11 +122,11 @@ CREATE TABLE renting (
     hotel_id INT NOT NULL,
     renting_date DATE NOT NULL,
     paid_for BOOLEAN NOT NULL,
-    booking_id VARCHAR(10),
+    booking_id INT NOT NULL,
     PRIMARY KEY (renting_id),
     FOREIGN KEY (employee_id) REFERENCES employee(ID),
     FOREIGN KEY (customer_id) REFERENCES customer(ID),
-    FOREIGN KEY (room_id) REFERENCES room(room_number),
+    FOREIGN KEY (room_id, hotel_id) REFERENCES room(room_number, hotel_id),
     FOREIGN KEY (booking_id) REFERENCES booking
 );
 CREATE TABLE booking_archive(
@@ -136,7 +137,7 @@ CREATE TABLE booking_archive(
     booking_date DATE NOT NULL,
     PRIMARY KEY (booking_id),
     FOREIGN KEY (customer_id) REFERENCES customer(ID),
-    FOREIGN KEY (room_id) REFERENCES room(room_number)
+    FOREIGN KEY (room_id, hotel_id) REFERENCES room(room_number, hotel_id)
 );
 
 CREATE TABLE renting_archive (
@@ -151,7 +152,7 @@ CREATE TABLE renting_archive (
     PRIMARY KEY (renting_id),
     FOREIGN KEY (employee_id) REFERENCES employee(ID),
     FOREIGN KEY (customer_id) REFERENCES customer(ID),
-    FOREIGN KEY (room_id) REFERENCES room(room_number),
+    FOREIGN KEY (room_id, hotel_id) REFERENCES room(room_number, hotel_id),
     FOREIGN KEY (booking_id) REFERENCES booking
 );
 
@@ -516,3 +517,24 @@ INSERT INTO customer(id, full_name, street_address, city, province_or_state, Pos
 VALUES (1, 'Ralph', '123 ex st', 'Ottawa', 'ON', 'K1J 5N2', 'Canada', '1102345646', 'ralph@ex.com', 'pompei', '2023-03-20');
 
 -- --------------Employees---------------------------------------------
+
+-- ----------------------------Amenities ---------------------------------
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 1, "Wifi, Free Breakfast, Pool");
+
+-- ----------------------------hotel chain emails ---------------------------------
+-- ----------------------------hotel emails ---------------------------------
+--- ----------------------------hotel phone numbers ---------------------------------
+
+-------------------QUERIES---------------------------------------------
+
+WITH hotel_room AS (SELECT * FROM hotel AS h INNER JOIN Room AS r ON h.id = r.hotel_id),
+    room_amenity AS (SELECT * FROM room INNER JOIN amenity ON room.room_number =amenity.room_number AND room.hotel_id=amenity.hotel_id),
+    hotel_hotel_chain AS (SELECT * FROM hotel INNER JOIN hotelChain ON hotel.id = hotelchain.id)
+
+SELECT * FROM hotel_room; 
+WHERE category IN () AND capacity = '' AND PRICE BETWEEN MIN AND MAX
+AND VIEW IN ('VALUE') AND EXTENDED IN ("TRUE/FALSE") AND number_of_rooms = VAL
+AND room_number IN (SELECT room_number FROM room_amenity WHERE amenity IN (""))
+AND room_number NOT IN (SELECT room_number FROM Booking WHERE check_in_date <= '' 
+OR check_out_date <= '')
+AND id in (SELECT id FROM hotel_hotel_chain WHERE name in (""));

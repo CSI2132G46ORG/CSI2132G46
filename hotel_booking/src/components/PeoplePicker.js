@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import './assets/styles/PeoplePicker.css';
 
-function PeoplePicker() {
+function PeoplePicker(props) {
   const [numPeople, setNumPeople] = useState(1);
 
   const handleNumPeopleChange = data => {
-    console.log("Number of people selected: ", data.target.value);
-    setNumPeople(data.target.value);
+    const val = data.target.value;
+    console.log("Number of people selected: ", val);
+    setNumPeople(val);
+    props.setNumPeople(val);
   };
 
   return (
