@@ -3,18 +3,24 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './assets/styles/DatePicker.css';
 
-function DatePickers() {
-  const [checkInDate, setCheckInDate] = useState(null);
-  const [checkOutDate, setCheckOutDate] = useState(null);
+function DatePickers(props) {
+  const [checkInDate, setCheckIn] = useState(props.defaultCheckIn);
+  const [checkOutDate, setCheckOut] = useState(props.defaultCheckOut);
 
   const handleCheckInDateChange = date => {
-    console.log("Selected check in date: ", date);
-    setCheckInDate(date);
+    const d = new Date(date).toLocaleDateString('fr-FR');
+    var newdate = d.split("/").reverse().join("/");
+    console.log("Selected check in date: ", newdate);
+    setCheckIn(new Date(newdate));
+    props.setCheckInDate(new Date(newdate));
   };
 
   const handleCheckOutDateChange = date => {
-    console.log("Selected check out date: ", date);
-    setCheckOutDate(date);
+    const d = new Date(date).toLocaleDateString('fr-FR');
+    var newdate = d.split("/").reverse().join("/");
+    console.log("Selected check in date: ", newdate);
+    setCheckOut(new Date(newdate));
+    props.setCheckOutDate(new Date(newdate));
   };
 
   return (
@@ -24,6 +30,7 @@ function DatePickers() {
         <DatePicker
           id="checkin"
           selected={checkInDate}
+          placeholderText="Select Date"
           onChange={handleCheckInDateChange}
           dateFormat="yyyy/MM/dd"
         />
@@ -33,8 +40,9 @@ function DatePickers() {
         <DatePicker
           id="checkout"
           selected={checkOutDate}
+          placeholderText="Select Date"
           onChange={handleCheckOutDateChange}
-          dateFormat="dd/MM/yyyy"
+          dateFormat="yyyy/MM/dd"
         />
       </div>
     </div>

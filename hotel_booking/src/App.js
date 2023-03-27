@@ -6,6 +6,7 @@ import Signin from './components/SignIn';
 import CreateCustomer from './components/CreateCustomer';
 import { useState } from 'react';
 import Filter from './components/Filter';
+import Payment from './components/Payment';
 
 function App() {
   const [token, setToken] = useState();
@@ -18,6 +19,7 @@ function App() {
           <Route path='/login' element={<Signin/>} setToken={setToken}/>
           <Route path='/signup' element={<CreateCustomer/>}/>
           <Route path='/filter' element={<Filter/>}/>
+          <Route path='/bookaroom' element={<Payment/>}/>
         </Routes>
       </div>
     </Router>
