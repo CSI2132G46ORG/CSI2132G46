@@ -1,45 +1,52 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './assets/styles/SignIn.css'
+import useToken from './useToken';
 
 const Signin = () => {
-    // const [token, setToken] = useState();
     const [username, setEmail] = useState();
     const [password, setPassword] = useState();
+    const { token, setToken } = useToken();
+    const port = 5000;
+
+    async function loginUser (email, password) {
+
+        const res = await fetch(`http://localhost:${port}/customers/${email}/${password}`, { method: 'GET' });
+        const data = await res.json();
+        console.log(data);
+        if (data.length == 0) {
+            console.log('user not found');
+            return null;
+        }
+        else {
+            const body = {email, password};
+            return await fetch(`http://localhost:${port}/login`, {
+                    method: 'POST',
+                    headers: {"content-type": "application/JSON"},
+                    body: JSON.stringify(body)
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log('data', data[0]);
+                return data;
+            });
+                
+        }
 
 
-    async function loginUser(credentials) {
-        return fetch('http://localhost:5000/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(credentials)
-        })
-          .then(data => data.json())
-    }
-
-    function setToken(userToken) {
-        sessionStorage.setItem('token', JSON.stringify(userToken));
-    }
-
-    function getToken() {
-        const tokenString = sessionStorage.getItem('token');
-        const userToken = JSON.parse(tokenString);
-        return userToken?.token
     }
 
     const handleSubmit  = async e => {
         e.preventDefault();
-        const token = await loginUser({
-            username,
-            password
-          });
-        setToken(token);
+        loginUser(username, password)
+        .then((res) => {
+            console.log('res', res);
+            
+            if(res!=null) setToken(res);
+         }
+        );
     };
     
-    const token = getToken();
-
 
     if(!token){
         return (
@@ -54,7 +61,7 @@ const Signin = () => {
             </div>
         );
     }
-    else{
+    else {
         return(
             <div>
                 <h1>You're connected</h1>

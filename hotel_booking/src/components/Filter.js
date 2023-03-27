@@ -78,7 +78,7 @@ const Filter = () => {
         .then(data => {
             console.log(data);
             setResults(data);
-        });;
+        });
         // console.log(results);
         // console.log("results updated");
     };

@@ -133,6 +133,21 @@ app.get("/customers/:email", async (req, res) => {
     }
 });
 
+// Get Customer by email and password
+app.get("/customers/:email/:password", async (req, res) => {
+    try {
+        const email = req.params['email'];
+        const password = req.params['password'];
+        const query = `SELECT email, passwrd FROM customer WHERE email='${email}' AND passwrd='${password}'`;
+        console.log(req.params);
+        const customer = await pool.query(query);
+        res.json(customer.rows);
+        console.log(customer.rows);
+    } catch (error) {
+        
+    }
+});
+
 //Get existing cities and countries
 
 app.get("/city", async(req, res) => {
