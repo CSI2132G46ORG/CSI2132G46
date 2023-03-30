@@ -7,7 +7,7 @@ const HotelCard = (props) => {
     return (
         <div className="hotelCard">
             <h3>{title}</h3>
-            <p>{price}</p>
+            $<p>{price}</p>
         </div>
     );
 };

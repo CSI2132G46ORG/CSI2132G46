@@ -1,0 +1,8 @@
+.payment {
+    display: block;
+    margin: auto;
+    width: 50%;
+}
+.payment input {
+    display: block;
+}

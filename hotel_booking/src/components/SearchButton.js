@@ -18,7 +18,8 @@ function SearchButton(props) {
             navigate("/filter", {state: {
                 checkIn: props.checkInDate,
                 checkOut: props.checkOutDate,
-                ppl: props.numPeople
+                ppl: props.numPeople,
+                area: props.area
             }});
           }, 200);
         }
@@ -36,7 +37,6 @@ function SearchButton(props) {
         <div className="search-button-container">
             <button className="search-button" onClick={handleSearchButtonClick}>Search</button>
         </div>
-    
       );
     }
     

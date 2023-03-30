@@ -6,6 +6,7 @@
 
 .row {
     display: flex;
+    margin-top: 40px;
     width: 80%;
 }
 
@@ -19,6 +20,14 @@
 
 .priceForm input{
     display: inline;
-    max-width: 240px;
+    max-width: 220px;
     margin-left: 10px;
+}
+
+.filterpage .searchBar {
+    display: inline-block;
+    width: 400px;   
+}
+.filterpage .search-button-container{
+    display: inline-flex;
 }

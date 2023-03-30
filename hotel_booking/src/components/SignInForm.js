@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './assets/styles/SignIn.css'
-import useToken from './useToken';
+import { useState } from "react";
+import useToken from "./useToken";
 
-const Signin = () => {
+const SignInForm = (props) => {
+
     const [username, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [type, setType] = useState(props.type);
     const { token, setToken } = useToken();
     const port = 5000;
 
     async function loginUser (email, password) {
 
-        const res = await fetch(`http://localhost:${port}/customers/${email}/${password}`, { method: 'GET' });
+        const res = await fetch(`http://localhost:${port}/${type}/${email}/${password}`, { method: 'GET' });
         const data = await res.json();
         console.log(data);
         if (data.length == 0) {
@@ -19,7 +19,7 @@ const Signin = () => {
             return null;
         }
         else {
-            const body = {email, password};
+            const body = data[0];
             return await fetch(`http://localhost:${port}/login`, {
                     method: 'POST',
                     headers: {"content-type": "application/JSON"},
@@ -29,10 +29,10 @@ const Signin = () => {
             .then(data => {
                 console.log('data', data[0]);
                 return data;
-            });
+            })
+            ;
                 
         }
-
 
     }
 
@@ -46,29 +46,14 @@ const Signin = () => {
          }
         );
     };
-    
 
-    if(!token){
-        return (
-            <div className="login">
-                <form onSubmit={handleSubmit}>
+    return (
+    <form onSubmit={handleSubmit}>
                     <h1>Sign in</h1>
                     <input type="email" placeholder='Email address' onChange={e => setEmail(e.target.value)} required/>
                     <input type="password" placeholder='password' onChange={e => setPassword(e.target.value)} required/>
                     <input type="submit" value="sign in"/>
-                </form>
-                <p>Don't have an account? <Link to='/signup'> Create one </Link></p>
-            </div>
-        );
-    }
-    else {
-        return(
-            <div>
-                <h1>You're connected</h1>
-            </div>
-        );
-    }
-    
+    </form>
+    );
 };
-
-export default Signin;
+export default SignInForm;
