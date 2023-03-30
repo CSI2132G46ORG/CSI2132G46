@@ -3,16 +3,23 @@ import { useLocation } from 'react-router-dom';
 import './assets/styles/Filter.css';
 import Checkbox from './Checkbox';
 import DatePickers from './DatePickers.js';
+import Footer from './Footer';
 import HotelCard from './HotelCard';
 import Navbar from './Navbar.js';
 import PeoplePicker from './PeoplePicker.js';
+import SearchBar from './Searchbar';
 import SearchButton from './SearchButton.js';
+import useToken from './useToken';
 
 const Filter = () => {
     const port = 5000;
     const location = useLocation();
     var providedCheckIn= (location.state!=null && location.state.checkIn !=null) ? location.state.checkIn:new Date();
     var providedCheckout = (location.state!=null && location.state.checkOut !=null) ? location.state.checkOut:new Date();
+    var providedArea = (location.state!=null && location.state.area !=null) ? location.state.area:'Ottawa, Canada';
+    // var tempLocation = providedArea.split(',');
+    // var tempCity = tempLocation[0].trim();
+    // var tempCountry = tempLocation[1].trim();
     // console.log(providedCheckout);
 
 
@@ -23,14 +30,17 @@ const Filter = () => {
     const [hotelchains, setHotelChains] = useState([]);
     const [selectedChains, setselectedChains] = useState([]);
     const [numRooms, setNumRooms] = useState();
-    const [country, setCountry] = useState("");
-    const [city, setCity] = useState("");
+    // const [country, setCountry] = useState(tempCountry);
+    // const [city, setCity] = useState(tempCity);
+    const [area, setArea] = useState(providedArea);
     const [checkInDate, setCheckInDate] = useState(providedCheckIn);
     const [checkOutDate, setCheckOutDate] = useState(providedCheckout);
     const [category, setCategory] = useState("");
     const [results, setResults] = useState([]);
+    const { token, setToken } = useToken();
 
-    if (location.state==null) {
+
+    if (true) {
         var d = new Date(providedCheckIn).toLocaleDateString('fr-FR');
         providedCheckIn= d.split("/").reverse().join("/").replace(/\//g, "_");
         d = new Date(providedCheckout).toLocaleDateString('fr-FR');
@@ -46,17 +56,15 @@ const Filter = () => {
         view: "",
         extended: "",
         hotelchains: "",
-        country: "",
-        city: "",
+        area: area,
         category: "",
-        results: "",
         capacity: "",
         checkInDate: providedCheckIn,
         checkOutDate: providedCheckout,
         numRooms: ""
     });
      
-    // console.log(checkInDate);
+    console.log('criteria ', criteria);
 
     const updateResult = () => {
         const keys = Object.keys(criteria);
@@ -76,7 +84,7 @@ const Filter = () => {
         fetch(`http://localhost:${port}/hotels/${combined}`, {method: 'GET' })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
+            console.log('results ', data);
             setResults(data);
         });
         // console.log(results);
@@ -245,6 +253,14 @@ const Filter = () => {
             checkOutDate: checkOutStr
         });
     };
+
+    const updateArea = (area) => {
+        setArea(area);
+        setCriteria({
+            ...criteria,
+            area: area
+        });
+    };
     
     useEffect(() => {
         findHotelChains();
@@ -253,9 +269,11 @@ const Filter = () => {
          [criteria]);
 
     return (
-        <div className='filterpage'>
-            {/* <Navbar/> */}
+        <div className='filterpage' style={{paddingTop: "90px"}}>
+            <Navbar token={token}/>
+            
             <div>
+                <SearchBar setArea={updateArea} area={area}/>
                 <DatePickers setCheckInDate={setCheckInDate} setCheckOutDate={setCheckOutDate} defaultCheckIn ={checkInDate} defaultCheckOut={checkOutDate}/>
                 {/* <PeoplePicker /> */}
                 <SearchButton updateDates={updateDates}/>
@@ -367,17 +385,17 @@ const Filter = () => {
                     </div>
                 </div>
                 <div className='col-1-of-2'>
-                    {/* <HotelCard/> */}
                     {
                         results.map((hotelObj) => {
                             return (
-
-                                <HotelCard key = {hotelObj.hotel_id} title = {hotelObj.name} price = {hotelObj.price}/>
+                                
+                                <HotelCard key = {hotelObj.hotel_id} title = {hotelObj.name} price = {hotelObj.min}/>
                             );
                         })
                     }
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 };

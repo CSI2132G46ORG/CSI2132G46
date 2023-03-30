@@ -10,8 +10,9 @@ app.use(express.json());
 
 
 app.use('/login', async (req, res) => {
+    console.log('params', req.body);
     res.send({
-      token: 'test123'
+      token: req.body
     });
 
     console.log("token send");
@@ -134,11 +135,26 @@ app.get("/customers/:email", async (req, res) => {
 });
 
 // Get Customer by email and password
+app.get("/employees/:email/:password", async (req, res) => {
+    try {
+        const email = req.params['email'];
+        const password = req.params['password'];
+        const query = `SELECT full_name FROM employee WHERE email='${email}' AND passwrd='${password}'`;
+        console.log(req.params);
+        const customer = await pool.query(query);
+        res.json(customer.rows);
+        console.log(customer.rows);
+    } catch (error) {
+        
+    }
+});
+
+// Get Customer by email and password
 app.get("/customers/:email/:password", async (req, res) => {
     try {
         const email = req.params['email'];
         const password = req.params['password'];
-        const query = `SELECT email, passwrd FROM customer WHERE email='${email}' AND passwrd='${password}'`;
+        const query = `SELECT full_name FROM customer WHERE email='${email}' AND passwrd='${password}'`;
         console.log(req.params);
         const customer = await pool.query(query);
         res.json(customer.rows);
@@ -244,6 +260,7 @@ app.get("/hotels/:criteria", async(req, res) => {
         var extendedCond = "";
         var capCond = "";
         var whereStatement = "";
+        var areaCond = "";
         
         var c1 = 0;
         var c2 = 0;
@@ -286,9 +303,17 @@ app.get("/hotels/:criteria", async(req, res) => {
             capCond = ` AND LOWER(capacity) IN (${val})`;
         }
 
+        if (criteriaObj.area != ''){
+            // const val = parseString(criteriaObj.city);
+            const areaArr = criteriaObj.area.split(',');
+            const city = areaArr[0].trim().toLowerCase();
+            const country = areaArr[1].trim().toLowerCase();
+
+            areaCond = ` AND lower(hr.city) = '${city}' AND lower(hr.country) = '${country}'`;  
+        }
+
         if (c1>0) whereStatement = "WHERE";
 
-        let hotelchains = [];
         const queryStatement = `
             WITH hotel_room AS (SELECT h.id as hotel_id, h.category, h.number_of_rooms, h.street_address,
                  h.city, h.province_or_state, h.postal_code_or_zip_code, h.country, h.contact_email,
@@ -304,18 +329,19 @@ app.get("/hotels/:criteria", async(req, res) => {
                      hc.province_or_state, hc.postal_code_or_zip_code, hc.country, hc.number_of_hotels FROM hotel as h INNER JOIN hotelChain as hc ON h.id = hc.id)
     
 
-            SELECT * FROM hotel_room as hr
+            SELECT hr.hotel_id, MIN(hr.price), hc.name FROM hotel_room as hr
             INNER JOIN hotelChain as hc ON  hc.id = hr.hotel_chain_id
             WHERE PRICE BETWEEN ${minPrice} AND ${maxPrice} ${categoryCond} ${capCond} 
-            ${viewCond} ${extendedCond} ${numRoomCond}
+            ${viewCond} ${extendedCond} ${numRoomCond} ${areaCond}
             AND room_number IN (SELECT room_number FROM room_amenity ${amenityCond})
             AND hr.hotel_chain_id in (SELECT id FROM hotel_hotel_chain ${hotelChainCond})
             AND room_number NOT IN (SELECT room_id FROM Booking WHERE (checkout_date >= '${checkIn}' AND checkout_date <= '${checkOut}') 
             OR (checkin_date >= '${checkIn}' AND checkin_date <='${checkOut}') OR (checkin_date <='${checkIn}' AND checkout_date >='${checkOut}'))
+            GROUP BY hr.hotel_id, hc.name
         `;
         console.log(queryStatement);
         const hotels = await pool.query(queryStatement);
-        // console.log("results, ", hotels.rows);
+        console.log("results, ", hotels.rows);
         res.json(hotels.rows);
     } catch (error) {
         console.error(error);

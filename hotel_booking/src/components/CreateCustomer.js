@@ -71,16 +71,16 @@ const CreateCustomer = () => {
         <div className="signUp">
             <h1>Create an account</h1>
             <form onSubmit={onSubmitForm}>
-                <input type="email" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} required/>
-                <input type="text" placeholder="enter your name" value={name} onChange={e => setName(e.target.value)} required/>
-                <input type="text" placeholder="street address" value={address} onChange={e => setAddress(e.target.value)} required/>
-                <input type="text" placeholder="city" value={city} onChange={e => setCity(e.target.value)} required/>
-                <input type="text" placeholder="province or state" value={provOrState} onChange={e => setProvorState(e.target.value)} required/>
-                <input type="text" placeholder="postal code or zip code" value={postOrZip} onChange={e => setPostOrZip(e.target.value)} required/>
+                <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required/>
+                <input type="text" placeholder="Enter your name" value={name} onChange={e => setName(e.target.value)} required/>
+                <input type="text" placeholder="Street address" value={address} onChange={e => setAddress(e.target.value)} required/>
+                <input type="text" placeholder="City" value={city} onChange={e => setCity(e.target.value)} required/>
+                <input type="text" placeholder="Province or State" value={provOrState} onChange={e => setProvorState(e.target.value)} required/>
+                <input type="text" placeholder="Postal code or Zip code" value={postOrZip} onChange={e => setPostOrZip(e.target.value)} required/>
                 <input type="text" placeholder="Country" value={country} onChange={e => setCountry(e.target.value)} required/>
                 <input type="text" placeholder="SSN or SIN" value={ssn_sin} onChange={e => setSsnSin(e.target.value)} required/>
-                <input type="password" placeholder='password'  required/>
-                <input type="password" placeholder='confirm password' value={password} onChange={e => setPassword(e.target.value)} required/>
+                <input type="password" placeholder='Create a New Password'  required/>
+                <input type="password" placeholder='Confirm password' value={password} onChange={e => setPassword(e.target.value)} required/>
                 <input type='submit' value='continue'/>
             </form>
         </div>

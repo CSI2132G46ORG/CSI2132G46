@@ -12,7 +12,7 @@ const formatResult = (item) => {
     )
 };
 
-const SearchBar = () => {
+const SearchBar = (props) => {
 
     const [items, setItems] = useState([]);
 
@@ -45,13 +45,18 @@ const SearchBar = () => {
     const navigate = useNavigate();
 
     const onSelect = (e) => {
-        console.log(e);
-        setTimeout(() => {
-            navigate("/checkinout", {state: {
-                chosenLocation: e
-            }});
-        }, 500);
-        
+        console.log('selected area ', e.name);
+
+        if(window.location.pathname==="/reservio"){
+            setTimeout(() => {
+                navigate("/checkinout", {state: {
+                    chosenLocation: e
+                }});
+            }, 500);
+        }
+        else {
+            props.setArea(e.name);
+        }
     };
 
     return (
@@ -60,7 +65,9 @@ const SearchBar = () => {
             items={items}
             onSelect={onSelect}
             autoFocus
+            inputSearchString={props.area}
             formatResult={formatResult}
+            placeholder='Going to'
             />
         </div>
     );
