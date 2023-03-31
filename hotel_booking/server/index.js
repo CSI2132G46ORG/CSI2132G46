@@ -334,9 +334,12 @@ app.get("/hotels/:criteria", async(req, res) => {
             ${viewCond} ${extendedCond} ${numRoomCond} ${areaCond}
             AND room_number IN (SELECT room_number FROM room_amenity ${amenityCond})
             AND hr.hotel_chain_id in (SELECT id FROM hotel_hotel_chain ${hotelChainCond})
-            AND room_number NOT IN (SELECT room_id FROM Booking WHERE (checkout_date >= '${checkIn}' AND checkout_date <= '${checkOut}') 
+            AND (room_number, hr.hotel_id) NOT IN (SELECT room_id, hotel_id  FROM Booking WHERE (checkout_date >= '${checkIn}' AND checkout_date <= '${checkOut}') 
+            OR (checkin_date >= '${checkIn}' AND checkin_date <='${checkOut}') OR (checkin_date <='${checkIn}' AND checkout_date >='${checkOut}'))
+            AND (room_number, hr.hotel_id) NOT IN (SELECT room_id, hotel_id FROM Renting WHERE (checkout_date >= '${checkIn}' AND checkout_date <= '${checkOut}') 
             OR (checkin_date >= '${checkIn}' AND checkin_date <='${checkOut}') OR (checkin_date <='${checkIn}' AND checkout_date >='${checkOut}'))
             GROUP BY hr.hotel_id, hc.name
+            
         `;
         // console.log(queryStatement);
         const hotels = await pool.query(queryStatement);
@@ -380,6 +383,7 @@ app.get("/rooms/:location", async(req, res) => {
     }
 });
 
+//booking -> booking archive
 app.get("/lastbooking", async(req, res) => {
     try {
 
@@ -393,6 +397,15 @@ app.get("/lastbooking", async(req, res) => {
         const booking = await pool.query(queryStatement);
         console.log("last booking, ", booking.rows);
         res.json(booking.rows);
+    } catch (error) {
+        
+    }
+});
+
+//renting -> renting_archive
+app.get("/lastrenting", async(req, res) => {
+    try {
+        
     } catch (error) {
         
     }
@@ -518,7 +531,7 @@ app.delete("/customer/:id", async (req, res) => {
 });
 
 // Port through which connection is established with server
-const port= 5000;
+const port= 5100;
 
 
 app.listen(port, () => {
