@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import './assets/styles/SignInForm.css'
 import useToken from "./useToken";
 
 const SignInForm = (props) => {
@@ -7,6 +9,7 @@ const SignInForm = (props) => {
     const [password, setPassword] = useState();
     const [type, setType] = useState(props.type);
     const { token, setToken } = useToken();
+    const navigate = useNavigate();
     const port = 5000;
 
     async function loginUser (email, password) {
@@ -40,9 +43,16 @@ const SignInForm = (props) => {
         e.preventDefault();
         loginUser(username, password)
         .then((res) => {
-            console.log('res', res);
+            console.log('res', res.token);
             
             if(res!=null) setToken(res);
+            if (type==="customers"){
+                navigate('/reservio', { replace: true });
+            }
+            else {
+                /*This should redirect to the employee's page */
+
+            }
          }
         );
     };

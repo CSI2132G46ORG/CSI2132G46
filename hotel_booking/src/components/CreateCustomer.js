@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './assets/styles/CreateCustomer.css';
+import useToken from './useToken';
 
 const CreateCustomer = () => {
 
@@ -12,6 +13,7 @@ const CreateCustomer = () => {
     const [postOrZip, setPostOrZip] = useState('');
     const [country, setCountry] = useState('');
     const [ssn_sin, setSsnSin] = useState('');
+    const { token, setToken } = useToken();
     const port = 5000;
 
 
@@ -19,7 +21,7 @@ const CreateCustomer = () => {
         e.preventDefault();
         try {
 
-            const res = await fetch(`http://localhost:${port}/customers/${email}`, {method: 'GET' })
+            await fetch(`http://localhost:${port}/customers/${email}`, {method: 'GET' })
             .then(d => {
                 return d.json();
             })
@@ -37,10 +39,33 @@ const CreateCustomer = () => {
                     body: JSON.stringify(body)
                 });
                 
-
-                console.log(response);
+                
+                // console.log(response);
+                return response;    
+            }
+            })
+            .then((data) => {
+                if (data.status==200){
+                    fetch(`http://localhost:${port}/customers/${email}`, {method: 'GET' })
+                    .then(d => {
+                        return d.json();
+                    })
+                    .then((data) => {
+                        const id = data[0].id;
+                        const full_name = data[0].full_name;
+                        setToken(
+                            {token: {
+                                id: id,
+                                full_name: full_name
+                            }}
+                        );
+                    }
+                    );
+                    
                 }
-            });
+            }
+                
+            );
 
             // console.log(user);
            

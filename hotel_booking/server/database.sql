@@ -58,7 +58,8 @@ CREATE TABLE employee (
     Postal_code_zip_code VARCHAR(255) NOT NULL,
     country VARCHAR(255) NOT NULL,
     SSN_SIN INT NOT NULL UNIQUE,
-    
+    email VARCHAR(255) NOT NULL UNIQUE,
+    passwrd VARCHAR(255) NOT NULL,
     role VARCHAR(255) NOT NULL,
     hotel_id INT NOT NULL,
     PRIMARY KEY (ID),
@@ -111,6 +112,7 @@ CREATE TABLE booking(
     hotel_id INT NOT NULL,
     checkin_date DATE NOT NULL,
     checkout_date DATE NOT NULL,
+    booking_date DATE NOT NULL DEFAULT CURRENT_DATE,
     PRIMARY KEY (booking_id),
     FOREIGN KEY (customer_id) REFERENCES customer(ID),
     FOREIGN KEY (room_id, hotel_id) REFERENCES room(room_number, hotel_id)
@@ -416,10 +418,10 @@ INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id)
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 100, 'queen', 'sea', FALSE, FALSE, 21);
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 150, 'Queen', 'sea', FALSE, TRUE, 21);
 
-INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 120, 'single', 'sea', TRUE, TRUE, 22);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 120, 'single', 'sea', FALSE, TRUE, 22);
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 130, 'Double', 'sea', FALSE, FALSE, 22);
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 140, 'Queen', 'mountain', FALSE, FALSE, 22);
-INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 160, 'king', 'mountain', TRUE, TRUE, 22);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 160, 'king', 'mountain', FALSE, TRUE, 22);
 
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 170, 'single', 'sea', TRUE, TRUE, 23);
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 180, 'double', 'sea', FALSE, FALSE, 23);
@@ -518,6 +520,8 @@ INSERT INTO customer(id, full_name, street_address, city, province_or_state, Pos
 VALUES (1, 'Ralph', '123 ex st', 'Ottawa', 'ON', 'K1J 5N2', 'Canada', '1102345646', 'ralph@ex.com', 'pompei', '2023-03-20');
 
 -- --------------Employees---------------------------------------------
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (1, 'Tom', '123 ex st', 'Ottawa', 'ON', 'K1J 5N2', 'Canada', '15415112', 'tom@ex.com', 'pompei', '2023-03-30');
 
 -- ----------------------------Amenities ---------------------------------
 INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 1, 'Wifi');
