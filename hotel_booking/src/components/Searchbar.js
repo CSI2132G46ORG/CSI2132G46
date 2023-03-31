@@ -19,7 +19,7 @@ const SearchBar = (props) => {
 
     const getItems = async () => {
         try {
-            const response = await fetch("http://localhost:5000/city");
+            const response = await fetch("http://localhost:5100/city");
             const jsonData = await response.json();
             const tempArr = [];
             for (let i = 0; i < jsonData.length; i++){
