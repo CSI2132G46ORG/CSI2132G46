@@ -7,7 +7,7 @@ const Checkbox = (props) => {
     
     return (
         <div>
-            <input className={props.objClass} type="checkbox" id={name} name={name} value={value} onChange={props.onChange}/>
+            <input className={props.objClass} type="checkbox" id={name} name={name} value={`'${value}'`} onChange={props.onChange}/>
             <label htmlFor={name}>{value}</label><br/>
         </div>
     );

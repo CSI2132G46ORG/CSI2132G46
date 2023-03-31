@@ -38,6 +38,7 @@ const Filter = () => {
     const [category, setCategory] = useState("");
     const [results, setResults] = useState([]);
     const { token, setToken } = useToken();
+    const [totalNumberOfRooms, setTotalNumberOfRooms] = useState();
 
 
     if (true) {
@@ -97,6 +98,15 @@ const Filter = () => {
         .then(data => {
             // console.log(data);
             setHotelChains(data);
+        });
+        
+    };
+    const findNumberofRooms = () => {
+        fetch(`http://localhost:${port}/rooms/${area}`, {method: 'GET'})
+        .then(res => res.json())
+        .then(data => {
+            console.log('rooms ', data);
+            setTotalNumberOfRooms(data[0].count);
         });
         
     };
@@ -265,6 +275,9 @@ const Filter = () => {
     useEffect(() => {
         findHotelChains();
     }, []);
+    useEffect(()=>{
+        findNumberofRooms();
+    }, [area]);
     useEffect(() => {updateResult()},
          [criteria]);
 
@@ -337,15 +350,15 @@ const Filter = () => {
                     <div>
                         <h5>Amenities</h5>
                         <form>
-                            <input className='amenity' type="checkbox" id="amenity1" name="amenity1" value="Wifi" onChange={updateAmenities}/>
+                            <input className='amenity' type="checkbox" id="amenity1" name="amenity1" value="'Wifi'" onChange={updateAmenities}/>
                             <label htmlFor="amenity1">Wifi</label><br/>
-                            <input className='amenity' type="checkbox" id="amenity2" name="amenity2" value="Free BreakFast" onChange={updateAmenities}/>
+                            <input className='amenity' type="checkbox" id="amenity2" name="amenity2" value="'Free BreakFast'" onChange={updateAmenities}/>
                             <label htmlFor="amenity2">Free BreakFast</label><br/>
-                            <input className='amenity' type="checkbox" id="amenity3" name="amenity3" value="Free Parking" onChange={updateAmenities}/>
+                            <input className='amenity' type="checkbox" id="amenity3" name="amenity3" value="'Free Parking'" onChange={updateAmenities}/>
                             <label htmlFor="amenity3">Free Parking</label><br/>
-                            <input className='amenity' type="checkbox" id="amenity4" name="amenity4" value="Pool" onChange={updateAmenities}/>
+                            <input className='amenity' type="checkbox" id="amenity4" name="amenity4" value="'Pool'" onChange={updateAmenities}/>
                             <label htmlFor="amenity4">Pool</label><br/>
-                            <input className='amenity' type="checkbox" id="amenity5" name="amenity5" value="AC" onChange={updateAmenities}/>
+                            <input className='amenity' type="checkbox" id="amenity5" name="amenity5" value="'AC'" onChange={updateAmenities}/>
                             <label htmlFor="amenity5">AC</label><br/>
                             {/* <input type="submit" value="Submit"/> */}
                         </form>
@@ -353,22 +366,22 @@ const Filter = () => {
                     <div>
                         <h5>Capacity</h5>
                         <form>
-                            <input className='capacity' type="checkbox" id="capacity1" name="capacity1" value="Single" onChange={updateCapacity}/>
+                            <input className='capacity' type="checkbox" id="capacity1" name="capacity1" value="'Single'" onChange={updateCapacity}/>
                             <label htmlFor="capacity1">Single</label><br/>
-                            <input className='capacity' type="checkbox" id="capacity2" name="capacity2" value="Double" onChange={updateCapacity}/>
+                            <input className='capacity' type="checkbox" id="capacity2" name="capacity2" value="'Double'" onChange={updateCapacity}/>
                             <label htmlFor="capacity2">Double</label><br/>
-                            <input className='capacity' type="checkbox" id="capacity3" name="capacity3" value="Queen" onChange={updateCapacity}/>
+                            <input className='capacity' type="checkbox" id="capacity3" name="capacity3" value="'Queen'" onChange={updateCapacity}/>
                             <label htmlFor="capacity3">Queen</label><br/>
-                            <input className='capacity' type="checkbox" id="capacity4" name="capacity4" value="King" onChange={updateCapacity}/>
+                            <input className='capacity' type="checkbox" id="capacity4" name="capacity4" value="'King'" onChange={updateCapacity}/>
                             <label htmlFor="capacity4">King</label><br/>
                         </form>
                     </div>
                     <div>
                         <h5>View</h5>
                         <form>
-                            <input className='view' type="checkbox" name="view1" value="Sea" onChange={updateView}/>
+                            <input className='view' type="checkbox" name="view1" value="'Sea'" onChange={updateView}/>
                             <label htmlFor="view1">Sea</label><br/>
-                            <input className='view' type="checkbox" name="view2" value="Mountain" onChange={updateView}/>
+                            <input className='view' type="checkbox" name="view2" value="'Mountain'" onChange={updateView}/>
                             <label htmlFor="view2">Mountain</label><br/>
                             {/* <input type="submit" value="Submit"/> */}
                         </form>
@@ -385,10 +398,10 @@ const Filter = () => {
                     </div>
                 </div>
                 <div className='col-1-of-2'>
+                    <p>The Number of Rooms in {area}: {totalNumberOfRooms}</p>
                     {
                         results.map((hotelObj) => {
                             return (
-                                
                                 <HotelCard key = {hotelObj.hotel_id} title = {hotelObj.name} price = {hotelObj.min}/>
                             );
                         })

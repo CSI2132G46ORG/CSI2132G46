@@ -24,11 +24,32 @@ app.use('/login', async (req, res) => {
 /*-----------------POST ---------------------- */
 
 //Create booking
-app.post("/bookings", async (req, res) => {
+app.post("/bookings/", async (req, res) => {
     try {
-        
+        const {customerID, roomNum, hotelID, checkInDate, checkOutDate} = req.body;
+        const queryCmd = `
+            INSERT INTO booking (customer_id, room_id, hotel_id, checkin_date, checkout_date) VALUES (${customerID}, ${roomNum}, ${hotelID}, '${checkInDate}', '${checkOutDate}')
+        `;
+        console.log(queryCmd);
+        const booking = await pool.query(queryCmd);
+        res.json(booking.rows);
     } catch (error) {
-        
+        console.error(error);
+    }
+});
+
+app.post("/bookingarchives", async (req, res) => {
+    try {
+        const {booking_id, customer_id, room_id, hotel_id, checkin_date, checkout_date, booking_date} = req.body;
+        const queryCmd = `
+            INSERT INTO booking_archive (booking_id, customer_id, room_id, hotel_id, booking_date) 
+            VALUES (${booking_id}, ${customer_id}, ${room_id}, ${hotel_id}, '${booking_date}')
+        `;
+        console.log(queryCmd);
+        const booking = await pool.query(queryCmd);
+        res.json(booking.rows);
+    } catch (error) {
+        console.error(error);
     }
 });
 
@@ -139,11 +160,11 @@ app.get("/employees/:email/:password", async (req, res) => {
     try {
         const email = req.params['email'];
         const password = req.params['password'];
-        const query = `SELECT full_name FROM employee WHERE email='${email}' AND passwrd='${password}'`;
+        const query = `SELECT id, full_name FROM employee WHERE email='${email}' AND passwrd='${password}'`;
         console.log(req.params);
-        const customer = await pool.query(query);
-        res.json(customer.rows);
-        console.log(customer.rows);
+        const employee = await pool.query(query);
+        res.json(employee.rows);
+        console.log(employee.rows);
     } catch (error) {
         
     }
@@ -154,7 +175,7 @@ app.get("/customers/:email/:password", async (req, res) => {
     try {
         const email = req.params['email'];
         const password = req.params['password'];
-        const query = `SELECT full_name FROM customer WHERE email='${email}' AND passwrd='${password}'`;
+        const query = `SELECT id, full_name FROM customer WHERE email='${email}' AND passwrd='${password}'`;
         console.log(req.params);
         const customer = await pool.query(query);
         res.json(customer.rows);
@@ -220,16 +241,6 @@ app.get("/hotels", async(req, res) => {
     }
 });
 
-const parseString = (str) =>{
-    var strArr = str.split(",");
-
-    for (var i = 0; i < strArr.length; i++) {
-        var val = strArr[i];
-        strArr[i] = `'${val}'`;
-    }
-
-    return strArr.join(",");
-};
 
 // Get existing hotels by criteria
 app.get("/hotels/:criteria", async(req, res) => {
@@ -259,48 +270,37 @@ app.get("/hotels/:criteria", async(req, res) => {
         var amenityCond = "";
         var extendedCond = "";
         var capCond = "";
-        var whereStatement = "";
         var areaCond = "";
         
-        var c1 = 0;
-        var c2 = 0;
-        var c3 = 0;
-        console.log("Dates", checkIn, checkOut);
+
+        // console.log("Dates", checkIn, checkOut);
         if (criteriaObj.numRooms != ''){
             numRoomCond = `AND number_of_rooms = ${criteriaObj.numRooms}`;
-            c1++;
         }
 
         if (criteriaObj.hotelchains != '') {
-            const val = parseString(criteriaObj.hotelchains);
-            hotelChainCond = `WHERE LOWER(name) IN (${val})`;
+            hotelChainCond = `WHERE LOWER(name) IN (${criteriaObj.hotelchains})`;
         }
 
         if(criteriaObj.category != ''){
-            const val = parseString(criteriaObj.category);
-            categoryCond = `AND category IN (${val})`;
-            c1++;
+            categoryCond = `AND category IN (${criteriaObj.category})`;
+            console.log("Categories", criteriaObj.category);
         }
 
         if (criteriaObj.view != '') {
-            const val = parseString(criteriaObj.view);
-            viewCond = `AND LOWER(view) IN (${val})`;
-            c1++;
+            viewCond = `AND LOWER(view) IN (${criteriaObj.view})`;
         }
 
-        if(extendedCond != ''){
-            const val = parseString(criteriaObj.extended);
-            extendedCond = `AND LOWER(extended) IN (${val})`;
+        if(criteriaObj.extended != ''){
+            extendedCond = `AND extended IN (${criteriaObj.extended})`;
         }
 
         if (criteriaObj.amenities != '') {
-            const val = parseString(criteriaObj.amenities);
-            amenityCond = ` WHERE LOWER(amenity) IN (${val})`;
+            amenityCond = ` WHERE LOWER(amenity) IN (${criteriaObj.amenities})`;
         }
 
         if (criteriaObj.capacity != '') {
-            const val = parseString(criteriaObj.capacity);
-            capCond = ` AND LOWER(capacity) IN (${val})`;
+            capCond = ` AND LOWER(capacity) IN (${criteriaObj.capacity})`;
         }
 
         if (criteriaObj.area != ''){
@@ -312,7 +312,6 @@ app.get("/hotels/:criteria", async(req, res) => {
             areaCond = ` AND lower(hr.city) = '${city}' AND lower(hr.country) = '${country}'`;  
         }
 
-        if (c1>0) whereStatement = "WHERE";
 
         const queryStatement = `
             WITH hotel_room AS (SELECT h.id as hotel_id, h.category, h.number_of_rooms, h.street_address,
@@ -339,9 +338,9 @@ app.get("/hotels/:criteria", async(req, res) => {
             OR (checkin_date >= '${checkIn}' AND checkin_date <='${checkOut}') OR (checkin_date <='${checkIn}' AND checkout_date >='${checkOut}'))
             GROUP BY hr.hotel_id, hc.name
         `;
-        console.log(queryStatement);
+        // console.log(queryStatement);
         const hotels = await pool.query(queryStatement);
-        console.log("results, ", hotels.rows);
+        // console.log("results, ", hotels.rows);
         res.json(hotels.rows);
     } catch (error) {
         console.error(error);
@@ -352,6 +351,48 @@ app.get("/hotels/:criteria", async(req, res) => {
 app.get("/rooms", async(req, res) => {
     try {
         
+    } catch (error) {
+        
+    }
+});
+
+// Get existing rooms by location
+app.get("/rooms/:location", async(req, res) => {
+    try {
+        const locationArr = req.params['location'].split(",");
+        const city = locationArr[0].trim().toLowerCase();
+        const country = locationArr[1].trim().toLowerCase();
+
+        const queryStatement = `
+            WITH hotel_room AS (SELECT h.id as hotel_id, h.category, h.number_of_rooms, h.street_address,
+                 h.city, h.province_or_state, h.postal_code_or_zip_code, h.country, h.contact_email,
+                  h.hotel_chain_id, r.room_number, r.price, 
+                  r.capacity, r.view, r.extended, r.problems FROM hotel AS h INNER JOIN Room AS r ON h.id = r.hotel_id)
+            
+            SELECT COUNT (hr.hotel_id) FROM hotel_room as hr WHERE lower (hr.city) = '${city}' and lower (hr.country) = '${country}'
+                `
+        console.log(queryStatement);
+        const rooms = await pool.query(queryStatement);
+        console.log("room results, ", rooms.rows);
+        res.json(rooms.rows);
+    } catch (error) {
+        
+    }
+});
+
+app.get("/lastbooking", async(req, res) => {
+    try {
+
+        const queryStatement = `
+        SELECT *
+            FROM booking
+            ORDER BY booking_id DESC
+            LIMIT 1
+        `;
+
+        const booking = await pool.query(queryStatement);
+        console.log("last booking, ", booking.rows);
+        res.json(booking.rows);
     } catch (error) {
         
     }

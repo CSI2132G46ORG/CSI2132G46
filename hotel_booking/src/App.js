@@ -8,6 +8,7 @@ import { useState } from 'react';
 import Filter from './components/Filter';
 import Payment from './components/Payment';
 import CustomerBookings from './components/CustomerBookings';
+import EmployeeLogin from './components/EmployeeLogin';
 
 function App() {
   const [token, setToken] = useState();
@@ -22,6 +23,7 @@ function App() {
           <Route path='/filter' element={<Filter/>}/>
           <Route exact path='/bookaroom' element={<Payment/>}/>
           <Route exact path='/mybooking' element={<CustomerBookings/>}/>
+          <Route exact path='/employeeLogin' element={<EmployeeLogin/>}/>
         </Routes>
       </div>
     </Router>
