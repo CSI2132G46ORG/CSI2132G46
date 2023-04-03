@@ -231,16 +231,6 @@ app.get("/hotelchains", async(req, res) => {
     }
 });
 
-// Get existing hotels
-app.get("/hotels", async(req, res) => {
-    try {
-       
-        
-    } catch (error) {
-        
-    }
-});
-
 
 // Get existing hotels by criteria
 app.get("/hotels/:criteria", async(req, res) => {
@@ -410,6 +400,70 @@ app.get("/lastrenting", async(req, res) => {
         
     }
 });
+
+//get hotel info for a specific hotel
+app.get("/hotels/info/:hotel_id", async(req, res) => {
+    const { hotel_id } = req.params;
+    try {
+        const amenity = await pool.query("SELECT * FROM hotel WHERE hotel.ID = $1",[hotel_id]);
+        console.log(amenity.rows);
+        res.json(amenity.rows);
+        
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.get("/amenity/:hotel_id", async(req, res) => {
+    const { hotel_id } = req.params;
+    try {
+        const hotel = await pool.query("SELECT * FROM amenity WHERE hotel_id = $1",[hotel_id]);
+        console.log(hotel.rows);
+        res.json(hotel.rows);
+        
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+
+//get all rooms for specific hotel
+app.get("/hotels/:hotel_id/rooms", async (req, res) => {
+    const { hotel_id } = req.params;
+    const { checkin_date, checkout_date } = req.query;
+  
+    try {
+      const result = await pool.query(`
+      SELECT *
+      FROM room
+      WHERE hotel_id = $1
+      AND room_number NOT IN (
+        
+        SELECT room_id
+        FROM booking
+        WHERE hotel_id = $1
+        AND (
+            (checkin_date <= $2
+            AND (checkout_date BETWEEN $2 AND $3))
+        OR 
+         (checkin_date >= $2
+            AND checkout_date <= $3)
+        OR
+            ((checkin_date BETWEEN $2 AND $3)
+            AND checkout_date >= $3)       
+        OR 
+            (checkin_date <= $2
+            AND checkout_date >= $3)
+        )
+          );
+      `, [hotel_id, checkout_date, checkin_date]);
+  
+      res.json(result.rows);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+    }
+  });
 
 
 

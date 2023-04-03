@@ -9,6 +9,7 @@ import Filter from './components/Filter';
 import Payment from './components/Payment';
 import CustomerBookings from './components/CustomerBookings';
 import EmployeeLogin from './components/EmployeeLogin';
+import Hotel from './components/Hotel';
 
 function App() {
   const [token, setToken] = useState();
@@ -24,6 +25,7 @@ function App() {
           <Route exact path='/bookaroom' element={<Payment/>}/>
           <Route exact path='/mybooking' element={<CustomerBookings/>}/>
           <Route exact path='/employeeLogin' element={<EmployeeLogin/>}/>
+          <Route exact path='/hotel' element={<Hotel/>}/>
         </Routes>
       </div>
     </Router>

@@ -161,6 +161,43 @@ CREATE TABLE renting_archive (
     FOREIGN KEY (booking_id) REFERENCES booking
 );
 
+---------------------Hotels Page Specific Test Insertions ------------------------------------
+INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
+VALUES (101, 100, 'single', 'sea', true, false, 1);
+
+INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
+VALUES (102, 150, 'double', 'mountain', true, false, 1);
+
+INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
+VALUES (201, 200, 'queen', 'sea', true, false, 2);
+
+INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
+VALUES (202, 250, 'king', 'mountain', true, false, 2);
+
+INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
+VALUES (203, 250, 'king', 'sea', true, false, 2);
+
+INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
+VALUES (204, 100, 'single', 'mountain', true, false, 2);
+
+INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
+VALUES (205, 200, 'queen', 'sea', true, false, 2);
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (201, 2, 'Wifi');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (203, 2, 'Free Breakfast');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (205, 2, 'Pool');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (205, 2, 'Free Breakfast');
+
+INSERT INTO booking (customer_id, room_id, hotel_id, checkin_date, checkout_date)
+VALUES (1, 101, 1, '2023-04-05', '2023-04-10');
+
+INSERT INTO booking (customer_id, room_id, hotel_id, checkin_date, checkout_date)
+VALUES (2, 201, 2, '2023-05-01', '2023-05-06');
+
+
 
 
 -- -------------------------------VIEWS-----------------------------------------------------
