@@ -15,7 +15,7 @@ const Navbar = (props) => {
         </div>
     );
 
-    if (props.token){
+    if (props.token && props.token.type=== 'customers'){
         return (
             <div className="navbar">
                 <ul role="list">

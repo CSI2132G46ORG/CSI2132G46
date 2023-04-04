@@ -7,6 +7,7 @@ const HotelCard = (props) => {
     const handleHotelCardClick = () => {
         props.handleHotelCardClick(true,props);
       };
+    
     return (
         <div className="hotelCard">
             <h3>{title}</h3>

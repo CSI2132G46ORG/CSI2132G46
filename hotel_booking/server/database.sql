@@ -42,6 +42,7 @@ CREATE TABLE hotel (
 );
 
 CREATE INDEX hotel_ad_idx on hotel(city, country);
+CREATE INDEX hotelchain_ad_idx on hotelChain(name);
 
 CREATE TABLE hotelPhoneNumber (
     hotel_id INT NOT NULL,
@@ -114,8 +115,8 @@ CREATE TABLE booking(
     checkout_date DATE NOT NULL,
     booking_date DATE NOT NULL DEFAULT CURRENT_DATE,
     PRIMARY KEY (booking_id),
-    FOREIGN KEY (customer_id) REFERENCES customer(ID),
-    FOREIGN KEY (room_id, hotel_id) REFERENCES room(room_number, hotel_id)
+    FOREIGN KEY (customer_id) REFERENCES customer(ID) ON DELETE CASCADE,
+    FOREIGN KEY (room_id, hotel_id) REFERENCES room(room_number, hotel_id) ON DELETE CASCADE
 );
 CREATE TABLE renting (
     renting_id SERIAL NOT NULL,
@@ -126,13 +127,13 @@ CREATE TABLE renting (
     checkin_date DATE NOT NULL,
     checkout_date DATE NOT NULL,
     paid_for BOOLEAN NOT NULL,
-    booking_id INT NOT NULL,
+    booking_id INT NOT NULL DEFAULT -1,
     renting_date DATE NOT NULL DEFAULT CURRENT_DATE,
     PRIMARY KEY (renting_id),
-    FOREIGN KEY (employee_id) REFERENCES employee(ID),
-    FOREIGN KEY (customer_id) REFERENCES customer(ID),
-    FOREIGN KEY (room_id, hotel_id) REFERENCES room(room_number, hotel_id),
-    FOREIGN KEY (booking_id) REFERENCES booking
+    FOREIGN KEY (employee_id) REFERENCES employee(ID) ON DELETE CASCADE,
+    FOREIGN KEY (customer_id) REFERENCES customer(ID) ON DELETE CASCADE,
+    FOREIGN KEY (room_id, hotel_id) REFERENCES room(room_number, hotel_id) ON DELETE CASCADE,
+    FOREIGN KEY (booking_id) REFERENCES booking ON DELETE CASCADE
 );
 CREATE TABLE booking_archive(
     booking_id INT NOT NULL,
@@ -140,9 +141,7 @@ CREATE TABLE booking_archive(
     room_id INT NOT NULL,
     hotel_id INT NOT NULL,
     booking_date DATE NOT NULL,
-    PRIMARY KEY (booking_id),
-    FOREIGN KEY (customer_id) REFERENCES customer(ID),
-    FOREIGN KEY (room_id, hotel_id) REFERENCES room(room_number, hotel_id)
+    PRIMARY KEY (booking_id)
 );
 
 CREATE TABLE renting_archive (
@@ -154,11 +153,7 @@ CREATE TABLE renting_archive (
     renting_date DATE NOT NULL,
     paid_for BOOLEAN NOT NULL,
     booking_id INT,
-    PRIMARY KEY (renting_id),
-    FOREIGN KEY (employee_id) REFERENCES employee(ID),
-    FOREIGN KEY (customer_id) REFERENCES customer(ID),
-    FOREIGN KEY (room_id, hotel_id) REFERENCES room(room_number, hotel_id),
-    FOREIGN KEY (booking_id) REFERENCES booking
+    PRIMARY KEY (renting_id)
 );
 
 ---------------------Hotels Page Specific Test Insertions ------------------------------------
@@ -201,7 +196,8 @@ VALUES (2, 201, 2, '2023-05-01', '2023-05-06');
 
 
 -- -------------------------------VIEWS-----------------------------------------------------
-
+CREATE VIEW AS
+;
 
 -- -----------------------------------------------------Hotel chains------------------------
 
@@ -578,18 +574,161 @@ INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 1, 'Free Breakfa
 INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 1, 'Pool');
 INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 1, 'Free Parking');
 
-
 INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 1, 'Wifi');
 INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 1, 'Free Breakfast');
 INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 1, 'Pool');
 INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 1, 'Free Parking');
 
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 1, 'Pets Allowed');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 1, 'Pets Allowed');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 1, 'Pets Allowed');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 1, 'Pets Allowed');
 
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 1, 'Air conditioning');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 1, 'Air conditioning');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 1, 'Air conditioning');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 1, 'Air conditioning');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 1, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 1, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 1, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 1, 'Hot Tub');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 1, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 1, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 1, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 1, 'Mini Bar');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 1, 'Bathrobes and slippers');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 1, 'Bathrobes and slippers');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 1, 'Bathrobes and slippers');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 1, 'Bathrobes and slippers');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 1, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 1, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 1, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 1, 'Gym');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 1, 'Smart TV');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 1, 'Smart TV');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 1, 'Smart TV');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 1, 'Smart TV');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 2, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 2, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 2, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 2, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 2, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 2, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 2, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 2, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 2, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 2, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 2, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 2, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 2, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 2, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 2, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 2, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 2, 'Pets Allowed');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 2, 'Pets Allowed');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 2, 'Pets Allowed');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 2, 'Pets Allowed');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 2, 'Air conditioning');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 2, 'Air conditioning');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 2, 'Air conditioning');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 2, 'Air conditioning');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 2, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 2, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 2, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 2, 'Hot Tub');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 2, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 2, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 2, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 2, 'Mini Bar');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 2, 'Bathrobes and slippers');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 2, 'Bathrobes and slippers');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 2, 'Bathrobes and slippers');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 2, 'Bathrobes and slippers');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 2, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 2, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 2, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 2, 'Gym');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 2, 'Smart TV');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 2, 'Smart TV');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 2, 'Smart TV');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 2, 'Smart TV');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 3, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 3, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 3, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 3, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 3, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 3, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 3, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 3, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 3, 'Pets Allowed');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 3, 'Pets Allowed');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 3, 'Air conditioning');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 3, 'Air conditioning');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 3, 'Hot Tub');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 3, 'Mini Bar');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 3, 'Bathrobes and slippers');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 3, 'Gym');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 3, 'Smart TV');
 
 
 -- ----------------------------hotel chain emails ---------------------------------
--- ----------------------------hotel emails ---------------------------------
+
+INSERT INTO emailAddress (hotelChainID, email_address) VALUES(1, 'mariotinn@contactus.ca');
+INSERT INTO emailAddress (hotelChainID, email_address) VALUES(2, 'hilton@contactus.ca');
+INSERT INTO emailAddress (hotelChainID, email_address) VALUES(3, 'businessinn@contactus.ca');
+INSERT INTO emailAddress (hotelChainID, email_address) VALUES(4, 'accor@contactus.ca');
+INSERT INTO emailAddress (hotelChainID, email_address) VALUES(5, 'hyatt@contactus.ca');
+INSERT INTO emailAddress (hotelChainID, email_address) VALUES(6, 'fourseasons@contactus.ca');
+INSERT INTO emailAddress (hotelChainID, email_address) VALUES(7, 'wyndham@contactus.ca');
+
+-- ----------------------------hotel chain phone numbers ---------------------------------
+
+INSERT INTO hotelChainPhoneNumber (hotelChainID, phoneNumber) VALUES(1, '514-000-0000');
+INSERT INTO hotelChainPhoneNumber (hotelChainID, phoneNumber) VALUES(2, '613-000-0000');
+INSERT INTO hotelChainPhoneNumber (hotelChainID, phoneNumber) VALUES(3, '519-000-0000');
+INSERT INTO hotelChainPhoneNumber (hotelChainID, phoneNumber) VALUES(4, '611-000-0000');
+INSERT INTO hotelChainPhoneNumber (hotelChainID, phoneNumber) VALUES(5, '989-000-0000');
+INSERT INTO hotelChainPhoneNumber (hotelChainID, phoneNumber) VALUES(6, '222-000-0000');
+INSERT INTO hotelChainPhoneNumber (hotelChainID, phoneNumber) VALUES(7, '454-000-0000');
+
 --- ----------------------------hotel phone numbers ---------------------------------
+
+INSERT INTO hotelPhoneNumber (hotel_id, phoneNumber) VALUES(1, '123-456-7890');
+INSERT INTO hotelPhoneNumber (hotel_id, phoneNumber) VALUES(2, '613-111-0011');
+INSERT INTO hotelPhoneNumber (hotel_id, phoneNumber) VALUES(3, '519-000-2222');
+INSERT INTO hotelPhoneNumber (hotel_id, phoneNumber) VALUES(4, '611-899-222');
+INSERT INTO hotelPhoneNumber (hotel_id, phoneNumber) VALUES(5, '989-030-0040');
+INSERT INTO hotelPhoneNumber (hotel_id, phoneNumber) VALUES(6, '222-110-0090');
+INSERT INTO hotelPhoneNumber (hotel_id, phoneNumber) VALUES(7, '454-024-0008');
+INSERT INTO hotelPhoneNumber (hotel_id, phoneNumber) VALUES(8, '555-024-0008');
+INSERT INTO hotelPhoneNumber (hotel_id, phoneNumber) VALUES(9, '454-024-8888');
+INSERT INTO hotelPhoneNumber (hotel_id, phoneNumber) VALUES(10, '333-263-0008');
+
 
 -------------------QUERIES---------------------------------------------
 
