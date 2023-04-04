@@ -1,54 +1,68 @@
-import './assets/styles/RoomCard.css';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import './assets/styles/RoomCard.css';
 
 const RoomCard = (props) => {
+  const [roomNumber, setroomNumber] = useState(props.roomNumber);
+  const [price, setprice] = useState(props.price);
+  const [capacity, setcapacity] = useState(props.capacity);
+  const [view, setview] = useState(props.view);
+  const [extended, setextended] = useState(props.extended);
+  const [problems, setproblems] = useState(props.problems);
+  const [amenities, setamenities] = useState(props.amenities);
 
-    const [roomNumber, setRoomNumber] = useState(props.roomNumber);
-    const [hotelId, setHotelId] = useState(props.hotelId);
-    const [price, setPrice] = useState(props.price);
-    const [capacity, setCapacity] = useState(props.capacity);
-    const [view, setView] = useState(props.view);
-    const [extended, setExtended] = useState(props.extended);
-    const [problems, setProblems] = useState(props.problems);
-    const port = 5100;
-    const navigate = useNavigate();
+  const handlePayLater = () => {
+    props.handlePayButtonClick(false,props);
+  };
+  
+  const handlePayOnline = () => {
+    props.handlePayButtonClick(true,props);
+  };
 
-
-    const deleteRoom = () => {
-        const body = {roomNumber, hotelId};
-        console.log(body);
-        fetch(`http://localhost:${port}/rooms`, {
-            method: 'DELETE',
-            headers: {"content-type": "application/JSON"},
-            body: JSON.stringify(body)
-        });
-    };
-
-    const handleClick = () => {
-        navigate('/modifyrooms', {
-            state: {
-                roomNumber: roomNumber,
-                hotelId: hotelId,
-                price: price,
-                capacity: capacity,
-                view: view,
-                extended: extended,
-                problems: problems
-            }
-        });
-
-    };
-    return (
-        <div className='roomCard' onClick={handleClick}>
-            <p>Room number: {roomNumber}</p>
-            <p>Capacity: {capacity}</p>
-            <p>View: {view}</p>
-            <p>Extended: {extended}</p>
-            <p>Problems: {problems}</p>
-        </div>
-    );
+  return (
+    <div className="roomCard">
+      <h3>Room {roomNumber} &nbsp;&nbsp;</h3>
+      <p>
+        <br />
+        <br />
+        <br />
+        Price: {price} &nbsp;&nbsp;
+      </p>
+      <p>
+        <br />
+        <br />
+        <br />
+        Capacity: {capacity}&nbsp;&nbsp;
+      </p>
+      <p>
+        <br />
+        <br />
+        <br />
+        View: {view}&nbsp;&nbsp;
+      </p>
+      <p>
+        <br />
+        <br />
+        <br />
+        Extended: {extended ? 'Yes' : 'No'}&nbsp;&nbsp;
+      </p>
+      <p>
+        <br />
+        <br />
+        <br />
+        Problems: {problems ? 'Yes' : 'No'}&nbsp;&nbsp;
+      </p>
+      {amenities.length > 0 && (
+        <p>
+          <br />
+          <br />
+          <br />
+          Amenities: {amenities.map((amenity) => amenity.amenity).join(', ')}&nbsp;&nbsp;
+        </p>
+      )}
+      <button onClick={handlePayLater}>Pay Later</button>
+      <button onClick={handlePayOnline}>Pay Online</button>
+    </div>
+  );
 };
 
 export default RoomCard;
