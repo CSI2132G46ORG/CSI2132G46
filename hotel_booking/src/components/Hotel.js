@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import RoomCard from "./RoomCard";
 import HotelOverview from "./HotelOverview";
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 function Hotel() {
   const [rooms, setRooms] = useState([]); // state to hold the retrieved rooms
@@ -14,8 +15,20 @@ function Hotel() {
   const [payType, setPayType] = useState(false);
   const [roomObject, getRoomObject] = useState([]);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const port = 5100;
+  var providedCheckIn= (location.state!=null && location.state.checkIn !=null) ? location.state.checkIn:new Date();
+  var providedCheckout = (location.state!=null && location.state.checkOut !=null) ? location.state.checkOut:new Date();
+  var providedArea = (location.state!=null && location.state.area !=null) ? location.state.area:'Ottawa, Canada';
+  var providedHotelID = (location.state!=null && location.state.hotel_id !=null) ? location.state.hotel_id:2;
+  var providedHotelName = (location.state!=null && location.state.hotelName !=null) ? location.state.hotelName:'Mariot inn';
+
+  console.log("Provided Check in date : "+ providedCheckIn);
+  console.log("Provided Check out date : "+ providedCheckout);
+  console.log("Provided area : "+ providedArea);
+  console.log("Provided Hotel ID : "+ providedHotelID);
+  console.log("Provided Hotel Name : "+ providedHotelName);
 
 const handlePayButtonClick = (payVal,roomObject) => {
   setPayButtonClicked(true);
@@ -38,6 +51,11 @@ const handlePayButtonClick = (payVal,roomObject) => {
           view : roomObject.view,
           extended : roomObject.extended,
           problems : roomObject.problems,
+          checkIn : providedCheckIn,
+          checkOut : providedCheckout,
+          area : providedArea,
+          hotel_id : providedHotelID,
+          hotelName : providedHotelName
           //missing amenities
       }});
     }, 200);
@@ -53,7 +71,7 @@ const handlePayButtonClick = (payVal,roomObject) => {
   useEffect(() => {
     async function fetchAmentityInfo() {
       try {
-        const response = await fetch(`http://localhost:${port}/amenity/2`); // fetch data from API with hotel id, checkin, and checkout parameters
+        const response = await fetch(`http://localhost:${port}/amenity/${providedHotelID}`); // fetch data from API with hotel id, checkin, and checkout parameters
         const data = await response.json(); // parse response data as JSON
         setAmentiyInfo(data); // update rooms state with fetched data
 
@@ -63,7 +81,7 @@ const handlePayButtonClick = (payVal,roomObject) => {
     }
     async function fetchHotelInfo() {
         try {
-          const response = await fetch(`http://localhost:${port}/hotels/info/2`); // fetch data from API with hotel id, checkin, and checkout parameters
+          const response = await fetch(`http://localhost:${port}/hotels/info/${providedHotelID}`); // fetch data from API with hotel id, checkin, and checkout parameters
           const data = await response.json(); // parse response data as JSON
           setHotelInfo(data); // update rooms state with fetched data
   
@@ -73,7 +91,7 @@ const handlePayButtonClick = (payVal,roomObject) => {
       }
     async function fetchRooms() {
       try {
-        const response = await fetch(`http://localhost:${port}/hotels/2/rooms?checkin_date=2023-04-05&checkout_date=2023-04-09`); // fetch data from API with hotel id, checkin, and checkout parameters
+        const response = await fetch(`http://localhost:${port}/hotels/${providedHotelID}/rooms?checkin_date=${providedCheckIn}&checkout_date=${providedCheckout}`); // fetch data from API with hotel id, checkin, and checkout parameters
         const data = await response.json(); // parse response data as JSON
         setTotalRooms(Object.keys(data).length);
         setRooms(data); // update rooms state with fetched data

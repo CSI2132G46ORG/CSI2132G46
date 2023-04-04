@@ -54,7 +54,8 @@ const Filter = () => {
                 checkIn : providedCheckIn,
                 checkOut : providedCheckout,
                 area : providedArea,
-                hotel_id : hotelObject.hotel_id
+                hotel_id : hotelObject.hotel_id,
+                hotelName : hotelObject.name
             }});
         }, 200);
         }
