@@ -15,11 +15,14 @@ function Hotel() {
   const [roomObject, getRoomObject] = useState([]);
   const navigate = useNavigate();
 
+  const port = 5100;
 
 const handlePayButtonClick = (payVal,roomObject) => {
   setPayButtonClicked(true);
   setPayType(payVal);
   getRoomObject(roomObject);
+
+  console.log("Pay Button Clicked");
 
   if(window.location.pathname==="/hotel"){
     setTimeout(() => {
@@ -50,7 +53,7 @@ const handlePayButtonClick = (payVal,roomObject) => {
   useEffect(() => {
     async function fetchAmentityInfo() {
       try {
-        const response = await fetch(`http://localhost:5100/amenity/2`); // fetch data from API with hotel id, checkin, and checkout parameters
+        const response = await fetch(`http://localhost:${port}/amenity/2`); // fetch data from API with hotel id, checkin, and checkout parameters
         const data = await response.json(); // parse response data as JSON
         setAmentiyInfo(data); // update rooms state with fetched data
 
@@ -60,7 +63,7 @@ const handlePayButtonClick = (payVal,roomObject) => {
     }
     async function fetchHotelInfo() {
         try {
-          const response = await fetch(`http://localhost:5100/hotels/info/2`); // fetch data from API with hotel id, checkin, and checkout parameters
+          const response = await fetch(`http://localhost:${port}/hotels/info/2`); // fetch data from API with hotel id, checkin, and checkout parameters
           const data = await response.json(); // parse response data as JSON
           setHotelInfo(data); // update rooms state with fetched data
   
@@ -70,7 +73,7 @@ const handlePayButtonClick = (payVal,roomObject) => {
       }
     async function fetchRooms() {
       try {
-        const response = await fetch(`http://localhost:5100/hotels/2/rooms?checkin_date=2023-04-05&checkout_date=2023-04-09`); // fetch data from API with hotel id, checkin, and checkout parameters
+        const response = await fetch(`http://localhost:${port}/hotels/2/rooms?checkin_date=2023-04-05&checkout_date=2023-04-09`); // fetch data from API with hotel id, checkin, and checkout parameters
         const data = await response.json(); // parse response data as JSON
         setTotalRooms(Object.keys(data).length);
         setRooms(data); // update rooms state with fetched data
