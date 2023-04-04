@@ -1,0 +1,11 @@
+.hotelChainCard {
+    display: flex;
+    border: 2px solid black;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: auto;
+    margin-bottom: 40px;
+    max-width: 650px;
+    /* width: 100%; */
+} 
