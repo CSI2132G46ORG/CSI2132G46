@@ -30,7 +30,8 @@ const SignInForm = (props) => {
             })
             .then(res => res.json())
             .then(data => {
-                console.log('data', data[0]);
+                data.token.type = `${type}`;
+                console.log('data', data);
                 return data;
             })
             ;
@@ -51,7 +52,7 @@ const SignInForm = (props) => {
             }
             else {
                 /*This should redirect to the employee's page */
-
+                navigate('/employeePage', { replace: true });
             }
          }
         );

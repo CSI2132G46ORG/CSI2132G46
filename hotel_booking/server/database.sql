@@ -115,8 +115,8 @@ CREATE TABLE booking(
     checkout_date DATE NOT NULL,
     booking_date DATE NOT NULL DEFAULT CURRENT_DATE,
     PRIMARY KEY (booking_id),
-    FOREIGN KEY (customer_id) REFERENCES customer(ID),
-    FOREIGN KEY (room_id, hotel_id) REFERENCES room(room_number, hotel_id)
+    FOREIGN KEY (customer_id) REFERENCES customer(ID) ON DELETE CASCADE,
+    FOREIGN KEY (room_id, hotel_id) REFERENCES room(room_number, hotel_id) ON DELETE CASCADE
 );
 CREATE TABLE renting (
     renting_id SERIAL NOT NULL,
@@ -127,13 +127,13 @@ CREATE TABLE renting (
     checkin_date DATE NOT NULL,
     checkout_date DATE NOT NULL,
     paid_for BOOLEAN NOT NULL,
-    booking_id INT NOT NULL,
+    booking_id INT NOT NULL DEFAULT -1,
     renting_date DATE NOT NULL DEFAULT CURRENT_DATE,
     PRIMARY KEY (renting_id),
-    FOREIGN KEY (employee_id) REFERENCES employee(ID),
-    FOREIGN KEY (customer_id) REFERENCES customer(ID),
-    FOREIGN KEY (room_id, hotel_id) REFERENCES room(room_number, hotel_id),
-    FOREIGN KEY (booking_id) REFERENCES booking
+    FOREIGN KEY (employee_id) REFERENCES employee(ID) ON DELETE CASCADE,
+    FOREIGN KEY (customer_id) REFERENCES customer(ID) ON DELETE CASCADE,
+    FOREIGN KEY (room_id, hotel_id) REFERENCES room(room_number, hotel_id) ON DELETE CASCADE,
+    FOREIGN KEY (booking_id) REFERENCES booking ON DELETE CASCADE
 );
 CREATE TABLE booking_archive(
     booking_id INT NOT NULL,
@@ -141,9 +141,7 @@ CREATE TABLE booking_archive(
     room_id INT NOT NULL,
     hotel_id INT NOT NULL,
     booking_date DATE NOT NULL,
-    PRIMARY KEY (booking_id),
-    FOREIGN KEY (customer_id) REFERENCES customer(ID),
-    FOREIGN KEY (room_id, hotel_id) REFERENCES room(room_number, hotel_id)
+    PRIMARY KEY (booking_id)
 );
 
 CREATE TABLE renting_archive (
@@ -155,17 +153,14 @@ CREATE TABLE renting_archive (
     renting_date DATE NOT NULL,
     paid_for BOOLEAN NOT NULL,
     booking_id INT,
-    PRIMARY KEY (renting_id),
-    FOREIGN KEY (employee_id) REFERENCES employee(ID),
-    FOREIGN KEY (customer_id) REFERENCES customer(ID),
-    FOREIGN KEY (room_id, hotel_id) REFERENCES room(room_number, hotel_id),
-    FOREIGN KEY (booking_id) REFERENCES booking
+    PRIMARY KEY (renting_id)
 );
 
 
 
 -- -------------------------------VIEWS-----------------------------------------------------
-
+CREATE VIEW AS
+;
 
 -- -----------------------------------------------------Hotel chains------------------------
 
