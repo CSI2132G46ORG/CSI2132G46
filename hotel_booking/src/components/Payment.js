@@ -4,6 +4,7 @@ import './assets/styles/Payment.css';
 import BackNavBar from "./BackNavbar";
 import Navbar from './Navbar';
 import useToken from './useToken';
+import { useLocation } from 'react-router-dom';
 
 const Payment = (props) => { 
     const { token, setToken } = useToken();
@@ -17,7 +18,7 @@ const Payment = (props) => {
     const [hotelName, setHotelName] = useState();
     const [extended, setExtended] = useState();
     const [price, setPrice] = useState(150);
-    const [location, setLocation] = useState("Ottawa, Canada");
+    const [locationTemp, setLocation] = useState("Ottawa, Canada");
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [provOrState, setProvorState] = useState('');
@@ -29,8 +30,15 @@ const Payment = (props) => {
     const [name, setName] = useState('');
     
     const navigate = useNavigate();
+    const location = useLocation();
     const port = 5100;
-
+    var providedCapacity= (location.state!=null && location.state.capacity !=null) ? location.state.capacity:'Mariot inn';
+    var providedHotelName= (location.state!=null && location.state.hotelName !=null) ? location.state.hotelName:'king';
+    var providedCheckIn= (location.state!=null && location.state.checkIn !=null) ? location.state.checkIn:new Date();
+    var providedCheckout = (location.state!=null && location.state.checkOut !=null) ? location.state.checkOut:new Date();
+    var providedArea = (location.state!=null && location.state.area !=null) ? location.state.area:'Ottawa, Canada';
+    var providedPrice = (location.state!=null && location.state.price !=null) ? location.state.price:250;
+    
     const passwordForm = () => {
         if (!token) {
             return (
@@ -174,8 +182,8 @@ const Payment = (props) => {
                 })
                 .then((response) => {
                     if (response.status==200) {
-                        // navigate('/reservio', { replace: true });
-                         addBookingArchive();
+                        //navigate('/reservio', { replace: true });
+                        addBookingArchive();
                     }
                 })
                 ;
@@ -198,7 +206,7 @@ const Payment = (props) => {
             <h3>Room Details </h3>
             <div>
                 <span>Amenities: {amenities}</span>
-                <span>Capacity: {capacity}</span>
+                <span>Capacity: {providedCapacity}</span>
             </div>
             <h3>Payment</h3>
             <input type={'text'} id={'paymentName'} placeholder='Enter your full name'required/>
@@ -213,11 +221,11 @@ const Payment = (props) => {
             
 
             <h3>Hotel Details </h3>
-            <h5>Hotel Name: {hotelName}</h5>
-            <p><b>Location</b>: {location}</p>
-            <span><b>Check In</b>: {checkInDate}</span>
-            <span><b>Check Out</b>: {checkOutDate}</span>
-            <p><b>Price Per Night</b>: ${price}</p>
+            <h5>Hotel Name: {providedHotelName}</h5>
+            <p><b>Location</b>: {providedArea}</p>
+            <span><b>Check In</b>: {providedCheckIn}</span>
+            <span><b>Check Out</b>: {providedCheckout}</span>
+            <p><b>Price Per Night</b>: ${providedPrice}</p>
             <input type={'submit'} value='Book'/>
         </form>
     </div>
