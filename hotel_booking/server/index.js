@@ -415,21 +415,21 @@ app.get("/rooms/:hotelId", async(req, res) => {
 });
 
 // Get existing rooms by location
-app.get("/rooms/:location", async(req, res) => {
+app.get("/roomsbyloc/:location", async(req, res) => {
     try {
         const locationArr = req.params['location'].split(",");
         const city = locationArr[0].trim().toLowerCase();
         const country = locationArr[1].trim().toLowerCase();
-
+        console.log(city, country);
         const queryStatement = `
-            SELECT COUNT (*) FROM ROOM_LOC_VIEW WHERE LOWER (city) = '${city}' AND LOWER (country) = '${country}'    
+            SELECT SUM (number_of_rooms) FROM ROOM_LOC_VIEW WHERE LOWER (city) = '${city}' AND LOWER (country) = '${country}'    
             `
         console.log(queryStatement);
         const rooms = await pool.query(queryStatement);
         console.log("room results, ", rooms.rows);
         res.json(rooms.rows);
     } catch (error) {
-        
+        console.error(error);
     }
 });
 
