@@ -102,11 +102,11 @@ const Filter = () => {
         
     };
     const findNumberofRooms = () => {
-        fetch(`http://localhost:${port}/rooms/${area}`, {method: 'GET'})
+        fetch(`http://localhost:${port}/roomsbyloc/${area}`, {method: 'GET'})
         .then(res => res.json())
         .then(data => {
             console.log('rooms ', data);
-            setTotalNumberOfRooms(data[0].count);
+            setTotalNumberOfRooms(data[0].sum);
         });
         
     };
