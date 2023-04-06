@@ -6,7 +6,7 @@ import EmployeeButton from "./EmployeeButton";
 
 const AllHotels = () => {
     const location = useLocation();
-    const [hotelChainId, setHotelChainId] = useState(location.state.hotelChainId);
+    const [hotelChainId, setHotelChainId] = useState(location.state && location.state.hotelChainId? location.state.hotelChainId:'');
     const [category, setCategory] = useState();
     const [stAd, setStAddress] = useState();
     const [city, setCity] = useState();
@@ -33,7 +33,7 @@ const AllHotels = () => {
         <div className="allHotels">
             <h2>All Hotels</h2>
 
-            <EmployeeButton title = "Add new Hotel"/>
+            <EmployeeButton title = "Add new Hotel" path='/modifyhotels'/>
             {
                 results.map((obj) => {
                     console.log('obj ', obj);

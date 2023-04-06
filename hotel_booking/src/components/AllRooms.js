@@ -10,7 +10,7 @@ const AllRooms = () => {
     const port = 5100;
     const location = useLocation();
     const [results, setResults] = useState([]);
-    const [hotelId, setHotelId] = useState(location.state.hotelId);
+    const [hotelId, setHotelId] = useState(location.state && location.state.hotelId? location.state.hotelId: '');
 
     const getAllRooms = () => {
         fetch(`http://localhost:${port}/rooms/${hotelId}`, { method: 'GET' })
@@ -23,14 +23,16 @@ const AllRooms = () => {
         });
     };
 
+    
+
     useEffect(() => {
         getAllRooms();
     }, []);
 
     return (
         <div>
-            <h2>All Hotels</h2>
-            <EmployeeButton title = "Add new Hotel"/>
+            <h2>All Rooms</h2>
+            <EmployeeButton title = "Add new Room" path='/modifyrooms'/>
             {
                 results.map((obj) => {
                     console.log(obj);

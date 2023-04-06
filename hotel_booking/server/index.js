@@ -114,9 +114,57 @@ app.post("/hotel", async (req, res) => {
 //Create Room
 app.post("/rooms", async (req, res) => {
     try {
-        
+        console.log(req.body);
+        const {roomNumber, hotelId, price, capacity, view, extended, problems} = req.body;
+        const queryCmd = `
+            INSERT INTO room VALUES (${parseInt(roomNumber)}, ${parseInt(price)}, '${capacity}', 
+            ${view}, '${extended}', '${problems}', '${parseInt(hotelId)}')
+        `;
+        console.log(queryCmd);
+        const room = await pool.query(queryCmd);
+        res.json(room.rows);
     } catch (error) {
-        
+        console.log(error);
+    }
+});
+
+app.post("/hotels", async (req, res) => {
+    try {
+        console.log(req.body);
+        const {category, stAd, city, provOrState, postOrZip,
+             country, email, hotelChainId} = req.body;
+        const queryCmd = `
+            INSERT INTO hotel (category, street_address, city, province_or_state,
+                postal_code_or_zip_code, country, contact_email, hotel_chain_id)
+                 VALUES (${parseInt(category)}, '${stAd}', 
+            '${city}', '${provOrState}', '${postOrZip}',
+            '${country}', '${email}', '${parseInt(hotelId)}')
+        `;
+        console.log(queryCmd);
+        const hotel = await pool.query(queryCmd);
+        res.json(room.rows);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.post("/hotelchains", async (req, res) => {
+    try {
+        console.log(req.body);
+        // const {category, stAd, city, provOrState, postOrZip,
+        //      country, email, hotelChainId} = req.body;
+        // const queryCmd = `
+        //     INSERT INTO hotel (category, street_address, city, province_or_state,
+        //         postal_code_or_zip_code, country, contact_email, hotel_chain_id)
+        //          VALUES (${parseInt(category)}, '${stAd}', 
+        //     '${city}', '${provOrState}', '${postOrZip}',
+        //     '${country}', '${email}', '${parseInt(hotelChainId)}')
+        // `;
+        // console.log(queryCmd);
+        // const hotel = await pool.query(queryCmd);
+        // res.json(room.rows);
+    } catch (error) {
+        console.log(error);
     }
 });
 
