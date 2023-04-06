@@ -44,15 +44,21 @@ const SignInForm = (props) => {
         e.preventDefault();
         loginUser(username, password)
         .then((res) => {
-            console.log('res', res.token);
-            
-            if(res!=null) setToken(res);
-            if (type==="customers"){
-                navigate('/reservio', { replace: true });
-            }
-            else {
-                /*This should redirect to the employee's page */
-                navigate('/employeePage', { replace: true });
+            if (res) {
+                    console.log('res', res.token);
+                
+                if(res!=null) setToken(res);
+                if (type==="customers"){
+                    navigate('/reservio', { replace: true });
+                }
+                else if (type === "employees") {
+                    /*This should redirect to the employee's page */
+                    navigate('/employeePage', { replace: true });
+                }
+                else{
+                    navigate('/adminPage', { replace: true });
+
+                }
             }
          }
         );
@@ -63,7 +69,7 @@ const SignInForm = (props) => {
                     <h1>Sign in</h1>
                     <input type="email" placeholder='Email address' onChange={e => setEmail(e.target.value)} required/>
                     <input type="password" placeholder='password' onChange={e => setPassword(e.target.value)} required/>
-                    <input type="submit" value="sign in"/>
+                    <input type="submit" value="Sign In"/>
     </form>
     );
 };

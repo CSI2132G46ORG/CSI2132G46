@@ -8,7 +8,7 @@ import useToken from "./useToken";
 
 const Home = () => {
     const { token, setToken } = useToken();
-
+    console.log(token);
 
     return (
         <div className="home">

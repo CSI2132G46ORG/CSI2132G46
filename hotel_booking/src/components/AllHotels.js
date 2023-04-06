@@ -31,6 +31,8 @@ const AllHotels = () => {
 
     return (
         <div className="allHotels">
+            <h2>All Hotels</h2>
+
             <EmployeeButton title = "Add new Hotel"/>
             {
                 results.map((obj) => {
@@ -38,7 +40,7 @@ const AllHotels = () => {
                     return (
                         <AllHotelsCard key = {obj.id} hotelId={obj.id} category = {obj.category} numRooms = {obj.number_of_rooms} 
                         stAdr = {obj.street_address} city = {obj.city} provOrState = {obj.province_or_state} postOrZip={obj.postal_code_or_zip_code}
-                        country = {obj.country} email = {obj.contact_email}/>
+                        country = {obj.country} email = {obj.contact_email} hotelChainId={obj.hotel_chain_id}/>
                     );
                 })
             }

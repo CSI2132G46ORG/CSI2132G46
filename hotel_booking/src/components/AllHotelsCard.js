@@ -13,21 +13,33 @@ const AllHotelsCard = (props) => {
     const [postOrZip, setPostOrZip] = useState(props.postOrZip);
     const [country, setCountry] = useState(props.country);
     const [email, setEmail] = useState(props.email);
+    const [hotelChainId, setHotelChainId] = useState(props.hotelChainId);
     const navigate = useNavigate();
     const port = 5100;
 
 
     const deleteHotel = () => {
-        const body = {hotelId};
-        console.log(body);
-        fetch(`http://localhost:${port}/hotels`, {
-            method: 'DELETE',
-            headers: {"content-type": "application/JSON"},
-            body: JSON.stringify(body)
-        });
+        if (window.confirm('Are you sure you want to delete')) {
+            console.log('confirmed')
+            const body = {hotelId};
+            console.log(body);
+            fetch(`http://localhost:${port}/hotels`, {
+                method: 'DELETE',
+                headers: {"content-type": "application/JSON"},
+                body: JSON.stringify(body)
+            });
+        }
+
+        else {
+
+        }
+        
     };
 
     const handleClick = () => {
+        
+        console.log('handleClick');
+        
         navigate('/modifyhotels', {
             state: {
                 hotelId: hotelId,
@@ -38,16 +50,22 @@ const AllHotelsCard = (props) => {
                 provOrState: provOrState,
                 postOrZip: postOrZip,
                 country: country,
-                email: email
+                email: email,
+                hotelChainId: hotelChainId
             }});
+        
     };
 
     return (
-        <div className="allHotelsCard" onClick={handleClick}>
-            <p>Category: {category} </p>
-            <p> Number of Rooms: {numRooms}</p>
-            <p> Address: {stAdr}, {city}, {provOrState} {postOrZip}, {country}</p>
-            <p> Email: {email}</p>
+        <div className="allHotelsCard">
+            <p><b>Category: </b> {category} </p>
+            <p><b>Number of Rooms:</b>  {numRooms}</p>
+            <p><b>Address:</b>  {stAdr}, {city}, {provOrState} {postOrZip}, {country}</p>
+            <p><b>Email:</b>  {email}</p>
+            <div className='cardBlock'>
+                <div onClick={deleteHotel}><img src={require('./assets/img/trash.png')} alt='trash image' /></div>
+                <div style={{display: 'block', textDecoration: 'underline'}} onClick={handleClick}>Modify Hotel</div>
+            </div>
         </div>
     );
 };

@@ -23,6 +23,7 @@ const AllHotelChains = () => {
 
     return (
         <div className="allHotelchains">
+            <h2>All Hotel Chains</h2>
             <EmployeeButton title = "Add new hotel chain" path ='/' />
             {
                 results.map((obj) => {

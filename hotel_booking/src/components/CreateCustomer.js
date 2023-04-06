@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './assets/styles/CreateCustomer.css';
 import useToken from './useToken';
 
@@ -14,6 +15,7 @@ const CreateCustomer = () => {
     const [country, setCountry] = useState('');
     const [ssn_sin, setSsnSin] = useState('');
     const { token, setToken } = useToken();
+    const navigate = useNavigate();
     const port = 5100;
 
 
@@ -31,7 +33,7 @@ const CreateCustomer = () => {
                 }
                 else {
                 const body = {name, address, city, provOrState, postOrZip, country, ssn_sin, email, password};
-                console.log(body);
+                console.log('signup form', body);
             
                 const response = fetch(`http://localhost:${port}/signUp`, {
                     method: 'POST',
@@ -40,7 +42,7 @@ const CreateCustomer = () => {
                 });
                 
                 
-                // console.log(response);
+                console.log(response);
                 return response;    
             }
             })
@@ -53,12 +55,15 @@ const CreateCustomer = () => {
                     .then((data) => {
                         const id = data[0].id;
                         const full_name = data[0].full_name;
+                        console.log(id, full_name);
                         setToken(
                             {token: {
                                 id: id,
+                                type: 'customers',
                                 full_name: full_name
                             }}
                         );
+                        navigate('/reservio', { replace: true });
                     }
                     );
                     
@@ -106,7 +111,7 @@ const CreateCustomer = () => {
                 <input type="text" placeholder="SSN or SIN" value={ssn_sin} onChange={e => setSsnSin(e.target.value)} required/>
                 <input type="password" placeholder='Create a New Password'  required/>
                 <input type="password" placeholder='Confirm password' value={password} onChange={e => setPassword(e.target.value)} required/>
-                <input type='submit' value='continue'/>
+                <input type='submit' value='Create a Customer Account'/>
             </form>
         </div>
     );

@@ -68,6 +68,16 @@ CREATE TABLE employee (
     PRIMARY KEY (ID),
     FOREIGN KEY (hotel_id) REFERENCES hotel(ID) ON DELETE CASCADE
 );
+
+
+CREATE TABLE Admin (
+    id SERIAL NOT NULL,
+    full_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    passwrd VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE manages (
     employee_id SERIAL NOT NULL,
     mgr_id INT NOT NULL,
@@ -161,6 +171,7 @@ CREATE TABLE renting_archive (
     booking_id INT,
     PRIMARY KEY (renting_id)
 );
+
 
 ---------------------Hotels Page Specific Test Insertions ------------------------------------
 INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)

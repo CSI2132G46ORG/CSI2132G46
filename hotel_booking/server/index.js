@@ -41,9 +41,12 @@ app.post("/bookings/", async (req, res) => {
 app.post("/bookingarchives", async (req, res) => {
     try {
         const {booking_id, customer_id, room_id, hotel_id, checkin_date, checkout_date, booking_date} = req.body;
+        const checkin_date_str = checkin_date.split("T")[0]
+        const checkOutDate_str = checkout_date.split("T")[0];
         const queryCmd = `
-            INSERT INTO booking_archive (booking_id, customer_id, room_id, hotel_id, booking_date) 
-            VALUES (${booking_id}, ${customer_id}, ${room_id}, ${hotel_id}, '${booking_date}')
+            INSERT INTO booking_archive (booking_id, customer_id, room_id, hotel_id, checkin_date, checkout_date, booking_date) 
+            VALUES (${booking_id}, ${customer_id}, ${room_id}, 
+                ${hotel_id}, ${checkin_date_str}, ${checkOutDate_str}, '${booking_date}')
         `;
         console.log(queryCmd);
         const booking = await pool.query(queryCmd);
@@ -74,10 +77,13 @@ app.post("/rentingarchives", async (req, res) => {
     try {
         const {renting_id, customer_id, employee_id, room_id, hotel_id, checkin_date, checkout_date,booking_id, renting_date} = req.body;
         var renting_date_str  = renting_date.split("T")[0];
+        var checkin_date_str = checkin_date.split("T")[1];
+        var checkout_date_str = checkout_date.split("T")[0];
         const queryCmd = `
-            INSERT INTO renting_archive (renting_id, customer_id, employee_id, room_id, hotel_id,renting_date,  paid_for, booking_id) 
+            INSERT INTO renting_archive (renting_id, customer_id, employee_id, 
+                room_id, hotel_id, checkin_date, checkout_date,  renting_date,  paid_for, booking_id) 
             VALUES (${renting_id}, ${customer_id}, ${employee_id}, ${room_id},
-                 ${hotel_id}, '${renting_date_str}',  TRUE, '${booking_id}')
+                 ${hotel_id}, ${checkin_date_str}, ${checkout_date_str}, '${renting_date_str}',  TRUE, '${booking_id}')
         `;
         console.log(queryCmd);
         const booking = await pool.query(queryCmd);
@@ -118,12 +124,12 @@ app.post("/rooms", async (req, res) => {
 // Create Customer
 app.post("/signup", async(req, res) => {
     try {
-        const {name, address, city, prov_or_state, post_or_zip, country, 
+        const {name, address, city, provOrState, postOrZip, country, 
             ssn_sin, email, password, registration_date} = req.body;
 
         const queryCmd = `INSERT INTO\
         customer(full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd)\
-         VALUES ('${name}', '${address}', '${city}', '${prov_or_state}', '${post_or_zip}', '${country}', ${ssn_sin}, '${email}', '${password}')`;
+         VALUES ('${name}', '${address}', '${city}', '${provOrState}', '${postOrZip}', '${country}', ${ssn_sin}, '${email}', '${password}')`;
         
          console.log(queryCmd);
         const customer = await pool.query(queryCmd);
@@ -152,18 +158,18 @@ app.get("/customers", async (req, res) => {
         const customers = await pool.query("SELECT * FROM customer");
         res.json(customers.rows);
     } catch (error) {
-        
+        console.error(error)
     }
 });
 
 //Get all registered customers by id
-app.get("/customers/:id", async (req, res) => {
+app.get("/customersbyid/:id", async (req, res) => {
     try {
         console.log(res.body);
         const customers = await pool.query(`SELECT * FROM customer WHERE id = ${req.params.id}`);
         res.json(customers.rows);
     } catch (error) {
-        
+        console.error(error)
     }
 });
 
@@ -181,13 +187,13 @@ app.get("/employees/:id", async (req, res) => {
 app.get("/customers/:email", async (req, res) => {
     try {
         const email = req.params['email'];
-        const query = `SELECT * FROM customer WHERE email='${email}'`;
+        const query = `SELECT * FROM customer WHERE LOWER(email) ='${email.toLowerCase()}'`;
         console.log(req.params);
         const customer = await pool.query(query);
         res.json(customer.rows);
         // console.log(customer.rows);
     } catch (error) {
-        
+        console.log(error);
     }
 });
 
@@ -196,13 +202,14 @@ app.get("/employees/:email/:password", async (req, res) => {
     try {
         const email = req.params['email'];
         const password = req.params['password'];
-        const query = `SELECT id, full_name, hotel_id FROM employee WHERE email='${email}' AND passwrd='${password}'`;
+        const query = `SELECT id, full_name, hotel_id FROM employee 
+        WHERE LOWER(email) ='${email.toLowerCase()}' AND passwrd='${password}'`;
         console.log(req.params);
         const employee = await pool.query(query);
         res.json(employee.rows);
         console.log(employee.rows);
     } catch (error) {
-        
+        console.error(error);
     }
 });
 
@@ -211,13 +218,28 @@ app.get("/customers/:email/:password", async (req, res) => {
     try {
         const email = req.params['email'];
         const password = req.params['password'];
-        const query = `SELECT id, full_name FROM customer WHERE email='${email}' AND passwrd='${password}'`;
+        const query = `SELECT id, full_name FROM customer WHERE LOWER (email)='${email.toLowerCase()}' AND passwrd='${password}'`;
         console.log(req.params);
         const customer = await pool.query(query);
         res.json(customer.rows);
         console.log(customer.rows);
     } catch (error) {
-        
+        console.error(error);
+    }
+});
+
+// Get Admin by email and password
+app.get("/admin/:email/:password", async (req, res) => {
+    try {
+        const email = req.params['email'];
+        const password = req.params['password'];
+        const query = `SELECT id, full_name FROM admin WHERE LOWER (email)='${email.toLowerCase()}' AND passwrd='${password}'`;
+        console.log(req.params);
+        const admin = await pool.query(query);
+        res.json(admin.rows);
+        console.log(admin.rows);
+    } catch (error) {
+        console.error(error);
     }
 });
 
@@ -229,7 +251,7 @@ app.get("/city", async(req, res) => {
         const allLocations = await pool.query("SELECT DISTINCT ON (lower(city)) city, country, id FROM hotel GROUP BY city, id;");
         res.json(allLocations.rows);
     } catch (error) {
-        console.log("err " +error.message);
+        console.error(error);
     }
 });
 
@@ -249,11 +271,10 @@ app.get("/bookings", async(req, res) => {
 
 app.get("/bookings/:hotelid", async(req, res) => {
     try {
-        console.log(res.status);
         const bookings = await pool.query(`SELECT * FROM Booking WHERE hotel_id= ${req.params.hotelid}`);
         res.json(bookings.rows);
     } catch (error) {
-        console.log("err " +error.message);
+        console.error(error);
     }
 });
 
@@ -264,7 +285,7 @@ app.get("/rentings", async(req, res) => {
         console.log(res.status);
         const rentings = await pool.query("");
     } catch (error) {
-        console.log("err " +error.message);
+        console.error(error);
     }
 });
 
@@ -579,7 +600,7 @@ app.put("/hotelchains", async(req, res) =>{
 });
 
 // update hotels info
-app.put("/hotels/", async(req, res) =>{
+app.put("/hotels", async(req, res) =>{
     try {
         console.log("req ", req.body);
         const queryStatement = `
@@ -638,7 +659,7 @@ app.delete("/rentings/:id", async(req, res) => {
 });
 
 //Delete hotel chain
-app.delete("/hotelchains/:id", async(req, res) => {
+app.delete("/hotelchains/", async(req, res) => {
     try {
         console.log("req ", req.body);
         const queryStatement = `
@@ -653,7 +674,7 @@ app.delete("/hotelchains/:id", async(req, res) => {
 });
 
 // Delete hotel
-app.delete("/hotels/:id", async(req, res) => {
+app.delete("/hotels/", async(req, res) => {
     try {
         console.log("req ", req.body);
         const queryStatement = `
@@ -664,12 +685,11 @@ app.delete("/hotels/:id", async(req, res) => {
         res.json(hc.rows);
     } catch (error) {
         console.error(error);
-        
     }
 });
 
 //Delete room
-app.delete("/rooms/:id", async(req, res) => {
+app.delete("/rooms", async(req, res) => {
     try {
         console.log("req ", req.body);
         const queryStatement = `

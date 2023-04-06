@@ -18,6 +18,8 @@ import AllHotels from './components/AllHotels';
 import HotelForm from './components/HotelForm';
 import AllRooms from './components/AllRooms';
 import RoomForm from './components/RoomForm';
+import AdminPage from './components/AdminPage';
+import AdminLogin from './components/AdminLogin';
 
 function App() {
   const [token, setToken] = useState();
@@ -32,13 +34,15 @@ function App() {
           <Route path='/filter' element={<Filter/>}/>
           <Route exact path='/bookaroom' element={<Payment/>}/>
           <Route exact path='/employeeLogin' element={<EmployeeLogin/>}/>
+          <Route exact path='/adminLogin' element={<AdminLogin/>}/>
           <Route exact path='/hotel' element={<Hotel/>}/>
           <Route exact path='/employeePage' element={<EmployeePage/>}/>
+          <Route exact path='/adminPage' element={<AdminPage/>}/>
           <Route exact path='/createRenting' element={<CreateRenting/>}/>
           <Route exact path='/allbookings' element={<AllBookings/>}/>
           <Route exact path='/allhotelchains' element={<AllHotelChains/>}/>
           <Route exact path='/allhotels' element={<AllHotels/>}/>
-          <Route exact path='/allRooms' element={<AllRooms/>}/>
+          <Route exact path='/allrooms' element={<AllRooms/>}/>
           <Route exact path='/modifyhotelchains' element={<HotelChainForm/>}/>
           <Route exact path='/modifyhotels' element={<HotelForm/>}/>
           <Route exact path='/modifyrooms' element={<RoomForm/>}/>
