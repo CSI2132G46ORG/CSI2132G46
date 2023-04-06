@@ -38,6 +38,9 @@ const Payment = (props) => {
     var providedCheckout = (location.state!=null && location.state.checkOut !=null) ? location.state.checkOut:new Date();
     var providedArea = (location.state!=null && location.state.area !=null) ? location.state.area:'Ottawa, Canada';
     var providedPrice = (location.state!=null && location.state.price !=null) ? location.state.price:250;
+    var providedAmenities = (location.state!=null && location.state.amenities !=null) ? location.state.amenities:"Not Found";
+
+    console.log("This is the amenities withing payment page: "+providedAmenities);
     
     const passwordForm = () => {
         if (!token) {
@@ -205,7 +208,7 @@ const Payment = (props) => {
             <input type={'text'} id='phone' placeholder='Enter your phone number' required/>
             <h3>Room Details </h3>
             <div>
-                <span>Amenities: {amenities}</span>
+                <span>Amenities: {providedAmenities}&nbsp;&nbsp;</span>
                 <span>Capacity: {providedCapacity}</span>
             </div>
             <h3>Payment</h3>

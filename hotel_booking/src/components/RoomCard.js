@@ -11,12 +11,14 @@ const RoomCard = (props) => {
   const [amenities, setamenities] = useState(props.amenities);
 
   const handlePayLater = () => {
-    props.handlePayButtonClick(false,props);
+    props.handlePayButtonClick(false,props,amenitiesToSend);
   };
   
   const handlePayOnline = () => {
-    props.handlePayButtonClick(true,props);
+    props.handlePayButtonClick(true,props,amenitiesToSend);
   };
+
+  const amenitiesToSend = amenities.map((amenity) => amenity.amenity).join(', ');
 
   return (
     <div className="roomCard">
@@ -56,7 +58,7 @@ const RoomCard = (props) => {
           <br />
           <br />
           <br />
-          Amenities: {amenities.map((amenity) => amenity.amenity).join(', ')}&nbsp;&nbsp;
+          Amenities: {amenitiesToSend}&nbsp;&nbsp;
         </p>
       )}
       <button onClick={handlePayLater}>Pay Later</button>
