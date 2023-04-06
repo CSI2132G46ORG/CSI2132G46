@@ -30,7 +30,7 @@ function Hotel() {
   console.log("Provided Hotel ID : "+ providedHotelID);
   console.log("Provided Hotel Name : "+ providedHotelName);
 
-const handlePayButtonClick = (payVal,roomObject) => {
+const handlePayButtonClick = (payVal,roomObject,amenities) => {
   setPayButtonClicked(true);
   setPayType(payVal);
   getRoomObject(roomObject);
@@ -55,13 +55,14 @@ const handlePayButtonClick = (payVal,roomObject) => {
           checkOut : providedCheckout,
           area : providedArea,
           hotel_id : providedHotelID,
-          hotelName : providedHotelName
-          //missing amenities
+          hotelName : providedHotelName,
+          amenities : amenities
       }});
     }, 200);
   }
   
 };
+//console.log("This is the amenities: "+ roomObject.amenities.map((amenity) => amenity.amenity).join(', '));
 // console.log("This is payButtonClicked: "+ payButtonClicked);
 // console.log("This is paytype: "+ payType);
 // console.log("This is roomNum: "+ roomObject.problems);

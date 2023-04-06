@@ -18,6 +18,9 @@ const Home = () => {
                 <SearchBar/>
             </div>
             <Footer/>
+            <div className="admin-link">
+                <a href="/employeeLogin" className="btn btn-primary">Are you an Admin? Click Here</a>
+            </div>
         </div>
     );
 };
