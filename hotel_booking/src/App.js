@@ -8,6 +8,7 @@ import { useState } from 'react';
 import Filter from './components/Filter';
 import Payment from './components/Payment';
 import EmployeeLogin from './components/EmployeeLogin';
+import Hotel from './components/Hotel';
 import EmployeePage from './components/EmployeePage';
 import CreateRenting from './components/CreateRenting';
 import AllBookings from './components/AllBookings';
@@ -31,6 +32,7 @@ function App() {
           <Route path='/filter' element={<Filter/>}/>
           <Route exact path='/bookaroom' element={<Payment/>}/>
           <Route exact path='/employeeLogin' element={<EmployeeLogin/>}/>
+          <Route exact path='/hotel' element={<Hotel/>}/>
           <Route exact path='/employeePage' element={<EmployeePage/>}/>
           <Route exact path='/createRenting' element={<CreateRenting/>}/>
           <Route exact path='/allbookings' element={<AllBookings/>}/>

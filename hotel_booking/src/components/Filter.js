@@ -10,6 +10,7 @@ import PeoplePicker from './PeoplePicker.js';
 import SearchBar from './Searchbar';
 import SearchButton from './SearchButton.js';
 import useToken from './useToken';
+import { useNavigate } from 'react-router-dom';
 
 const Filter = () => {
     const port = 5100;
@@ -39,6 +40,26 @@ const Filter = () => {
     const [results, setResults] = useState([]);
     const { token, setToken } = useToken();
     const [totalNumberOfRooms, setTotalNumberOfRooms] = useState();
+    const [hotelObject, getHotelObject] = useState([]);
+    const [hotelCardClicked, setHotelCardClicked] = useState(false);
+    const navigate = useNavigate();
+
+    const handleHotelCardClick = (hotelClickBool,hotelObject) => {
+        console.log("Hotel Card Clicked");
+        getHotelObject(hotelObject);
+        setHotelCardClicked(hotelClickBool);
+        if(window.location.pathname==="/filter"){
+        setTimeout(() => {
+            navigate("/hotel", {state: {
+                checkIn : providedCheckIn,
+                checkOut : providedCheckout,
+                area : providedArea,
+                hotel_id : hotelObject.hotel_id,
+                hotelName : hotelObject.name
+            }});
+        }, 200);
+        }
+    };
 
 
     if (true) {
@@ -402,7 +423,7 @@ const Filter = () => {
                     {
                         results.map((hotelObj) => {
                             return (
-                                <HotelCard key = {hotelObj.hotel_id} title = {hotelObj.name} price = {hotelObj.min}/>
+                                <HotelCard key = {hotelObj.hotel_id} title = {hotelObj.name} price = {hotelObj.min} handleHotelCardClick={handleHotelCardClick}/>
                             );
                         })
                     }
