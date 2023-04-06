@@ -17,7 +17,7 @@ const BookingCard = (props) => {
     const navigate = useNavigate();
 
     const findCustomerName = async () => {
-        fetch(`http://localhost:${port}/customers/${customerId}`)
+        fetch(`http://localhost:${port}/customersbyid/${customerId}`)
         .then((response) => response.json())
         .then((data) => {
             console.log('customer Data', data);

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import EmployeeButton from "./EmployeeButton";
 
 const HotelForm = () => {
@@ -12,7 +12,9 @@ const HotelForm = () => {
     const [postOrZip, setPostOrZip] = useState(location.state.postOrZip);
     const [country, setCountry] = useState(location.state.country);
     const [email, setEmail] = useState(location.state.email);
+    const [hotelChainId, setHotelChainId] = useState(location.state && location.state.hotelChainId? location.state.hotelChainId: '');
     const port = 5100;
+    const navigate = useNavigate();
 
 
     const updateCategory = (e) => {
@@ -46,10 +48,15 @@ const HotelForm = () => {
                 method: 'PUT',
                 headers: {"content-type": "application/JSON"},
                 body: JSON.stringify(body)
-            });
+            })
+            .then(
+                navigate('/allhotels', {replace: true, state: {
+                    hotelChainId: hotelChainId
+                }})
+            );
         }
         else {
-
+            
         }
     };
 
@@ -63,6 +70,7 @@ const HotelForm = () => {
 
     return (
         <div>
+            <h2>Modify Rooms</h2>
             <form onSubmit={handleSubmit}>
                 <input type={"text"} value={category} onChange={updateCategory} placeholder="Enter a category"/>
                 <input type={"text"} value={stAd} onChange={updateStAd} placeholder="Enter street address"/>

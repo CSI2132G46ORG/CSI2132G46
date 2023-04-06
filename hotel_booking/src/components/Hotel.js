@@ -83,6 +83,7 @@ const handlePayButtonClick = (payVal,roomObject) => {
         try {
           const response = await fetch(`http://localhost:${port}/hotels/info/${providedHotelID}`); // fetch data from API with hotel id, checkin, and checkout parameters
           const data = await response.json(); // parse response data as JSON
+          console.log('data ', data); 
           setHotelInfo(data); // update rooms state with fetched data
   
         } catch (error) {
@@ -94,6 +95,7 @@ const handlePayButtonClick = (payVal,roomObject) => {
         const response = await fetch(`http://localhost:${port}/hotels/${providedHotelID}/rooms?checkin_date=${providedCheckIn}&checkout_date=${providedCheckout}`); // fetch data from API with hotel id, checkin, and checkout parameters
         const data = await response.json(); // parse response data as JSON
         setTotalRooms(Object.keys(data).length);
+        console.log('rooms: ', data)
         setRooms(data); // update rooms state with fetched data
 
       } catch (error) {
@@ -112,7 +114,7 @@ const handlePayButtonClick = (payVal,roomObject) => {
       <div className="hotel-overview">
       {hotelInfo.map((hotelInfo) => {
             return (
-                <HotelOverview number_of_rooms = {hotelInfo.number_of_rooms} street_address = {hotelInfo.street_address} city = {hotelInfo.city} province_or_state = {hotelInfo.province_or_state} country = {hotelInfo.country} postal_code_or_zip_code = {hotelInfo.postal_code_or_zip_code} contact_email = {hotelInfo.contact_email}/>
+                <HotelOverview key = {hotelInfo.id} number_of_rooms = {hotelInfo.number_of_rooms} street_address = {hotelInfo.street_address} city = {hotelInfo.city} province_or_state = {hotelInfo.province_or_state} country = {hotelInfo.country} postal_code_or_zip_code = {hotelInfo.postal_code_or_zip_code} contact_email = {hotelInfo.contact_email}/>
             );
         })
     }
@@ -123,7 +125,7 @@ const handlePayButtonClick = (payVal,roomObject) => {
         {rooms.map((room) => {
           const amenities = amenityInfo.filter((amenity) => amenity.room_number === room.room_number);
             return (
-                <RoomCard roomNumber = {room.room_number} price = {room.price} capacity = {room.capacity} view = {room.view} extended = {room.extended} problems = {room.problems} amenities = {amenities} handlePayButtonClick={handlePayButtonClick}>
+                <RoomCard key ={`${room.room_number}_${room.hotel_id}`} roomNumber = {room.room_number} price = {room.price} capacity = {room.capacity} view = {room.view} extended = {room.extended} problems = {room.problems} amenities = {amenities} handlePayButtonClick={handlePayButtonClick}>
                   </RoomCard>
             );
         })

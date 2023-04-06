@@ -1,28 +1,33 @@
-.hotelChainCard {
+.roomCard {
     display: flex;
+    border: 1px solid black;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    cursor: pointer;
     border: 2px solid black;
     margin-bottom: 40px;
     border-radius: 10px;
+    cursor: pointer;
     margin: auto;
     margin-bottom: 40px;
-    margin-top: 40px;
     max-width: 650px;
+    margin-top: 10px;
     /* width: 100%; */
-} 
+}
 
-.hotelChainCard p {
+.roomCard p {
     margin-right: 10px;
 }
 
-.hotelChainCard .cardBlock {
+.roomCard .cardBlock {
     margin-left: 5px;
 }
 
-.hotelChainCard div {
+.roomCard div {
     cursor: pointer;
 }
 
-.hotelChainCard img {
+.roomCard img {
     display: inline-block;
     /* position: absolute; */
     /* z-index: 4; */

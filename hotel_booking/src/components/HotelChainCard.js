@@ -18,11 +18,17 @@ const HotelChainCard = (props) => {
     const deleteHotelChain = () => {
         const body = {id};
         console.log(body);
-        fetch(`http://localhost:${port}/hotelchains`, {
-            method: 'DELETE',
-            headers: {"content-type": "application/JSON"},
-            body: JSON.stringify(body)
-        });
+        if (window.confirm('Are you sure you want to delete')) {
+            fetch(`http://localhost:${port}/hotelchains`, {
+                method: 'DELETE',
+                headers: {"content-type": "application/JSON"},
+                body: JSON.stringify(body)
+            });
+        }
+        else {
+
+        }
+        
     };
 
     const handleClick = () => {
@@ -39,10 +45,14 @@ const HotelChainCard = (props) => {
     };
 
     return (
-        <div className="hotelChainCard" onClick={handleClick}>
-            <p>Name: {name}</p>
-            <p>Address: {street_address}, {city}, {province_or_state}, {postal_code_or_zip_code}, {country}</p>
-            <p>Number of hotels: {numHotels}</p>
+        <div className="hotelChainCard">
+            <p><b>Name:</b> {name}</p>
+            <p><b>Address:</b> {street_address}, {city}, {province_or_state}, {postal_code_or_zip_code}, {country}</p>
+            <p><b>Number of hotels:</b> {numHotels}</p>
+            <div className='cardBlock'>
+                <div onClick={deleteHotelChain}><img src={require('./assets/img/trash.png')} alt='trash image' /></div>
+                <div style={{display: 'block', textDecoration: 'underline'}} onClick={handleClick}>Modify Hotel Chain</div>
+            </div>
         </div>
     );
 };

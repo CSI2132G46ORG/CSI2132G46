@@ -52,6 +52,7 @@ const RoomForm = () => {
     return (
         <div className="roomForm">
             <form onSubmit={handleSubmit}>
+                <h2>Modify Rooms</h2>
                 <input type={"text"} value={price} onChange={updatePrice} placeholder="Enter price"/>
                 <input type={"text"} value={capacity} onChange={updateCapacity} placeholder="Enter capacity"/>
                 <input type={"text"} value={view} onChange={updateView}  placeholder="Enter view"/>

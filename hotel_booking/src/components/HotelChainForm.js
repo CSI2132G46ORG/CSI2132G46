@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import EmployeeButton from "./EmployeeButton";
 
 const HotelChainForm = (props) => {
@@ -14,6 +14,7 @@ const HotelChainForm = (props) => {
     const [country, setCountry] = useState(location.state && location.state.country? location.state.country: '');
     const [numHotels, setNumHotels] = useState(location.state && location.state.numHotels? location.state.numHotels: 0);
     const port = 5100;
+    const navigate = useNavigate();
 
 
     const updateName = (e) => {
@@ -46,7 +47,10 @@ const HotelChainForm = (props) => {
                 method: 'PUT',
                 headers: {"content-type": "application/JSON"},
                 body: JSON.stringify(body)
-            });
+            })
+            .then(
+                navigate('/allhotelchains' , {replace: true})
+            );
         }
         else {
 

@@ -1,8 +1,35 @@
 .allHotelsCard{
     display: flex;
+    padding: 40px;
     border: 1px solid black;
     margin-bottom: 40px;
     border-radius: 10px;
-    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    width: 500px;
     /* width: 100%; */
+}
+.allHotelsCard p {
+    margin-right: 10px;
+}
+
+.allHotelsCard cardBlock {
+    margin-left: 5px;
+}
+
+.cardBlock div {
+    cursor: pointer;
+}
+
+.allHotelsCard img {
+    display: inline-block;
+    /* position: absolute; */
+    /* z-index: 4; */
+    width: 20px;
+    margin-bottom: 15px;
+    cursor: pointer;
+
+    /* right: 20px; */
+    height: 25px;
 }
