@@ -47,6 +47,7 @@ const CreateCustomer = () => {
             }
             })
             .then((data) => {
+                console.log('status', data.status);
                 if (data.status==200){
                     fetch(`http://localhost:${port}/customers/${email}`, {method: 'GET' })
                     .then(d => {

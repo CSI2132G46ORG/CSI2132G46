@@ -27,8 +27,11 @@ app.use('/login', async (req, res) => {
 app.post("/bookings/", async (req, res) => {
     try {
         const {customerID, roomNum, hotelID, checkInDate, checkOutDate} = req.body;
+        var checkIn = checkInDate.replace(/_/g, "/");
+        var checkOut = checkOutDate.replace(/_/g, "/");
+
         const queryCmd = `
-            INSERT INTO booking (customer_id, room_id, hotel_id, checkin_date, checkout_date) VALUES (${customerID}, ${roomNum}, ${hotelID}, '${checkInDate}', '${checkOutDate}')
+            INSERT INTO booking (customer_id, room_id, hotel_id, checkin_date, checkout_date) VALUES (${customerID}, ${roomNum}, ${hotelID}, '${checkIn}', '${checkOut}')
         `;
         console.log(queryCmd);
         const booking = await pool.query(queryCmd);
@@ -41,12 +44,11 @@ app.post("/bookings/", async (req, res) => {
 app.post("/bookingarchives", async (req, res) => {
     try {
         const {booking_id, customer_id, room_id, hotel_id, checkin_date, checkout_date, booking_date} = req.body;
-        const checkin_date_str = checkin_date.split("T")[0]
-        const checkOutDate_str = checkout_date.split("T")[0];
+
         const queryCmd = `
             INSERT INTO booking_archive (booking_id, customer_id, room_id, hotel_id, checkin_date, checkout_date, booking_date) 
             VALUES (${booking_id}, ${customer_id}, ${room_id}, 
-                ${hotel_id}, ${checkin_date_str}, ${checkOutDate_str}, '${booking_date}')
+                ${hotel_id}, '${checkin_date}', '${checkout_date}', '${booking_date}')
         `;
         console.log(queryCmd);
         const booking = await pool.query(queryCmd);
@@ -114,9 +116,57 @@ app.post("/hotel", async (req, res) => {
 //Create Room
 app.post("/rooms", async (req, res) => {
     try {
-        
+        console.log(req.body);
+        const {roomNumber, hotelId, price, capacity, view, extended, problems} = req.body;
+        const queryCmd = `
+            INSERT INTO room VALUES (${parseInt(roomNumber)}, ${parseInt(price)}, '${capacity}', 
+            ${view}, '${extended}', '${problems}', '${parseInt(hotelId)}')
+        `;
+        console.log(queryCmd);
+        const room = await pool.query(queryCmd);
+        res.json(room.rows);
     } catch (error) {
-        
+        console.log(error);
+    }
+});
+
+app.post("/hotels", async (req, res) => {
+    try {
+        console.log(req.body);
+        const {category, stAd, city, provOrState, postOrZip,
+             country, email, hotelChainId} = req.body;
+        const queryCmd = `
+            INSERT INTO hotel (category, street_address, city, province_or_state,
+                postal_code_or_zip_code, country, contact_email, hotel_chain_id)
+                 VALUES (${parseInt(category)}, '${stAd}', 
+            '${city}', '${provOrState}', '${postOrZip}',
+            '${country}', '${email}', '${parseInt(hotelId)}')
+        `;
+        console.log(queryCmd);
+        const hotel = await pool.query(queryCmd);
+        res.json(room.rows);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.post("/hotelchains", async (req, res) => {
+    try {
+        console.log(req.body);
+        // const {category, stAd, city, provOrState, postOrZip,
+        //      country, email, hotelChainId} = req.body;
+        // const queryCmd = `
+        //     INSERT INTO hotel (category, street_address, city, province_or_state,
+        //         postal_code_or_zip_code, country, contact_email, hotel_chain_id)
+        //          VALUES (${parseInt(category)}, '${stAd}', 
+        //     '${city}', '${provOrState}', '${postOrZip}',
+        //     '${country}', '${email}', '${parseInt(hotelChainId)}')
+        // `;
+        // console.log(queryCmd);
+        // const hotel = await pool.query(queryCmd);
+        // res.json(room.rows);
+    } catch (error) {
+        console.log(error);
     }
 });
 
@@ -641,11 +691,17 @@ app.put("/rooms", async(req, res) =>{
 /*---------DELETE------------------------- */
 
 //Delete booking
-app.delete("/bookings/:id", async(req, res) => {
+app.delete("/bookings", async(req, res) => {
     try {
-        
+        console.log("req ", req.body);
+        const queryStatement = `
+            DELETE FROM booking WHERE booking_id =${req.body.bookingId}
+        `;
+        console.log(queryStatement);
+        // const booking = await pool.query(queryStatement);
+        // res.json(booking.rows);
     } catch (error) {
-        
+        console.error(error);
     }
 });
 

@@ -21,8 +21,8 @@ function Hotel() {
   var providedCheckIn= (location.state!=null && location.state.checkIn !=null) ? location.state.checkIn:new Date();
   var providedCheckout = (location.state!=null && location.state.checkOut !=null) ? location.state.checkOut:new Date();
   var providedArea = (location.state!=null && location.state.area !=null) ? location.state.area:'Ottawa, Canada';
-  var providedHotelID = (location.state!=null && location.state.hotel_id !=null) ? location.state.hotel_id:2;
-  var providedHotelName = (location.state!=null && location.state.hotelName !=null) ? location.state.hotelName:'Mariot inn';
+  var providedHotelID = (location.state!=null && location.state.hotel_id !=null) ? location.state.hotel_id:null;
+  var providedHotelName = (location.state!=null && location.state.hotelName !=null) ? location.state.hotelName:null;
 
   console.log("Provided Check in date : "+ providedCheckIn);
   console.log("Provided Check out date : "+ providedCheckout);
@@ -35,7 +35,7 @@ const handlePayButtonClick = (payVal,roomObject,amenities) => {
   setPayType(payVal);
   getRoomObject(roomObject);
 
-  console.log("Pay Button Clicked");
+  console.log("room obj", roomObject);
 
   if(window.location.pathname==="/hotel"){
     setTimeout(() => {
@@ -56,7 +56,8 @@ const handlePayButtonClick = (payVal,roomObject,amenities) => {
           area : providedArea,
           hotel_id : providedHotelID,
           hotelName : providedHotelName,
-          amenities : amenities
+          amenities : amenities,
+          payType: payVal
       }});
     }, 200);
   }

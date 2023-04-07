@@ -580,8 +580,8 @@ INSERT INTO customer(id, full_name, street_address, city, province_or_state, Pos
 VALUES (1, 'Ralph', '123 ex st', 'Ottawa', 'ON', 'K1J 5N2', 'Canada', '1102345646', 'ralph@ex.com', 'pompei', '2023-03-20');
 
 -- --------------Employees---------------------------------------------
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (1, 'Tom', '123 ex st', 'Ottawa', 'ON', 'K1J 5N2', 'Canada', '15415112', 'tom@ex.com', 'pompei', '2023-03-30');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (1, 'Tom', '123 ex st', 'Ottawa', 'ON', 'K1J 5N2', 'Canada', '15415112', 'tom@ex.com', 'pompei', 'receptionist', 1);
 
 -- ----------------------------Amenities ---------------------------------
 INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 1, 'Wifi');
