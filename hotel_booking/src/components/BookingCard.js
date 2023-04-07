@@ -27,6 +27,24 @@ const BookingCard = (props) => {
         ;
     };
 
+    const deleteBooking = () => {
+        if (window.confirm('Are you sure you want to delete')) {
+            console.log('confirmed')
+            const body = {bookingId};
+            console.log(body);
+            fetch(`http://localhost:${port}/bookings`, {
+                method: 'DELETE',
+                headers: {"content-type": "application/JSON"},
+                body: JSON.stringify(body)
+            });
+        }
+
+        else {
+
+        }
+        
+    };
+
     const handleClick = () => {
 
         navigate('/createrenting', {state: {
@@ -45,12 +63,16 @@ const BookingCard = (props) => {
 
 
     return (
-        <div className="bookingCard" onClick={handleClick}>
-            <p> Customer Name: {customerName} </p>
-            <p> Room Number: {roomNumber}</p>
-            <span>Check In: {checkin_date} </span>
-            <span>Check Out: {checkout_date} </span>
-            <p>Booking Date: {booking_date} </p>
+        <div className="bookingCard">
+            <p> <b>Customer Name:</b> {customerName} </p>
+            <p> <b>Room Number:</b> {roomNumber}</p>
+            <span><b>Check In:</b> {checkin_date} </span>
+            <span><b>Check Out:</b> {checkout_date} </span>
+            <p><b>Booking Date:</b> {booking_date} </p>
+            <div className='cardBlock'>
+                <div onClick={deleteBooking}><img src={require('./assets/img/trash.png')} alt='trash image' /></div>
+                <div style={{display: 'block', textDecoration: 'underline'}} onClick={handleClick}>Modify Booking</div>
+            </div>
         </div>
     )
 };

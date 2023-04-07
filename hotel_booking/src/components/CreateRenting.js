@@ -2,6 +2,7 @@ import { useState } from "react";
 import useToken from "./useToken";
 import DatePickers from './DatePickers';
 import { useLocation } from "react-router-dom";
+import './assets/styles/CreateRenting.css';
 import { useEffect } from "react";
 
 const CreateRenting = () => {
@@ -103,10 +104,15 @@ const CreateRenting = () => {
                 <input type={"text"} placeholder='Enter customer email' required/>
                 <input type={"text"} placeholder='Enter room number' value={roomNumber} onChange={updateRoomNumber}  required/>
                 <DatePickers defaultCheckIn={checkInDate} defaultCheckOut={checkOutDate} setCheckInDate={setCheckInDate} setCheckOutDate={setCheckOutDate}/>
-                <input type={"text"} placeholder='Enter customer name' required/>
-                <input type={"text"} placeholder='Enter customer name' required/>
-                <input type={"text"} placeholder='Enter customer name' required/>
-                <input type={"text"} placeholder='Enter customer name' required/>
+                <h3>Payment</h3>
+                    <input type={'text'} id={'paymentName'} placeholder='Enter your full name'required/>
+                    <input type={'text'} placeholder='0000 0000 0000 0000' id='ccnum' required/>
+                    <input type={'text'} id='expMonth' placeholder='MM' style={{display: 'inline-block', width: '40px'}} required/>/
+                    <input type={'text'} id='expYear' placeholder='YY' style={{display: 'inline-block', width: '40px'}} required/>
+                    <input type={'text'} placeholder='CVV' id='cvv'/>
+                    <h4>Billing Address</h4>
+                    <input type={'text'} id={'country'} placeholder='Enter your country' required/>
+                    <input type={'text'} id={'paymentziporpost'} placeholder='Enter your Postal Code or Zip code' required/>
                 <input type={"submit"} placeholder='Enter customer name' value="Create Renting"/>
             </form>
         </div>

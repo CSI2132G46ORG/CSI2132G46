@@ -45,7 +45,7 @@ const Filter = () => {
     const navigate = useNavigate();
 
     const handleHotelCardClick = (hotelClickBool,hotelObject) => {
-        console.log("Hotel Card Clicked");
+        console.log("Hotel Card Clicked", hotelObject);
         getHotelObject(hotelObject);
         setHotelCardClicked(hotelClickBool);
         if(window.location.pathname==="/filter"){
@@ -54,8 +54,8 @@ const Filter = () => {
                 checkIn : providedCheckIn,
                 checkOut : providedCheckout,
                 area : providedArea,
-                hotel_id : hotelObject.hotel_id,
-                hotelName : hotelObject.name
+                hotel_id : hotelObject.hotelId,
+                hotelName : hotelObject.title
             }});
         }, 200);
         }
@@ -423,7 +423,7 @@ const Filter = () => {
                     {
                         results.map((hotelObj) => {
                             return (
-                                <HotelCard key = {hotelObj.hotel_id} title = {hotelObj.name} price = {hotelObj.min} handleHotelCardClick={handleHotelCardClick}/>
+                                <HotelCard key = {hotelObj.hotel_id} hotelId = {hotelObj.hotel_id} title = {hotelObj.name} price = {hotelObj.min} handleHotelCardClick={handleHotelCardClick}/>
                             );
                         })
                     }

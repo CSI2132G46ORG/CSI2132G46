@@ -7,11 +7,28 @@ import useToken from './useToken';
 import { useLocation } from 'react-router-dom';
 
 const Payment = (props) => { 
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const port = 5100;
+
+    var providedCapacity= (location.state!=null && location.state.capacity !=null) ? location.state.capacity:null;
+    var providedHotelName= (location.state!=null && location.state.hotelName !=null) ? location.state.hotelName:null;
+    var providedCheckIn= (location.state!=null && location.state.checkIn !=null) ? location.state.checkIn.replace(/_/g, "/"):null;
+    var providedCheckout = (location.state!=null && location.state.checkOut !=null) ? location.state.checkOut.replace(/_/g, "/"):null;
+    var providedArea = (location.state!=null && location.state.area !=null) ? location.state.area:null;
+    var providedPrice = (location.state!=null && location.state.price !=null) ? location.state.price:250;
+    var providedAmenities = (location.state!=null && location.state.amenities !=null) ? location.state.amenities:"Not Found";
+    var payMethod = (location.state!=null && location.state.payType) ? location.state.payType:false;
+    var hotelId= (!location.state && location.state.hotel_id) ? location.state.hotel_id:null;
+    var roomNumber= (!location.state && location.state.roomNumber) ? location.state.roomNumber:null;
+
+
     const { token, setToken } = useToken();
-    const [roomNum, setRoomNum] = useState(1);
-    const [hotelID, setHotelID] = useState(1);
-    const [checkInDate, setCheckInDate] = useState('2023/05/06');
-    const [checkOutDate, setCheckOutDate] = useState('2023/05/15');
+    const [roomNum, setRoomNum] = useState(roomNumber);
+    const [hotelID, setHotelID] = useState(hotelId);
+    const [checkInDate, setCheckInDate] = useState(providedCheckIn);
+    const [checkOutDate, setCheckOutDate] = useState(providedCheckout);
     const [capacity, setCapacity] = useState();
     const [amenities, setAmenities] = useState();
     const [view, setView] = useState();
@@ -29,19 +46,8 @@ const Payment = (props) => {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     
-    const navigate = useNavigate();
-    const location = useLocation();
-    const port = 5100;
-    var providedCapacity= (location.state!=null && location.state.capacity !=null) ? location.state.capacity:'Mariot inn';
-    var providedHotelName= (location.state!=null && location.state.hotelName !=null) ? location.state.hotelName:'king';
-    var providedCheckIn= (location.state!=null && location.state.checkIn !=null) ? location.state.checkIn:new Date();
-    var providedCheckout = (location.state!=null && location.state.checkOut !=null) ? location.state.checkOut:new Date();
-    var providedArea = (location.state!=null && location.state.area !=null) ? location.state.area:'Ottawa, Canada';
-    var providedPrice = (location.state!=null && location.state.price !=null) ? location.state.price:250;
-    var providedAmenities = (location.state!=null && location.state.amenities !=null) ? location.state.amenities:"Not Found";
-
-    console.log("This is the amenities withing payment page: "+providedAmenities);
     
+        
     const passwordForm = () => {
         if (!token) {
             return (
@@ -140,7 +146,7 @@ const Payment = (props) => {
                                     );
                                     const customerID = id;
         
-                                    const body = {customerID, roomNum, hotelID, checkInDate, checkOutDate};
+                                    const body = {customerID, roomNumber, hotelID, checkInDate, checkOutDate};
                                     console.log(body);
 
 
@@ -173,6 +179,8 @@ const Payment = (props) => {
                 //Connected customer
 
                 const customerID = token.id;
+                const roomNum = location.state && location.state.roomNumber? location.state.roomNumber: null;
+                const hotelID = location.state && location.state.hotel_id? location.state.hotel_id: null;
         
                 const body = {customerID, roomNum, hotelID, checkInDate, checkOutDate};
                 console.log(token);
@@ -197,6 +205,32 @@ const Payment = (props) => {
         
     };
 
+    const payForm  = () => {
+
+        if (payMethod) {
+            return (
+                <div>
+                    <h3>Payment</h3>
+                    <input type={'text'} id={'paymentName'} placeholder='Enter your full name'required/>
+                    <input type={'text'} placeholder='0000 0000 0000 0000' id='ccnum' required/>
+                    <input type={'text'} id='expMonth' placeholder='MM' style={{display: 'inline-block', width: '40px'}} required/>/
+                    <input type={'text'} id='expYear' placeholder='YY' style={{display: 'inline-block', width: '40px'}} required/>
+                    <input type={'text'} placeholder='CVV' id='cvv'/>
+                    <h4>Billing Address</h4>
+                    <input type={'text'} id={'country'} placeholder='Enter your country' required/>
+                    <input type={'text'} id={'paymentziporpost'} placeholder='Enter your Postal Code or Zip code' required/>
+                </div>
+            );
+        }
+        
+
+        
+    };
+    console.log('hotelID', location.state.hotel_id);
+    console.log('roomNum', location.state.roomNumber);
+    console.log('checkin', location.state.checkIn);
+    console.log('checkout', location.state.checkOut);
+    console.log('online ', payMethod);
     return (
     <div className='payment'>
         <Navbar token={token}/>
@@ -208,18 +242,11 @@ const Payment = (props) => {
             <input type={'text'} id='phone' placeholder='Enter your phone number' required/>
             <h3>Room Details </h3>
             <div>
-                <span>Amenities: {providedAmenities}&nbsp;&nbsp;</span>
-                <span>Capacity: {providedCapacity}</span>
+                <span><b>Amenities:</b> {providedAmenities}&nbsp;&nbsp;</span>
+                <span><b>Capacity:</b> {providedCapacity}</span>
             </div>
-            <h3>Payment</h3>
-            <input type={'text'} id={'paymentName'} placeholder='Enter your full name'required/>
-            <input type={'text'} placeholder='0000 0000 0000 0000' id='ccnum' required/>
-            <input type={'text'} id='expMonth' placeholder='MM' style={{display: 'inline-block', width: '40px'}} required/>/
-            <input type={'text'} id='expYear' placeholder='YY' style={{display: 'inline-block', width: '40px'}} required/>
-            <input type={'text'} placeholder='CVV' id='cvv'/>
-            <h4>Billing Address</h4>
-            <input type={'text'} id={'country'} placeholder='Enter your country' required/>
-            <input type={'text'} id={'paymentziporpost'} placeholder='Enter your Postal Code or Zip code' required/>
+            {payForm()}
+            
             {passwordForm()}
             
 

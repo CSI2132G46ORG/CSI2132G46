@@ -5,6 +5,7 @@ import DatePickers from './DatePickers';
 import Navbar from './Navbar';
 import PeoplePicker from './PeoplePicker';
 import SearchButton from './SearchButton';
+import useToken from './useToken';
 
 function CheckInOut() {
 
@@ -14,6 +15,7 @@ function CheckInOut() {
   const [checkOutDate, setCheckOutDate] = useState(new Date());
   const [numPeople, setNumPeople] = useState(1);
   const [area, setArea] = useState(providedArea);
+  const { token, setToken } = useToken();
 
   // function updateCheckInDate () {
   //     setCheckInDate();
@@ -21,7 +23,7 @@ function CheckInOut() {
 
   return (
     <div className="CheckInOut"  style={{paddingTop: "90px"}}>
-      <Navbar/>
+      <Navbar token={token}/>
       <h3>The Best Hotels In {area}</h3>
       <div className="container">
         <DatePickers setCheckInDate={setCheckInDate} setCheckOutDate={setCheckOutDate}/>
