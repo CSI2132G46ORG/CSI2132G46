@@ -24,14 +24,12 @@ const CreateEmployee = () => {
     const onSubmitForm = async (e) => {
         e.preventDefault();
         try {
-            console.log("I got to line 27");
             await fetch(`http://localhost:${port}/employees/${email}`, {method: 'GET' })
             .then(d => {
                 console.log("This is d.json: "+d.json());
                 return d.json();
             })
             .then(data => {
-                console.log("I got to line 33");
                 if(data.length!=0){
                     console.log("user already exists");
                 }
@@ -44,7 +42,6 @@ const CreateEmployee = () => {
                     headers: {"content-type": "application/JSON"},
                     body: JSON.stringify(body)
                 });
-                
                 
                 console.log(response);
                 return response;    
@@ -82,7 +79,6 @@ const CreateEmployee = () => {
         }
     };
 
-    console.log("I got to line 83");
     return (
         <div className="signUp">
             <h1>Create an account</h1>

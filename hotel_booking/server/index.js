@@ -317,7 +317,6 @@ app.get("/admin/:email/:password", async (req, res) => {
 });
 
 //Get existing cities and countries
-
 app.get("/city", async(req, res) => {
     try {
         console.log(res.status);
