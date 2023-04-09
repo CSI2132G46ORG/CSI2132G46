@@ -15,6 +15,8 @@ const RoomForm = () => {
     const [problems, setProblems] = useState(location.state && location.state.problems? location.state.problems:'');
     const navigate = useNavigate();
 
+    console.log("This is hotelID: " + hotelId);
+
 
 
     const handleSubmit = (e) => {
@@ -30,25 +32,27 @@ const RoomForm = () => {
             .then((res) => {
                 if (res.status == 200) {
                     navigate('/allrooms', {replace: true, state: {
-                        hotelId: hotelId
+                        hotelId: hotelId,
+                        roomNumber: roomNumber
                     }})
                 }
             });
         }
         else {
-            const body = {roomNumber, hotelId, price, capacity, view, extended, problems};
+            const body = {roomNumber, hotelId, price, capacity, view, extended, problems,hotelId};
             console.log(body);
-            fetch(`http://localhost:${port}/rooms`, {
+            fetch(`http://localhost:${port}/roomsPost`, {
                 method: 'POST',
                 headers: {"content-type": "application/JSON"},
                 body: JSON.stringify(body)
             })
             .then((res) => {
-                // if (res.status == 200) {
-                //     navigate('/allrooms', {replace: true, state: {
-                //         hotelId: hotelId
-                //     }})
-                // }
+                if (res.status == 200) {
+                    navigate('/allrooms', {replace: true, state: {
+                        hotelId: hotelId,
+                        roomNumber: roomNumber
+                    }})
+                }
             });
         }
     };

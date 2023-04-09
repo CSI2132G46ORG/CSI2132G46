@@ -114,13 +114,13 @@ app.post("/hotel", async (req, res) => {
 });
 
 //Create Room
-app.post("/rooms", async (req, res) => {
+app.post("/roomsPost", async (req, res) => {
     try {
         console.log(req.body);
         const {roomNumber, hotelId, price, capacity, view, extended, problems} = req.body;
         const queryCmd = `
             INSERT INTO room VALUES (${parseInt(roomNumber)}, ${parseInt(price)}, '${capacity}', 
-            ${view}, '${extended}', '${problems}', '${parseInt(hotelId)}')
+            '${view}', '${extended}', '${problems}', '${parseInt(hotelId)}')
         `;
         console.log(queryCmd);
         const room = await pool.query(queryCmd);
@@ -130,7 +130,7 @@ app.post("/rooms", async (req, res) => {
     }
 });
 
-app.post("/hotels", async (req, res) => {
+app.post("/hotelsPost", async (req, res) => {
     try {
         console.log(req.body);
         const {category, stAd, city, provOrState, postOrZip,
@@ -140,31 +140,32 @@ app.post("/hotels", async (req, res) => {
                 postal_code_or_zip_code, country, contact_email, hotel_chain_id)
                  VALUES (${parseInt(category)}, '${stAd}', 
             '${city}', '${provOrState}', '${postOrZip}',
-            '${country}', '${email}', '${parseInt(hotelId)}')
+            '${country}', '${email}', '${parseInt(hotelChainId)}')
         `;
         console.log(queryCmd);
         const hotel = await pool.query(queryCmd);
-        res.json(room.rows);
+        res.json(hotel.rows);
     } catch (error) {
         console.log(error);
     }
 });
 
-app.post("/hotelchains", async (req, res) => {
+app.post("/hotelchainsPost", async (req, res) => {
     try {
-        console.log(req.body);
-        // const {category, stAd, city, provOrState, postOrZip,
-        //      country, email, hotelChainId} = req.body;
-        // const queryCmd = `
-        //     INSERT INTO hotel (category, street_address, city, province_or_state,
-        //         postal_code_or_zip_code, country, contact_email, hotel_chain_id)
-        //          VALUES (${parseInt(category)}, '${stAd}', 
-        //     '${city}', '${provOrState}', '${postOrZip}',
-        //     '${country}', '${email}', '${parseInt(hotelChainId)}')
-        // `;
-        // console.log(queryCmd);
-        // const hotel = await pool.query(queryCmd);
-        // res.json(room.rows);
+        console.log("This is req.body: "+req.body);
+        const {name, street_address, city, province_or_state, postal_code_or_zip_code,
+            country} = req.body;
+        const queryCmd = `
+            INSERT INTO hotelchain (name, street_address, city, province_or_state, postal_code_or_zip_code,
+                country)
+                 VALUES ('${name}', '${street_address}', 
+            '${city}', '${province_or_state}', '${postal_code_or_zip_code}',
+            '${country}')
+        `;
+        console.log("This is queryCMD: "+queryCmd);
+        const hotelchain = await pool.query(queryCmd);
+        console.log("This is hotelchain insertion res: "+hotelchain.rows);
+        res.json(hotelchain.rows);
     } catch (error) {
         console.log(error);
     }
@@ -191,11 +192,21 @@ app.post("/signup", async(req, res) => {
 
 // Create employee
 
-app.post("/employees", async (req, res) => {
+app.post("/employeesSignUp", async (req, res) => {
     try {
+        const {name, address, city, provOrState, postOrZip, country, 
+            ssn_sin, email, password, role} = req.body;
+
+        const queryCmd = `INSERT INTO\
+        customer(full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd,role, hotel_id)\
+         VALUES ('${name}', '${address}', '${city}', '${provOrState}', '${postOrZip}', '${country}', ${ssn_sin}, '${email}', '${password}','${role}','${hotel_id}')`;
+        
+         console.log(queryCmd);
+        const employee = await pool.query(queryCmd);
+        res.json(employee.rows);
         
     } catch (error) {
-        
+        console.log("err " +error.message);
     }
 });
 
@@ -242,6 +253,18 @@ app.get("/customers/:email", async (req, res) => {
         const customer = await pool.query(query);
         res.json(customer.rows);
         // console.log(customer.rows);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.get("/employees/:email", async (req, res) => {
+    try {
+        const email = req.params['email'];
+        const query = `SELECT * FROM employee WHERE LOWER(email) ='${email.toLowerCase()}'`;
+        console.log(req.params);
+        const employee = await pool.query(query);
+        res.json(employee.rows);
     } catch (error) {
         console.log(error);
     }

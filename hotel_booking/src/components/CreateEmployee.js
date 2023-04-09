@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './assets/styles/CreateCustomer.css';
+import './assets/styles/CreateEmployee.css';
 import useToken from './useToken';
 
-const CreateCustomer = () => {
+const CreateEmployee = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -14,6 +14,8 @@ const CreateCustomer = () => {
     const [postOrZip, setPostOrZip] = useState('');
     const [country, setCountry] = useState('');
     const [ssn_sin, setSsnSin] = useState('');
+    const [role, setRole] = useState('');
+    const [hotelId, setHotelId] = useState('');
     const { token, setToken } = useToken();
     const navigate = useNavigate();
     const port = 5100;
@@ -22,20 +24,22 @@ const CreateCustomer = () => {
     const onSubmitForm = async (e) => {
         e.preventDefault();
         try {
-
-            await fetch(`http://localhost:${port}/customers/${email}`, {method: 'GET' })
+            console.log("I got to line 27");
+            await fetch(`http://localhost:${port}/employees/${email}`, {method: 'GET' })
             .then(d => {
+                console.log("This is d.json: "+d.json());
                 return d.json();
             })
             .then(data => {
+                console.log("I got to line 33");
                 if(data.length!=0){
                     console.log("user already exists");
                 }
                 else {
-                const body = {name, address, city, provOrState, postOrZip, country, ssn_sin, email, password};
-                console.log('signup form', body);
+                const body = {name, address, city, provOrState, postOrZip, country, ssn_sin, email, password, role, hotelId};
+                console.log('employee signup form', body);
             
-                const response = fetch(`http://localhost:${port}/signUp`, {
+                const response = fetch(`http://localhost:${port}/employeesSignUp`, {
                     method: 'POST',
                     headers: {"content-type": "application/JSON"},
                     body: JSON.stringify(body)
@@ -49,7 +53,7 @@ const CreateCustomer = () => {
             .then((data) => {
                 console.log('status', data.status);
                 if (data.status==200){
-                    fetch(`http://localhost:${port}/customers/${email}`, {method: 'GET' })
+                    fetch(`http://localhost:${port}/employess/${email}`, {method: 'GET' })
                     .then(d => {
                         return d.json();
                     })
@@ -60,7 +64,7 @@ const CreateCustomer = () => {
                         setToken(
                             {token: {
                                 id: id,
-                                type: 'customers',
+                                type: 'employee',
                                 full_name: full_name
                             }}
                         );
@@ -73,13 +77,12 @@ const CreateCustomer = () => {
                 
             );
 
-
         } catch (error) {
             
         }
     };
 
-
+    console.log("I got to line 83");
     return (
         <div className="signUp">
             <h1>Create an account</h1>
@@ -94,10 +97,12 @@ const CreateCustomer = () => {
                 <input type="text" placeholder="SSN or SIN" value={ssn_sin} onChange={e => setSsnSin(e.target.value)} required/>
                 <input type="password" placeholder='Create a New Password'  required/>
                 <input type="password" placeholder='Confirm password' value={password} onChange={e => setPassword(e.target.value)} required/>
-                <input type='submit' value='Create a Customer Account'/>
+                <input type="text" placeholder="Role" value={role} onChange={e => setRole(e.target.value)} required/>
+                <input type="text" placeholder="Hotel ID" value={hotelId} onChange={e => setHotelId(e.target.value)} required/>
+                <input type='submit' value='Create a Employee Account'/>
             </form>
         </div>
     );
 };
 
-export default CreateCustomer;
+export default CreateEmployee;

@@ -53,6 +53,21 @@ const HotelChainForm = (props) => {
             );
         }
         else {
+            const body = {name, street_address, city, province_or_state, postal_code_or_zip_code, country};
+            console.log(body);
+            fetch(`http://localhost:${port}/hotelchainsPost`, {
+                method: 'POST',
+                headers: {"content-type": "application/JSON"},
+                body: JSON.stringify(body)
+            })
+            .then((res) => {
+                console.log("This is res with hotelchain:" + res);
+                if (res.status == 200) {
+                    navigate('/allhotelchains', {replace: true, state: {
+                        hotelChainId: id
+                    }})
+                }
+            });
 
         }
 
@@ -77,7 +92,6 @@ const HotelChainForm = (props) => {
             <input type={"text"} placeholder="Enter post or zip" onChange={updatePostOrZip} value = {postal_code_or_zip_code}/>
             <input type={"text"} placeholder="Enter country" onChange={updateCountry} value = {country}/>
             <input type={"submit"} value="Submit"/>
-
         </form>
         {showAllHotels()}
     </div>

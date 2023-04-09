@@ -16,6 +16,9 @@ const HotelForm = () => {
     const port = 5100;
     const navigate = useNavigate();
 
+    console.log("This is hotelId on HotelForm: " + hotelId);
+    console.log("THis is hotelChainId on HotelForm: " + hotelChainId);
+
 
     const updateCategory = (e) => {
         setCategory(e.target.value);
@@ -57,7 +60,7 @@ const HotelForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (location.state){
-            const body = {hotelId, category, stAd, city, provOrState, postOrZip, country, email};
+            const body = {hotelId, category, stAd, city, provOrState, postOrZip, country, email,hotelChainId};
             console.log(body);
             fetch(`http://localhost:${port}/hotels`, {
                 method: 'PUT',
@@ -66,24 +69,26 @@ const HotelForm = () => {
             })
             .then(
                 navigate('/allhotels', {replace: true, state: {
+                    hotelId: hotelId,
                     hotelChainId: hotelChainId
                 }})
             );
         }
         else {
-            const body = {category, stAd, city, provOrState, postOrZip, country, email, hotelChainId};
+            const body = {category, stAd, city, provOrState, postOrZip, country, email, hotelId};
             console.log(body);
-            fetch(`http://localhost:${port}/hotels`, {
+            fetch(`http://localhost:${port}/hotelsPost`, {
                 method: 'POST',
                 headers: {"content-type": "application/JSON"},
                 body: JSON.stringify(body)
             })
             .then((res) => {
-                // if (res.status == 200) {
-                //     navigate('/allrooms', {replace: true, state: {
-                //         hotelId: hotelId
-                //     }})
-                // }
+                if (res.status == 200) {
+                    navigate('/allhotels', {replace: true, state: {
+                        hotelId: hotelId,
+                        hotelChainId: hotelChainId
+                    }})
+                }
             });
         }
     };

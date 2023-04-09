@@ -19,7 +19,10 @@ const Home = () => {
             </div>
             <Footer/>
             <div className="admin-link">
-                <a href="/employeeLogin" className="btn btn-primary">Are you an Admin? Click Here</a>
+                <a href="/adminLogin" className="btn btn-primary">Are you an Admin? Click Here</a>
+            </div>
+            <div className="employee-link">
+                <a href="/employeeLogin" className="btn btn-primary">Are you an Employee? Click Here</a>
             </div>
         </div>
     );
