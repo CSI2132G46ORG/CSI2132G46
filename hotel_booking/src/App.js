@@ -20,6 +20,8 @@ import AllRooms from './components/AllRooms';
 import RoomForm from './components/RoomForm';
 import AdminPage from './components/AdminPage';
 import AdminLogin from './components/AdminLogin';
+import AllRentings from './components/AllRentings';
+import AllCustomers from './components/AllCustomers';
 
 function App() {
   const [token, setToken] = useState();
@@ -40,9 +42,11 @@ function App() {
           <Route exact path='/adminPage' element={<AdminPage/>}/>
           <Route exact path='/createRenting' element={<CreateRenting/>}/>
           <Route exact path='/allbookings' element={<AllBookings/>}/>
+          <Route exact path='/allrentings' element={<AllRentings/>}/>
           <Route exact path='/allhotelchains' element={<AllHotelChains/>}/>
           <Route exact path='/allhotels' element={<AllHotels/>}/>
           <Route exact path='/allrooms' element={<AllRooms/>}/>
+          <Route exact path='/allcustomers' element={<AllCustomers/>}/>
           <Route exact path='/modifyhotelchains' element={<HotelChainForm/>}/>
           <Route exact path='/modifyhotels' element={<HotelForm/>}/>
           <Route exact path='/modifyrooms' element={<RoomForm/>}/>

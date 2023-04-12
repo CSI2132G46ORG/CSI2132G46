@@ -65,7 +65,7 @@ const SignInForm = (props) => {
     };
 
     return (
-    <form onSubmit={handleSubmit}>
+    <form className="formClass" onSubmit={handleSubmit}>
                     <h1>Sign in</h1>
                     <input type="email" placeholder='Email address' onChange={e => setEmail(e.target.value)} required/>
                     <input type="password" placeholder='password' onChange={e => setPassword(e.target.value)} required/>

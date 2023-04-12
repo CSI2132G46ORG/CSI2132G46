@@ -1,0 +1,32 @@
+.RentingCard {
+    display: flex;
+    border: 1px solid black;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    /* width: 100%; */
+}
+
+.RentingCard p {
+    margin-right: 10px;
+}
+
+.RentingCard .cardBlock {
+    margin-left: 5px;
+}
+
+.RentingCard div {
+    cursor: pointer;
+}
+
+.RentingCard img {
+    display: inline-block;
+    /* position: absolute; */
+    /* z-index: 4; */
+    width: 20px;
+    margin-bottom: 15px;
+    cursor: pointer;
+
+    /* right: 20px; */
+    height: 25px;
+}

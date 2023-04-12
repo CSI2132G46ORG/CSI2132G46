@@ -26,9 +26,12 @@ const EmployeeButton = (props) => {
     };
 
     return (
-        <button className="EmployeeButton" onClick={handleClick}>
-            {props.title}
-        </button>
+        <div className="EmployeeButton">
+            <button className="EmployeeButton" onClick={handleClick}>
+                {props.title}
+            </button>
+        </div>
+        
     );
 };
 

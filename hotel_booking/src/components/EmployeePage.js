@@ -7,16 +7,14 @@ const EmployeePage = () => {
 
 
     return (
-        <div className="employeePage row">
-            <div className="col-1-of-2">
-                <EmployeeButton title = "All Bookings" path ='/allbookings' employeeId={token.id} />
+        <div className="employeePage">
+                <h2>Employee Page</h2>
+                <EmployeeButton title = "All Bookings" path ='/allbookings'/>
+                <EmployeeButton title = "All Rentings" path ='/allrentings' />
                 {/* <EmployeeButton title = "All Hotel Chains " path ='/allhotelchains' /> */}
                 {/* <EmployeeButton title = "All Rooms"/> */}
                 {/* <EmployeeButton title = "All Customers"/> */}
-            </div>
-            <div className="col-2-of-2">
-                
-            </div>
+
         </div>
     );
 };

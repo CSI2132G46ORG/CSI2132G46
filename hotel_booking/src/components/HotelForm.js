@@ -97,7 +97,7 @@ const HotelForm = () => {
     };
 
     return (
-        <div>
+        <div className="hotelForm">
             <h2>Modify Rooms</h2>
             <form onSubmit={handleSubmit}>
                 <input type={"text"} value={category} onChange={updateCategory} placeholder="Enter a category"/>

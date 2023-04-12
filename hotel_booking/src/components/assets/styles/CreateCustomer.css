@@ -1,3 +1,7 @@
 .signUp input {
     display: block;
+    width: 440px;
+    padding: 4px;
+    margin-bottom: 10px;
+    border-radius: 10px;
 }
