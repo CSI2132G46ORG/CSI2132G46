@@ -27,11 +27,8 @@ app.use('/login', async (req, res) => {
 app.post("/bookings/", async (req, res) => {
     try {
         const {customerID, roomNum, hotelID, checkInDate, checkOutDate} = req.body;
-        var checkIn = checkInDate.replace(/_/g, "/");
-        var checkOut = checkOutDate.replace(/_/g, "/");
-
         const queryCmd = `
-            INSERT INTO booking (customer_id, room_id, hotel_id, checkin_date, checkout_date) VALUES (${customerID}, ${roomNum}, ${hotelID}, '${checkIn}', '${checkOut}')
+            INSERT INTO booking (customer_id, room_id, hotel_id, checkin_date, checkout_date) VALUES (${customerID}, ${roomNum}, ${hotelID}, '${checkInDate}', '${checkOutDate}')
         `;
         console.log(queryCmd);
         const booking = await pool.query(queryCmd);
@@ -44,11 +41,12 @@ app.post("/bookings/", async (req, res) => {
 app.post("/bookingarchives", async (req, res) => {
     try {
         const {booking_id, customer_id, room_id, hotel_id, checkin_date, checkout_date, booking_date} = req.body;
-
+        const checkin_date_str = checkin_date.split("T")[0]
+        const checkOutDate_str = checkout_date.split("T")[0];
         const queryCmd = `
             INSERT INTO booking_archive (booking_id, customer_id, room_id, hotel_id, checkin_date, checkout_date, booking_date) 
             VALUES (${booking_id}, ${customer_id}, ${room_id}, 
-                ${hotel_id}, '${checkin_date}', '${checkout_date}', '${booking_date}')
+                ${hotel_id}, '${checkin_date_str}','${checkOutDate_str}', '${booking_date}')
         `;
         console.log(queryCmd);
         const booking = await pool.query(queryCmd);
@@ -79,13 +77,13 @@ app.post("/rentingarchives", async (req, res) => {
     try {
         const {renting_id, customer_id, employee_id, room_id, hotel_id, checkin_date, checkout_date,booking_id, renting_date} = req.body;
         var renting_date_str  = renting_date.split("T")[0];
-        var checkin_date_str = checkin_date.split("T")[1];
+        var checkin_date_str = checkin_date.split("T")[0];
         var checkout_date_str = checkout_date.split("T")[0];
         const queryCmd = `
             INSERT INTO renting_archive (renting_id, customer_id, employee_id, 
                 room_id, hotel_id, checkin_date, checkout_date,  renting_date,  paid_for, booking_id) 
             VALUES (${renting_id}, ${customer_id}, ${employee_id}, ${room_id},
-                 ${hotel_id}, ${checkin_date_str}, ${checkout_date_str}, '${renting_date_str}',  TRUE, '${booking_id}')
+                 ${hotel_id}, '${checkin_date_str}', '${checkout_date_str}', '${renting_date_str}',  TRUE, '${booking_id}')
         `;
         console.log(queryCmd);
         const booking = await pool.query(queryCmd);
@@ -116,57 +114,9 @@ app.post("/hotel", async (req, res) => {
 //Create Room
 app.post("/rooms", async (req, res) => {
     try {
-        console.log(req.body);
-        const {roomNumber, hotelId, price, capacity, view, extended, problems} = req.body;
-        const queryCmd = `
-            INSERT INTO room VALUES (${parseInt(roomNumber)}, ${parseInt(price)}, '${capacity}', 
-            ${view}, '${extended}', '${problems}', '${parseInt(hotelId)}')
-        `;
-        console.log(queryCmd);
-        const room = await pool.query(queryCmd);
-        res.json(room.rows);
+        
     } catch (error) {
-        console.log(error);
-    }
-});
-
-app.post("/hotels", async (req, res) => {
-    try {
-        console.log(req.body);
-        const {category, stAd, city, provOrState, postOrZip,
-             country, email, hotelChainId} = req.body;
-        const queryCmd = `
-            INSERT INTO hotel (category, street_address, city, province_or_state,
-                postal_code_or_zip_code, country, contact_email, hotel_chain_id)
-                 VALUES (${parseInt(category)}, '${stAd}', 
-            '${city}', '${provOrState}', '${postOrZip}',
-            '${country}', '${email}', '${parseInt(hotelId)}')
-        `;
-        console.log(queryCmd);
-        const hotel = await pool.query(queryCmd);
-        res.json(room.rows);
-    } catch (error) {
-        console.log(error);
-    }
-});
-
-app.post("/hotelchains", async (req, res) => {
-    try {
-        console.log(req.body);
-        // const {category, stAd, city, provOrState, postOrZip,
-        //      country, email, hotelChainId} = req.body;
-        // const queryCmd = `
-        //     INSERT INTO hotel (category, street_address, city, province_or_state,
-        //         postal_code_or_zip_code, country, contact_email, hotel_chain_id)
-        //          VALUES (${parseInt(category)}, '${stAd}', 
-        //     '${city}', '${provOrState}', '${postOrZip}',
-        //     '${country}', '${email}', '${parseInt(hotelChainId)}')
-        // `;
-        // console.log(queryCmd);
-        // const hotel = await pool.query(queryCmd);
-        // res.json(room.rows);
-    } catch (error) {
-        console.log(error);
+        
     }
 });
 
@@ -321,6 +271,7 @@ app.get("/bookings", async(req, res) => {
 
 app.get("/bookings/:hotelid", async(req, res) => {
     try {
+        console.log(req.params.hotelid);
         const bookings = await pool.query(`SELECT * FROM Booking WHERE hotel_id= ${req.params.hotelid}`);
         res.json(bookings.rows);
     } catch (error) {
@@ -333,12 +284,23 @@ app.get("/bookings/:hotelid", async(req, res) => {
 app.get("/rentings", async(req, res) => {
     try {
         console.log(res.status);
-        const rentings = await pool.query("");
+        const rentings = await pool.query("SELECT * FROM renting");
+        res.json(rentings.rows);
     } catch (error) {
         console.error(error);
     }
 });
 
+
+app.get("/rentings/:hotelid", async(req, res) => {
+    try {
+        console.log(res.status);
+        const rentings = await pool.query(`SELECT * FROM renting WHERE hotel_id= ${req.params.hotelid}`);
+        res.json(rentings.rows);
+    } catch (error) {
+        console.error(error);
+    }
+});
 
 // Get existing hotel chains
 app.get("/hotelchains", async(req, res) => {
@@ -451,7 +413,8 @@ app.get("/hotels/:criteria", async(req, res) => {
                      hc.province_or_state, hc.postal_code_or_zip_code, hc.country, hc.number_of_hotels FROM hotel as h INNER JOIN hotelChain as hc ON h.id = hc.id)
     
 
-            SELECT hr.hotel_id, MIN(hr.price), hc.name FROM hotel_room as hr
+            SELECT hr.hotel_id, MIN(hr.price), hc.name, hr.street_address, hr.city, 
+            hr.province_or_state, hr.postal_code_or_zip_code, hr.country  FROM hotel_room as hr
             INNER JOIN hotelChain as hc ON  hc.id = hr.hotel_chain_id
             WHERE PRICE BETWEEN ${minPrice} AND ${maxPrice} ${categoryCond} ${capCond} 
             ${viewCond} ${extendedCond} ${numRoomCond} ${areaCond}
@@ -461,10 +424,10 @@ app.get("/hotels/:criteria", async(req, res) => {
             OR (checkin_date >= '${checkIn}' AND checkin_date <='${checkOut}') OR (checkin_date <='${checkIn}' AND checkout_date >='${checkOut}'))
             AND (room_number, hr.hotel_id) NOT IN (SELECT room_id, hotel_id FROM Renting WHERE (checkout_date >= '${checkIn}' AND checkout_date <= '${checkOut}') 
             OR (checkin_date >= '${checkIn}' AND checkin_date <='${checkOut}') OR (checkin_date <='${checkIn}' AND checkout_date >='${checkOut}'))
-            GROUP BY hr.hotel_id, hc.name
+            GROUP BY hr.hotel_id, hc.name, hr.street_address, hr.city, hr.province_or_state, hr.postal_code_or_zip_code, hr.country
             
         `;
-        // console.log(queryStatement);
+        console.log(queryStatement);
         const hotels = await pool.query(queryStatement);
         console.log("results, ", hotels.rows);
         res.json(hotels.rows);
@@ -611,11 +574,23 @@ app.get("/hotels/:hotel_id/rooms", async (req, res) => {
 
 // update customer info
 
-app.put("/customers/:email", async(req, res) => {
+app.put("/customers", async(req, res) => {
     try {
-        
+        console.log("req ", req.body);
+        const queryStatement = `
+            UPDATE customer
+            SET full_name = '${req.body.name}', street_address = '${req.body.stAd}', ssn_sin = ${req.body.ssnSin},
+            city = '${req.body.city}', province_or_state = '${req.body.provOrState}',
+            postal_code_zip_code = '${req.body.postOrZip}', country = '${req.body.country}', email = '${req.body.email}',
+            passwrd = '${req.body.password}'
+            WHERE id = ${req.body.customerId}
+        `;
+        console.log(queryStatement);
+        const customer = await pool.query(queryStatement);
+        // console.log("last booking, ", booking.rows);
+        res.json(customer.rows);
     } catch (error) {
-        
+        console.error(error);
     }
 });
 
@@ -698,19 +673,25 @@ app.delete("/bookings", async(req, res) => {
             DELETE FROM booking WHERE booking_id =${req.body.bookingId}
         `;
         console.log(queryStatement);
-        // const booking = await pool.query(queryStatement);
-        // res.json(booking.rows);
+        const hc = await pool.query(queryStatement);
+        res.json(hc.rows);
     } catch (error) {
         console.error(error);
     }
 });
 
 //Delete renting
-app.delete("/rentings/:id", async(req, res) => {
+app.delete("/rentings/:rentingId", async(req, res) => {
     try {
-        
+        console.log("req ", req.body);
+        const queryStatement = `
+            DELETE FROM renting WHERE renting_id =${req.body.rentingId}
+        `;
+        console.log(queryStatement);
+        const hc = await pool.query(queryStatement);
+        res.json(hc.rows);
     } catch (error) {
-        
+        console.error(error);
     }
 });
 
@@ -771,11 +752,22 @@ app.delete("/employees/:id", async (req, res) => {
 
 // Delete registered customer
 
-app.delete("/customer/:id", async (req, res) => {
+app.delete("/customers", async (req, res) => {
+
     try {
-        
+        const id = req.body.id;
+        console.log("req ", req.body);
+
+        const queryStatement = `
+            DELETE FROM customer WHERE id = ${id}        
+        `;
+
+        console.log(queryStatement);
+        const hc = await pool.query(queryStatement);
+        res.json(hc.rows);
+
     } catch (error) {
-        
+        console.log(error);
     }
 });
 

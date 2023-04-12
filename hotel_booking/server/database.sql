@@ -144,8 +144,8 @@ CREATE TABLE renting (
     PRIMARY KEY (renting_id),
     FOREIGN KEY (employee_id) REFERENCES employee(ID) ON DELETE CASCADE,
     FOREIGN KEY (customer_id) REFERENCES customer(ID) ON DELETE CASCADE,
-    FOREIGN KEY (room_id, hotel_id) REFERENCES room(room_number, hotel_id) ON DELETE CASCADE,
-    FOREIGN KEY (booking_id) REFERENCES booking ON DELETE CASCADE
+    FOREIGN KEY (room_id, hotel_id) REFERENCES room(room_number, hotel_id) ON DELETE CASCADE
+    -- FOREIGN KEY (booking_id) REFERENCES booking ON DELETE CASCADE
 );
 CREATE TABLE booking_archive(
     booking_id INT NOT NULL,

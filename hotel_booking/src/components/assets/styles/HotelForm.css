@@ -1,13 +1,7 @@
-.EmployeeButton button {
+.hotelForm input {
     display: block;
     width: 440px;
     padding: 4px;
     margin-bottom: 10px;
     border-radius: 10px;
-
-}
-
-.EmployeeButton {
-    margin-left: auto;
-    margin-right: auto;
 }

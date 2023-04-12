@@ -1,0 +1,38 @@
+.customerCard {
+    display: flex;
+    border: 1px solid black;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid black;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: auto;
+    margin-bottom: 40px;
+    max-width: 650px;
+}
+
+.customerCard p {
+    margin-right: 10px;
+}
+
+.customerCard .cardBlock {
+    margin-left: 5px;
+}
+
+.cardBlock div {
+    cursor: pointer;
+}
+
+.customerCard img {
+    display: inline-block;
+    /* position: absolute; */
+    /* z-index: 4; */
+    width: 20px;
+    margin-bottom: 15px;
+    cursor: pointer;
+
+    /* right: 20px; */
+    height: 25px;
+}

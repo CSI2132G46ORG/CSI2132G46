@@ -25,7 +25,8 @@ const AllBookings = () => {
 
     return (
         <div className="allBookings">
-            <EmployeeButton title = 'Check in Customer' path='/createrenting'/>
+            <h2>Bookings </h2>
+            {/* <EmployeeButton title = 'Check in Customer' path='/createrenting'/> */}
             {
                 bookings.map((obj) => {
                     console.log(obj);

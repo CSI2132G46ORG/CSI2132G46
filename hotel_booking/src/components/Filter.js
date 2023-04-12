@@ -45,11 +45,11 @@ const Filter = () => {
     const navigate = useNavigate();
 
     const handleHotelCardClick = (hotelClickBool,hotelObject) => {
-        console.log("Hotel Card Clicked", hotelObject);
+        console.log("Hotel Obj", hotelObject);
         getHotelObject(hotelObject);
         setHotelCardClicked(hotelClickBool);
         if(window.location.pathname==="/filter"){
-        setTimeout(() => {
+        // setTimeout(() => {
             navigate("/hotel", {state: {
                 checkIn : providedCheckIn,
                 checkOut : providedCheckout,
@@ -57,7 +57,7 @@ const Filter = () => {
                 hotel_id : hotelObject.hotelId,
                 hotelName : hotelObject.title
             }});
-        }, 200);
+        // }, 200);
         }
     };
 
@@ -379,8 +379,34 @@ const Filter = () => {
                             <label htmlFor="amenity3">Free Parking</label><br/>
                             <input className='amenity' type="checkbox" id="amenity4" name="amenity4" value="'Pool'" onChange={updateAmenities}/>
                             <label htmlFor="amenity4">Pool</label><br/>
-                            <input className='amenity' type="checkbox" id="amenity5" name="amenity5" value="'AC'" onChange={updateAmenities}/>
-                            <label htmlFor="amenity5">AC</label><br/>
+                            {/* <input className='amenity' type="checkbox" id="amenity5" name="amenity5" value="'AC'" onChange={updateAmenities}/>
+                            <label htmlFor="amenity5">AC</label><br/> */}
+
+                            <input className='amenity' type="checkbox" id="amenity6" name="amenity6" value="'Air conditioning'" onChange={updateAmenities}/>
+                            <label htmlFor="amenity6">AC</label><br/>
+                            <input className='amenity' type="checkbox" id="amenity7" name="amenity7" value="'Hot Tub'" onChange={updateAmenities}/>
+                            <label htmlFor="amenity7">Hot Tub</label><br/>
+                            <input className='amenity' type="checkbox" id="amenity8" name="amenity8" value="'Mini Bar'" onChange={updateAmenities}/>
+                            <label htmlFor="amenity8">Mini Bar</label><br/>
+                            <input className='amenity' type="checkbox" id="amenity9" name="amenity9" value="'Bathrobes and slippers'" onChange={updateAmenities}/>
+                            <label htmlFor="amenity9">Bathrobes and slippers</label><br/>
+                            <input className='amenity' type="checkbox" id="amenity10" name="amenity10" value="'Gym'" onChange={updateAmenities}/>
+                            <label htmlFor="amenity10">Gym</label><br/>
+                            <input className='amenity' type="checkbox" id="amenity11" name="amenity11" value="'Smart TV''" onChange={updateAmenities}/>
+                            <label htmlFor="amenity11">Smart TV</label><br/>
+
+                            <input className='amenity' type="checkbox" id="amenity12" name="amenity12" value="'Pets Allowed''" onChange={updateAmenities}/>
+                            <label htmlFor="amenity12">Pets Allowed</label><br/>
+                            <input className='amenity' type="checkbox" id="amenity13" name="amenity13" value="'Bathrobes and slippers''" onChange={updateAmenities}/>
+                            <label htmlFor="amenity13">Bathrobes and slippers</label><br/>
+                            {/* <input className='amenity' type="checkbox" id="amenity14" name="amenity14" value="'Smart TV''" onChange={updateAmenities}/>
+                            <label htmlFor="amenity14">AC</label><br/>
+                            <input className='amenity' type="checkbox" id="amenity15" name="amenity15" value="'Smart TV''" onChange={updateAmenities}/>
+                            <label htmlFor="amenity15">AC</label><br/>
+                            <input className='amenity' type="checkbox" id="amenity16" name="amenity16" value="'Smart TV''" onChange={updateAmenities}/>
+                            <label htmlFor="amenity16">AC</label><br/>
+                            <input className='amenity' type="checkbox" id="amenity17" name="amenity17" value="'Smart TV''" onChange={updateAmenities}/>
+                            <label htmlFor="amenity17">AC</label><br/> */}
                             {/* <input type="submit" value="Submit"/> */}
                         </form>
                     </div>
@@ -418,12 +444,14 @@ const Filter = () => {
                         </form>
                     </div>
                 </div>
-                <div className='col-1-of-2'>
-                    <p>The Number of Rooms in {area}: {totalNumberOfRooms}</p>
+                <div className='col-2-of-2'>
+                    <p>The Number of Rooms in {area}: <b>{totalNumberOfRooms}</b></p>
                     {
                         results.map((hotelObj) => {
                             return (
-                                <HotelCard key = {hotelObj.hotel_id} hotelId = {hotelObj.hotel_id} title = {hotelObj.name} price = {hotelObj.min} handleHotelCardClick={handleHotelCardClick}/>
+                                <HotelCard key = {hotelObj.hotel_id} hotelId = {hotelObj.hotel_id} title = {hotelObj.name} price = {hotelObj.min}
+                                stAd = {hotelObj.street_address} city = {hotelObj.city} provOrState = {hotelObj.province_or_state}
+                                postOrZip = {hotelObj.postal_code_or_zip_code} country = {hotelObj.country}  handleHotelCardClick={handleHotelCardClick}/>
                             );
                         })
                     }

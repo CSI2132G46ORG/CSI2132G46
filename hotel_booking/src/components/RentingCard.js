@@ -1,21 +1,22 @@
 import { useEffect } from 'react';
+import './assets/styles/RentingCard.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './assets/styles/BookingCard.css';
 
-const BookingCard = (props) => {
+const RentingCard = (props) => {
     const [hotelName, setHotelName] = useState();
+    const [rentingId, setRentingId] = useState(props.rentingId);
     const [bookingId, setBookingId] = useState(props.bookingId);
     const [checkin_date, setCheckInDate] = useState(props.checkInDate.split('T')[0].replace(/-/g, '/'));
     const [checkout_date, setCheckOutDate] = useState(props.checkOutDate.split('T')[0].replace(/-/g, '/'));
     const [customerId, setCustomerId] = useState(props.customerId);
     const [customerName, setCustomerName] = useState();
     const [roomNumber, setRoomNumber] = useState(props.roomNumber);
-    const [booking_date, setBookingDate] = useState(props.bookingDate.split('T')[0]);
+    const [rentingDate, setBookingDate] = useState(props.rentingDate.split('T')[0]);
     
     const port = 5100;
     const navigate = useNavigate();
-
+    
     const findCustomerName = async () => {
         fetch(`http://localhost:${port}/customersbyid/${customerId}`)
         .then((response) => response.json())
@@ -27,30 +28,27 @@ const BookingCard = (props) => {
         ;
     };
 
-    const deleteBooking = () => {
+    const deleteRenting = () => {
+        const body = {rentingId};
+        console.log(body);
         if (window.confirm('Are you sure you want to delete')) {
-            console.log('confirmed')
-            const body = {bookingId};
-            console.log(body);
-            fetch(`http://localhost:${port}/bookings`, {
+            fetch(`http://localhost:${port}/rentings/${rentingId}`, {
                 method: 'DELETE',
                 headers: {"content-type": "application/JSON"},
                 body: JSON.stringify(body)
             });
         }
-
-        else {
-
-        }
-        
     };
 
-    const handleClick = () => {
 
+    const handleClick = () => {
+        
         navigate('/createrenting', {state: {
             bookingId: bookingId,
+            rentingId: rentingId,
             checkin_date: checkin_date,
             checkout_date: checkout_date,
+            customerName: customerName,
             roomNumber: roomNumber,
             customerId: customerId
         }});
@@ -59,21 +57,21 @@ const BookingCard = (props) => {
     useEffect(() => {
         findCustomerName();
     }, []);
-    
-
 
     return (
-        <div className="bookingCard">
+        <div className="RentingCard">
             <p> <b>Customer Name:</b> {customerName} </p>
             <p> <b>Room Number:</b> {roomNumber}</p>
             <span><b>Check In:</b> {checkin_date} </span>
             <span><b>Check Out:</b> {checkout_date} </span>
-            <p><b>Booking Date:</b> {booking_date} </p>
+            <p><b>Creation Date:</b> {rentingDate} </p>
             <div className='cardBlock'>
-                <div onClick={deleteBooking}><img src={require('./assets/img/trash.png')} alt='trash image' /></div>
-                <div style={{display: 'block', textDecoration: 'underline'}} onClick={handleClick}>Create Rent</div>
+                <div onClick={deleteRenting}><img src={require('./assets/img/trash.png')} alt='trash' /></div>
+                <div style={{display: 'block', textDecoration: 'underline'}} onClick={handleClick}>Modify Rent</div>
+
             </div>
         </div>
-    )
+    );
 };
-export default BookingCard;
+
+export default RentingCard;
