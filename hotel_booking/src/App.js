@@ -22,6 +22,7 @@ import AdminPage from './components/AdminPage';
 import AdminLogin from './components/AdminLogin';
 import AllRentings from './components/AllRentings';
 import AllCustomers from './components/AllCustomers';
+import CreateEmployee from './components/CreateEmployee';
 
 function App() {
   const [token, setToken] = useState();
@@ -50,6 +51,7 @@ function App() {
           <Route exact path='/modifyhotelchains' element={<HotelChainForm/>}/>
           <Route exact path='/modifyhotels' element={<HotelForm/>}/>
           <Route exact path='/modifyrooms' element={<RoomForm/>}/>
+          <Route exact path='/employeeSignUp' element={<CreateEmployee/>}/>
           
           {/* <Route path='/allhotels' element={<AllHotelChains/>}/>
           <Route path='/allrooms' element={<AllHotelChains/>}/> */}
