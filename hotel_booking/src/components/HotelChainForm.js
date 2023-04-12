@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import EmployeeButton from "./EmployeeButton";
+import './assets/styles/HotelChainForm.css';
 
 const HotelChainForm = (props) => {
     const location = useLocation();
@@ -53,7 +54,18 @@ const HotelChainForm = (props) => {
             );
         }
         else {
-
+            const body = {name, street_address, city, province_or_state, postal_code_or_zip_code, country};
+            console.log(body);
+            fetch(`http://localhost:${port}/hotelchains`, {
+                method: 'POST',
+                headers: {"content-type": "application/JSON"},
+                body: JSON.stringify(body)
+            })
+            .then((res) => {
+                if (res.status == 200) {
+                    navigate('/allhotelchains', {replace: true})
+                }
+            });
         }
 
     };
@@ -67,7 +79,7 @@ const HotelChainForm = (props) => {
     };
 
     return (
-    <div>
+    <div className="hotelchainForm">
         <h2>Hotel Chain Form</h2>
         <form onSubmit={handleSubmit}>
             <input type={"text"} placeholder="Enter hotel chain name" onChange={updateName} value = {name}/>

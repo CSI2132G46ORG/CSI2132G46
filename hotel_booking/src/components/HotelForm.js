@@ -79,11 +79,11 @@ const HotelForm = () => {
                 body: JSON.stringify(body)
             })
             .then((res) => {
-                // if (res.status == 200) {
-                //     navigate('/allrooms', {replace: true, state: {
-                //         hotelId: hotelId
-                //     }})
-                // }
+                if (res.status == 200) {
+                    navigate('/allhotels', {replace: true, state: {
+                        hotelChainId: hotelChainId
+                    }})
+                }
             });
         }
     };

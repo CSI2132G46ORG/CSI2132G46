@@ -44,11 +44,11 @@ const RoomForm = () => {
                 body: JSON.stringify(body)
             })
             .then((res) => {
-                // if (res.status == 200) {
-                //     navigate('/allrooms', {replace: true, state: {
-                //         hotelId: hotelId
-                //     }})
-                // }
+                if (res.status == 200) {
+                    navigate('/allrooms', {replace: true, state: {
+                        hotelId: hotelId
+                    }})
+                }
             });
         }
     };

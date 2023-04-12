@@ -24,7 +24,7 @@ const AllHotelChains = () => {
     return (
         <div className="allHotelchains">
             <h2>All Hotel Chains</h2>
-            <EmployeeButton title = "Add new hotel chain" path ='/' />
+            <EmployeeButton title = "Add new hotel chain" path ='/modifyhotelchains' />
             {
                 results.map((obj) => {
                     console.log(obj);

@@ -24,7 +24,7 @@ app.use('/login', async (req, res) => {
 /*-----------------POST ---------------------- */
 
 //Create booking
-app.post("/bookings/", async (req, res) => {
+app.post("/bookings", async (req, res) => {
     try {
         const {customerID, roomNum, hotelID, checkInDate, checkOutDate} = req.body;
         const queryCmd = `
@@ -62,7 +62,7 @@ app.post("/rentings", async (req, res) => {
         const {customerId, employeeId, roomNumber, hotelId, checkInStr, checkOutStr, bookingId} = req.body;
         const queryCmd = `
             INSERT INTO renting (customer_id, employee_id, room_id, hotel_id, checkin_date, checkout_date, paid_for, booking_id)
-             VALUES (${customerId}, ${employeeId}, ${roomNumber}, ${hotelId}, '${checkInStr}', '${checkOutStr}', TRUE, '${bookingId}')
+             VALUES (${customerId}, ${employeeId}, ${roomNumber}, ${hotelId}, '${checkInStr}', '${checkOutStr}', TRUE, ${bookingId})
         `;
         console.log(queryCmd);
         const renting = await pool.query(queryCmd);
@@ -83,7 +83,7 @@ app.post("/rentingarchives", async (req, res) => {
             INSERT INTO renting_archive (renting_id, customer_id, employee_id, 
                 room_id, hotel_id, checkin_date, checkout_date,  renting_date,  paid_for, booking_id) 
             VALUES (${renting_id}, ${customer_id}, ${employee_id}, ${room_id},
-                 ${hotel_id}, '${checkin_date_str}', '${checkout_date_str}', '${renting_date_str}',  TRUE, '${booking_id}')
+                 ${hotel_id}, '${checkin_date_str}', '${checkout_date_str}', '${renting_date_str}',  TRUE, ${booking_id})
         `;
         console.log(queryCmd);
         const booking = await pool.query(queryCmd);
@@ -96,17 +96,42 @@ app.post("/rentingarchives", async (req, res) => {
 //Create hotel chain
 app.post("/hotelchains", async (req, res) => {
     try {
-        
+        console.log(req.body);
+        const {name, street_address, city, province_or_state, postal_code_or_zip_code,
+             country} = req.body;
+        const queryCmd = `
+            INSERT INTO hotelchain (name, street_address, city, province_or_state,
+                postal_code_or_zip_code, country)
+                 VALUES ('${name}', '${street_address}', 
+            '${city}', '${province_or_state}', '${postal_code_or_zip_code}',
+            '${country}')
+        `;
+        console.log(queryCmd);
+        const hc = await pool.query(queryCmd);
+        res.json(hc.rows);
     } catch (error) {
-        
+        console.error(error);
     }
 });
 
 //Create hotel
 app.post("/hotel", async (req, res) => {
     try {
-        
+        console.log(req.body);
+        const {category, stAd, city, provOrState, postOrZip,
+             country, email, hotelChainId} = req.body;
+        const queryCmd = `
+            INSERT INTO hotel (category, street_address, city, province_or_state,
+                postal_code_or_zip_code, country, contact_email, hotel_chain_id)
+                 VALUES (${parseInt(category)}, '${stAd}', 
+            '${city}', '${provOrState}', '${postOrZip}',
+            '${country}', '${email}', '${parseInt(hotelChainId)}')
+        `;
+        console.log(queryCmd);
+        const hotel = await pool.query(queryCmd);
+        res.json(room.rows);
     } catch (error) {
+        console.error(error);
         
     }
 });
@@ -114,8 +139,16 @@ app.post("/hotel", async (req, res) => {
 //Create Room
 app.post("/rooms", async (req, res) => {
     try {
-        
+        const {roomNumber, hotelId, price, capacity, view, extended, problems} = req.body;
+        const queryCmd = `
+            INSERT INTO room VALUES (${parseInt(roomNumber)}, ${parseInt(price)}, '${capacity}', 
+            ${view}, '${extended}', '${problems}', '${parseInt(hotelId)}')
+        `;
+        console.log(queryCmd);
+        const room = await pool.query(queryCmd);
+        res.json(room.rows);
     } catch (error) {
+        console.error(error);
         
     }
 });
