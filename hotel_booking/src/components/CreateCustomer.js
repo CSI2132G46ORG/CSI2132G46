@@ -22,12 +22,13 @@ const CreateCustomer = () => {
     const onSubmitForm = async (e) => {
         e.preventDefault();
         try {
-
+            console.log("This is the line before fetch line 25 customer.js");
             await fetch(`http://localhost:${port}/customers/${email}`, {method: 'GET' })
             .then(d => {
                 return d.json();
             })
             .then(data => {
+                console.log("This is data.length: "+ data.length);
                 if(data.length!=0){
                     console.log("user already exists");
                 }

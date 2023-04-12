@@ -192,14 +192,14 @@ app.post("/signup", async(req, res) => {
 
 // Create employee
 
-app.post("/employeesSignUp", async (req, res) => {
+app.post("/employees/SignUp", async (req, res) => {
     try {
         const {name, address, city, provOrState, postOrZip, country, 
-            ssn_sin, email, password, role} = req.body;
+            ssn_sin, email, password, role, hotelId} = req.body;
 
         const queryCmd = `INSERT INTO\
-        customer(full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd,role, hotel_id)\
-         VALUES ('${name}', '${address}', '${city}', '${provOrState}', '${postOrZip}', '${country}', ${ssn_sin}, '${email}', '${password}','${role}','${hotel_id}')`;
+        employee(full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd,role, hotel_id)\
+         VALUES ('${name}', '${address}', '${city}', '${provOrState}', '${postOrZip}', '${country}', ${ssn_sin}, '${email}', '${password}','${role}','${hotelId}')`;
         
          console.log(queryCmd);
         const employee = await pool.query(queryCmd);
@@ -258,7 +258,7 @@ app.get("/customers/:email", async (req, res) => {
     }
 });
 
-app.get("/employees/:email", async (req, res) => {
+app.get("/employees/setEmail/:email", async (req, res) => {
     try {
         const email = req.params['email'];
         const query = `SELECT * FROM employee WHERE LOWER(email) ='${email.toLowerCase()}'`;
@@ -317,6 +317,7 @@ app.get("/admin/:email/:password", async (req, res) => {
 });
 
 //Get existing cities and countries
+
 app.get("/city", async(req, res) => {
     try {
         console.log(res.status);
@@ -627,6 +628,54 @@ app.get("/hotels/:hotel_id/rooms", async (req, res) => {
     }
   });
 
+  app.get('/totalRoomNum/:hotel_id/rooms', async (req, res) => {
+    const { hotel_id } = req.params;
+    const { checkin_date, checkout_date } = req.query;
+  
+    try {
+      // Get the total number of rooms for the specified hotel from the view
+      const roomsResult = await pool.query(`
+        SELECT total_rooms FROM hotel_room_count WHERE hotel_id = $1;
+      `, [hotel_id]);
+  
+      const totalRooms = roomsResult.rows[0].total_rooms;
+  
+      // Get the number of booked rooms for the specified hotel and dates
+      const bookedRoomsResult = await pool.query(`
+        SELECT COUNT(*) AS booked_rooms
+        FROM booking
+        WHERE hotel_id = $1
+        AND (
+            (checkin_date <= $2
+            AND (checkout_date BETWEEN $2 AND $3))
+        OR 
+         (checkin_date >= $2
+            AND checkout_date <= $3)
+        OR
+            ((checkin_date BETWEEN $2 AND $3)
+            AND checkout_date >= $3)       
+        OR 
+            (checkin_date <= $2
+            AND checkout_date >= $3)
+        );
+      `, [hotel_id, checkin_date, checkout_date]);
+  
+      const bookedRooms = bookedRoomsResult.rows[0].booked_rooms;
+  
+      // Calculate the number of available rooms
+      const availableRooms = totalRooms - bookedRooms;
+  
+      res.json({
+        hotel_id,
+        total_rooms: totalRooms,
+        booked_rooms: bookedRooms,
+        available_rooms: availableRooms
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
 
 
 /*---------UPDATE------------------------------- */

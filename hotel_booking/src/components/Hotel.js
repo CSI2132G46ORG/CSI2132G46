@@ -9,6 +9,7 @@ function Hotel() {
   const [rooms, setRooms] = useState([]); // state to hold the retrieved rooms
   const [totalRooms, setTotalRooms] = useState(0);
   const [hotelInfo, setHotelInfo] = useState([]);
+  const [hotelRoomCount, setHotelRoomCount] = useState([]);
   const [amenityInfo,setAmentiyInfo] = useState([]);
   const [error, setError] = useState(null); // state to hold any errors encountered during fetch
   const [payButtonClicked, setPayButtonClicked] = useState(false);
@@ -92,6 +93,18 @@ const handlePayButtonClick = (payVal,roomObject,amenities) => {
           setError(error); // set error state if an error occurs during fetch
         }
       }
+      async function fetchHotelRoomCountInfo() {
+        try {
+          const response = await fetch(`http://localhost:${port}/totalRoomNum/${providedHotelID}/rooms?checkin_date=${providedCheckIn}&checkout_date=${providedCheckout}`); // fetch data from API with hotel id, checkin, and checkout parameters
+          const data = await response.json(); // parse response data as JSON
+          //setTotalRooms(Object.keys(data).length);
+          console.log('hotelRoomCount: ', data)
+          setHotelRoomCount(data); // update rooms state with fetched data
+  
+        } catch (error) {
+          setError(error); // set error state if an error occurs during fetch
+        }
+      }
     async function fetchRooms() {
       try {
         const response = await fetch(`http://localhost:${port}/hotels/${providedHotelID}/rooms?checkin_date=${providedCheckIn}&checkout_date=${providedCheckout}`); // fetch data from API with hotel id, checkin, and checkout parameters
@@ -106,9 +119,11 @@ const handlePayButtonClick = (payVal,roomObject,amenities) => {
     }
     fetchAmentityInfo();
     fetchHotelInfo();
+    fetchHotelRoomCountInfo();
     fetchRooms(); // call fetchRooms function on component mount
   }, []);
 
+  console.log("This is room count now: "+ hotelRoomCount.available_rooms);
 
   return (
     <div className="HotelPage"  style={{paddingTop: "90px"}}>
@@ -121,7 +136,7 @@ const handlePayButtonClick = (payVal,roomObject,amenities) => {
         })
     }
       </div>
-      <h1>The Number of Rooms available are : {totalRooms}</h1>
+      <h1>The Number of Rooms available are : {hotelRoomCount.available_rooms}</h1>
       <div>
         {/* map over the rooms array to render a RoomCard for each room */}
         {rooms.map((room) => {

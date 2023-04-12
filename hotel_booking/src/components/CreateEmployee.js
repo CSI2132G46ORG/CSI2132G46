@@ -20,67 +20,59 @@ const CreateEmployee = () => {
     const navigate = useNavigate();
     const port = 5100;
 
-
-    const onSubmitForm = async (e) => {
+    const onSubmitForm = (e) => {
         e.preventDefault();
-        try {
-            await fetch(`http://localhost:${port}/employees/${email}`, {method: 'GET' })
-            .then(d => {
-                console.log("This is d.json: "+d.json());
-                return d.json();
-            })
-            .then(data => {
-                if(data.length!=0){
-                    console.log("user already exists");
-                }
-                else {
-                const body = {name, address, city, provOrState, postOrZip, country, ssn_sin, email, password, role, hotelId};
-                console.log('employee signup form', body);
-            
-                const response = fetch(`http://localhost:${port}/employeesSignUp`, {
-                    method: 'POST',
-                    headers: {"content-type": "application/JSON"},
-                    body: JSON.stringify(body)
-                });
-                
-                console.log(response);
-                return response;    
+        fetch(`http://localhost:${port}/employees/setEmail/${email}`, {method: 'GET' })
+          .then(response => response.json())
+          .then(json => {
+            console.log("This is json.length: "+ json.length);
+            if (json.length != 0) {
+              console.log("user already exists");
+            } else {
+              //console.log("I am reaching here");
+              const body = {name, address, city, provOrState, postOrZip, country, ssn_sin, email, password, role, hotelId};
+              console.log('employee signup form', body);
+              return fetch(`http://localhost:${port}/employees/SignUp`, {
+                method: 'POST',
+                headers: {"content-type": "application/JSON"},
+                body: JSON.stringify(body)
+              });
             }
-            })
-            .then((data) => {
-                console.log('status', data.status);
-                if (data.status==200){
-                    fetch(`http://localhost:${port}/employess/${email}`, {method: 'GET' })
-                    .then(d => {
-                        return d.json();
-                    })
-                    .then((data) => {
-                        const id = data[0].id;
-                        const full_name = data[0].full_name;
-                        console.log(id, full_name);
-                        setToken(
-                            {token: {
-                                id: id,
-                                type: 'employee',
-                                full_name: full_name
-                            }}
-                        );
-                        navigate('/reservio', { replace: true });
+          })
+          .then(response => {
+            console.log(response);
+            return response;
+          })
+          .then((data) => {
+            console.log('status', data.status);
+            if (data.status == 200) {
+              return fetch(`http://localhost:${port}/employees/setEmail/${email}`, {method: 'GET' })
+                .then(d => {
+                  return d.json();
+                })
+                .then((data) => {
+                  const id = data[0].id;
+                  const full_name = data[0].full_name;
+                  console.log(id, full_name);
+                  setToken({
+                    token: {
+                      id: id,
+                      type: 'employee',
+                      full_name: full_name
                     }
-                    );
-                    
-                }
+                  });
+                  navigate('/reservio', { replace: true });
+                });
             }
-                
-            );
-
-        } catch (error) {
-            
-        }
-    };
+          })
+          .catch(error => {
+            console.log("This is error: "+error);
+          });
+      };
+      
 
     return (
-        <div className="signUp">
+        <div className="employeesignUp">
             <h1>Create an account</h1>
             <form onSubmit={onSubmitForm}>
                 <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required/>
