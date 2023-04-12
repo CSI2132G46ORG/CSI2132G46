@@ -16,7 +16,7 @@ const CreateRenting = () => {
     const [checkInDate, setCheckInDate] = useState(location.state && location.state.checkin_date ? new Date (location.state.checkin_date): new Date());
     const [checkOutDate, setCheckOutDate] = useState(location.state && location.state.checkout_date ? new Date (location.state.checkout_date): new Date());
     const [customerId, setCustomerId] = useState(location.state && location.state.customerId ? location.state.customerId: '');
-    const [bookingId, setBookingId] = useState(location.state && location.state.bookingId ? location.state.bookingId: -1);
+    const [bookingId, setBookingId] = useState(location.state && location.state.bookingId ? location.state.bookingId: null);
 
     const hotelId = token.hotel_id;
     const employeeId = token.id;
