@@ -237,140 +237,140 @@ VALUES (7, 'Wyndham Hotels & Resorts', '123 road', 'Denver', 'CO', '60000', 'Uni
 
 
 -- ------------------------------Hotels---------------------------------------
-INSERT INTO hotel (category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel (id, category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id)
- VALUES(3, '123 one rd', 'Ottawa', 'ON', 'A1X 5K1', 'Canada', 'a@ex.com', 1);
+ VALUES(1, 3, '123 one rd', 'Ottawa', 'ON', 'A1X 5K1', 'Canada', 'a@ex.com', 1);
 
-INSERT INTO hotel (category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel (id, category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) 
-VALUES(3,'123 one rd', 'Ottawa', 'ON', 'A1X 5K7', 'Canada', 'a2@ex.com', 1);
+VALUES(2, 3,'123 one rd', 'Ottawa', 'ON', 'A1X 5K7', 'Canada', 'a2@ex.com', 1);
 
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id, category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) 
-VALUES(4,'1234 two rd', 'Ottawa', 'ON', 'A1X 5KX', 'Canada', 'a3@ex.com', 1);
+VALUES(3, 4,'1234 two rd', 'Ottawa', 'ON', 'A1X 5KX', 'Canada', 'a3@ex.com', 1);
 
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) 
-VALUES(5,'143 two rd', 'Vancouver', 'BC', 'A1X 5KX', 'Canada', 'a3@ex.com', 1);
+VALUES(4, 5,'143 two rd', 'Vancouver', 'BC', 'A1X 5KX', 'Canada', 'a3@ex.com', 1);
 
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) 
-VALUES(5,'123 central rd', 'Austin', 'TX', '66544', 'United States of America', 'a4@ex.com', 1);
+VALUES(5, 5,'123 central rd', 'Austin', 'TX', '66544', 'United States of America', 'a4@ex.com', 1);
 
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) 
-VALUES(5, '123 st louis rd', 'Houston', 'TX', '465652', 'United States of America', 'a5@ex.com', 1);
+VALUES(6, 5, '123 st louis rd', 'Houston', 'TX', '465652', 'United States of America', 'a5@ex.com', 1);
 
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code, country, contact_email, hotel_chain_id) 
-VALUES(3, '123 btoadway', 'New York City', 'NY', '45646', 'United States of America', 'a6@ex.com', 1);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code, country, contact_email, hotel_chain_id) 
+VALUES(7, 3, '123 btoadway', 'New York City', 'NY', '45646', 'United States of America', 'a6@ex.com', 1);
 
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code, country, contact_email, hotel_chain_id)
- VALUES(2, '123 town rd', 'Vancouver', 'BC', 'H1J 5KX', 'Canada', 'a7@ex.com', 1);
-
-
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code, country, contact_email, hotel_chain_id)
+ VALUES(8, 2, '123 town rd', 'Vancouver', 'BC', 'H1J 5KX', 'Canada', 'a7@ex.com', 1);
 
 
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(3, '123 celine rd', 'New york City', 'NY', '50000', 'United States of America', 'b1@ex.com', 2);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(3, '123 joyce rd', 'Boulder', 'CO', '10000', 'United States of America', 'b2@ex.com', 2);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(2, '123 candy rd', 'Los Angeles', 'CA', '21200', 'United States of America', 'b3@ex.com', 2);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(5, '123 Makepe', 'New york City', 'NY', '77777', 'United States of America', 'b4@ex.com', 2);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(2, '123 Joy', 'Cleveland', 'OH', '54411', 'United States of America', 'b5@ex.com', 2);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(1, '123 Hurdman', 'Vancouver', 'BC', 'T1X 5K4', 'Canada', 'b6@ex.com', 2);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(4, '123 Lyon', 'Montreal', 'QC', 'L1X 5K4', 'Canada', 'b7@ex.com', 2);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(4, '123 st Germain', 'Quebec City', 'QC', 'M1X 5K4', 'Canada', 'b8@ex.com', 2);
 
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(3, '123 paris rd', 'Ottawa', 'ON', 'C1V 5K4', 'Canada', 'c@ex.com', 3);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(3, '123 london rd', 'Toronto', 'ON', 'M1X 5K4', 'Canada', 'c2@ex.com', 3);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(4, '123 boyca rd', 'Vancouver', 'BC', 'J1X 5K4', 'Canada', 'c3@ex.com', 3);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(5, '123 douala rd', 'Vancouver', 'BC', 'N1X 4K4', 'Canada', 'c4@ex.com', 3);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(1, '123 Dakar rd', 'Montreal', 'QC', 'V1V 4K1', 'Canada', 'c5@ex.com', 3);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(2, '123 Huffman rd', 'Toronto', 'ON', 'J1Y 5K7', 'Canada', 'c6@ex.com', 3);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(2, '123 Puffy rd', 'Toronto', 'ON', 'U1X 1KX', 'Canada', 'c7@ex.com', 3);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(2, '123 corny rd', 'Vancouver', 'BC', 'A1T 5K3', 'Canada', 'c8@ex.com', 3);
 
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(3, '123 July rd', 'Ottawa', 'ON', 'X1X 5K9', 'Canada', 'd@ex.com', 4);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(4, '123 August rd', 'Toronto', 'ON', 'Z1X 7K8', 'Canada', 'd2@ex.com', 4);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(5, '123 jane rd', 'Vancouver', 'BC', 'N1X 5K4', 'Canada', 'd3@ex.com', 4);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(5, '123 korea rd', 'Vancouver', 'BC', 'J1X 5K5', 'Canada', 'd4@ex.com', 4);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(5, '123 witness rd', 'Montreal', 'QC', 'B1X 5K1', 'Canada', 'd5@ex.com', 4);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(5, '123 ford rd', 'Indianapolis', 'IN', '14666', 'United States of America', 'd6@ex.com', 4);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(2, '123 Levesque rd', 'Los Angeles', 'CA', '11722', 'United States of America', 'd7@ex.com', 4);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(2, '123 Jackson rd', 'Sacramento', 'CA', '56912', 'United States of America', 'd8@ex.com', 4);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(9, 3, '123 celine rd', 'New york City', 'NY', '50000', 'United States of America', 'b1@ex.com', 2);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(10, 3, '123 joyce rd', 'Boulder', 'CO', '10000', 'United States of America', 'b2@ex.com', 2);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(11, 2, '123 candy rd', 'Los Angeles', 'CA', '21200', 'United States of America', 'b3@ex.com', 2);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(12, 5, '123 Makepe', 'New york City', 'NY', '77777', 'United States of America', 'b4@ex.com', 2);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(13, 2, '123 Joy', 'Cleveland', 'OH', '54411', 'United States of America', 'b5@ex.com', 2);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(14, 1, '123 Hurdman', 'Vancouver', 'BC', 'T1X 5K4', 'Canada', 'b6@ex.com', 2);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(15, 4, '123 Lyon', 'Montreal', 'QC', 'L1X 5K4', 'Canada', 'b7@ex.com', 2);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(16, 4, '123 st Germain', 'Quebec City', 'QC', 'M1X 5K4', 'Canada', 'b8@ex.com', 2);
 
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(3, '123 Kanye rd', 'Chicago', 'IL', '22000', 'United States of America', 'e@ex.com', 5);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(4, '123 Common rd', 'Toronto', 'ON', 'A1X 5K7', 'Canada', 'e2@ex.com', 5);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(5, '123 street', 'Vancouver', 'BC', 'S1X 5KX', 'Canada', 'e3@ex.com', 5);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(5, '123 other street', 'Vancouver', 'BC', 'C1X 5K1', 'Canada', 'e4@ex.com', 5);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(2, '123 boomer rd', 'Ottawa', 'ON', 'A1X 5K1', 'Canada', 'e5@ex.com', 5);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(2, '123 genz rd', 'New York City', 'NY', '78200', 'United States of America', 'e6@ex.com', 5);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(2, '123 select ', 'Minnesota', 'WI', '54312', 'United States of America', 'e7@ex.com', 5);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(2, '123 miles rd', 'Vancouver', 'ON', '54545', 'United States of America', 'e8@ex.com', 5);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(17, 3, '123 paris rd', 'Ottawa', 'ON', 'C1V 5K4', 'Canada', 'c@ex.com', 3);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(18, 3, '123 london rd', 'Toronto', 'ON', 'M1X 5K4', 'Canada', 'c2@ex.com', 3);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(19, 4, '123 boyca rd', 'Vancouver', 'BC', 'J1X 5K4', 'Canada', 'c3@ex.com', 3);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(20, 5, '123 douala rd', 'Vancouver', 'BC', 'N1X 4K4', 'Canada', 'c4@ex.com', 3);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(21, 1, '123 Dakar rd', 'Montreal', 'QC', 'V1V 4K1', 'Canada', 'c5@ex.com', 3);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(22, 2, '123 Huffman rd', 'Toronto', 'ON', 'J1Y 5K7', 'Canada', 'c6@ex.com', 3);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(23, 2, '123 Puffy rd', 'Toronto', 'ON', 'U1X 1KX', 'Canada', 'c7@ex.com', 3);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(24, 2, '123 corny rd', 'Vancouver', 'BC', 'A1T 5K3', 'Canada', 'c8@ex.com', 3);
 
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(3, '123 john st', 'Ottawa', 'ON', 'G1G 5K1', 'Canada', 'f@ex.com', 6);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(4, '123 igor st', 'Toronto', 'ON', 'K1G 5K7', 'Canada', 'f2@ex.com', 6);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(5, '123 main rd', 'Vancouver', 'BC', 'V1X 5K4', 'Canada', 'f3@ex.com', 6);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(1, '123 two rd', 'Vancouver', 'BC', 'V1X 5K4', 'Canada', 'f4@ex.com', 6);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(1, '123 thre rd', 'Ottawa', 'ON', 'A1X 5K1', 'Canada', 'f5@ex.com', 6);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(2, '123 four rd', 'New York City', 'NY', '12521', 'United States of America', 'f6@ex.com', 6);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(2, '123 five rd', 'New York City', 'NY', '96122', 'United States of America', 'f7@ex.com', 6);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(2, '123 six rd', 'New York City', 'NY', '41515', 'United States of America', 'f8@ex.com', 6);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(25, 3, '123 July rd', 'Ottawa', 'ON', 'X1X 5K9', 'Canada', 'd@ex.com', 4);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(26, 4, '123 August rd', 'Toronto', 'ON', 'Z1X 7K8', 'Canada', 'd2@ex.com', 4);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(27, 5, '123 jane rd', 'Vancouver', 'BC', 'N1X 5K4', 'Canada', 'd3@ex.com', 4);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(28, 5, '123 korea rd', 'Vancouver', 'BC', 'J1X 5K5', 'Canada', 'd4@ex.com', 4);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(29, 5, '123 witness rd', 'Montreal', 'QC', 'B1X 5K1', 'Canada', 'd5@ex.com', 4);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(30, 5, '123 ford rd', 'Indianapolis', 'IN', '14666', 'United States of America', 'd6@ex.com', 4);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(31, 2, '123 Levesque rd', 'Los Angeles', 'CA', '11722', 'United States of America', 'd7@ex.com', 4);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(32, 2, '123 Jackson rd', 'Sacramento', 'CA', '56912', 'United States of America', 'd8@ex.com', 4);
 
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(3, '123 seven rd', 'Ottawa', 'ON', 'K1X 5K1', 'Canada', 'g@ex.com', 7);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(4, '123 kenny rd', 'Toronto', 'ON', 'J1X 5K4', 'Canada', 'g2@ex.com', 7);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(5, '123 Lebum rd', 'Vancouver', 'BC', 'Y1X 5K7', 'Canada', 'g3@ex.com', 7);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(5, '123 LeMickey rd', 'Vancouver', 'BC', 'J1X 7K9', 'Canada', 'g4@ex.com', 7);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(4, '123 LeDisney rd', 'Ottawa', 'ON', 'N1X 5K8', 'Canada', 'g5@ex.com', 7);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(4, '123 Le46 rd', 'Chicago', 'IL', '23233', 'United States of America', 'g6@ex.com', 7);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(4, '123 Pessi rd', 'New York City', 'NY', '44545', 'United States of America', 'g7@ex.com', 7);
-INSERT INTO hotel(category, street_address, city, province_or_state, Postal_code_or_zip_code
-, country, contact_email, hotel_chain_id) VALUES(4, '123 Penaldo rd', 'Saint Louis', 'CA', '11212', 'United States of America', 'g8@ex.com', 7);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(33, 3, '123 Kanye rd', 'Chicago', 'IL', '22000', 'United States of America', 'e@ex.com', 5);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(34, 4, '123 Common rd', 'Toronto', 'ON', 'A1X 5K7', 'Canada', 'e2@ex.com', 5);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(35, 5, '123 street', 'Vancouver', 'BC', 'S1X 5KX', 'Canada', 'e3@ex.com', 5);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(36, 5, '123 other street', 'Vancouver', 'BC', 'C1X 5K1', 'Canada', 'e4@ex.com', 5);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(37, 2, '123 boomer rd', 'Ottawa', 'ON', 'A1X 5K1', 'Canada', 'e5@ex.com', 5);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(38, 2, '123 genz rd', 'New York City', 'NY', '78200', 'United States of America', 'e6@ex.com', 5);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(39, 2, '123 select ', 'Minnesota', 'WI', '54312', 'United States of America', 'e7@ex.com', 5);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(40, 2, '123 miles rd', 'Vancouver', 'ON', '54545', 'United States of America', 'e8@ex.com', 5);
+
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(41, 3, '123 john st', 'Ottawa', 'ON', 'G1G 5K1', 'Canada', 'f@ex.com', 6);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(42, 4, '123 igor st', 'Toronto', 'ON', 'K1G 5K7', 'Canada', 'f2@ex.com', 6);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(43, 5, '123 main rd', 'Vancouver', 'BC', 'V1X 5K4', 'Canada', 'f3@ex.com', 6);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(44, 1, '123 two rd', 'Vancouver', 'BC', 'V1X 5K4', 'Canada', 'f4@ex.com', 6);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(45, 1, '123 thre rd', 'Ottawa', 'ON', 'A1X 5K1', 'Canada', 'f5@ex.com', 6);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(46, 2, '123 four rd', 'New York City', 'NY', '12521', 'United States of America', 'f6@ex.com', 6);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(47, 2, '123 five rd', 'New York City', 'NY', '96122', 'United States of America', 'f7@ex.com', 6);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(48, 2, '123 six rd', 'New York City', 'NY', '41515', 'United States of America', 'f8@ex.com', 6);
+
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(49, 3, '123 seven rd', 'Ottawa', 'ON', 'K1X 5K1', 'Canada', 'g@ex.com', 7);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(50, 4, '123 kenny rd', 'Toronto', 'ON', 'J1X 5K4', 'Canada', 'g2@ex.com', 7);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(51, 5, '123 Lebum rd', 'Vancouver', 'BC', 'Y1X 5K7', 'Canada', 'g3@ex.com', 7);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(52, 5, '123 LeMickey rd', 'Vancouver', 'BC', 'J1X 7K9', 'Canada', 'g4@ex.com', 7);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(53, 4, '123 LeDisney rd', 'Ottawa', 'ON', 'N1X 5K8', 'Canada', 'g5@ex.com', 7);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(54, 4, '123 Le46 rd', 'Chicago', 'IL', '23233', 'United States of America', 'g6@ex.com', 7);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(55, 4, '123 Pessi rd', 'New York City', 'NY', '44545', 'United States of America', 'g7@ex.com', 7);
+insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+, country, contact_email, hotel_chain_id) VALUES(56, 4, '123 Penaldo rd', 'Saint Louis', 'CA', '11212', 'United States of America', 'g8@ex.com', 7);
 
 -- -----------------------------------------Rooms -----------------------------------------------------
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 120, 'single', 'sea', TRUE, TRUE, 1);
