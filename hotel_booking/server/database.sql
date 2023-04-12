@@ -217,6 +217,11 @@ CREATE VIEW ROOM_LOC_VIEW AS
 SELECT id, number_of_rooms, city, country
 FROM hotel;
 
+CREATE VIEW hotel_room_count AS
+SELECT hotel_id, COUNT(*) AS total_rooms
+FROM room
+GROUP BY hotel_id;
+
 -- -----------------------------------------------------Hotel chains------------------------
 
 INSERT INTO hotelchain (id, name, street_address, city, province_or_state, Postal_code_or_zip_code, country) 
