@@ -217,11 +217,6 @@ CREATE VIEW ROOM_LOC_VIEW AS
 SELECT id, number_of_rooms, city, country
 FROM hotel;
 
-CREATE VIEW hotel_room_count AS
-SELECT hotel_id, COUNT(*) AS total_rooms
-FROM room
-GROUP BY hotel_id;
-
 -- -----------------------------------------------------Hotel chains------------------------
 
 INSERT INTO hotelchain (id, name, street_address, city, province_or_state, Postal_code_or_zip_code, country) 
@@ -579,6 +574,86 @@ INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id)
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 270, 'king', 'mountain', FALSE, FALSE, 40);
 
 
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 290, 'single', 'sea', TRUE, FALSE, 41);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 310, 'double', 'sea', FALSE, FALSE, 41);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 350, 'queen', 'sea', TRUE, FALSE, 41);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 380, 'king', 'mountain', FALSE, FALSE, 41);
+
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 70, 'single', 'mountain', FALSE, FALSE, 42);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 100, 'Double', 'mountain', FALSE, TRUE, 42);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 120, 'queen', 'mountain', FALSE, FALSE, 42);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 150, 'king', 'sea', TRUE, FALSE, 42);
+
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 290, 'single', 'sea', TRUE, FALSE, 43);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 310, 'double', 'sea', FALSE, FALSE, 43);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 350, 'queen', 'sea', TRUE, FALSE, 43);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 380, 'king', 'mountain', FALSE, FALSE, 43);
+
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 70, 'single', 'mountain', FALSE, FALSE, 44);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 100, 'Double', 'mountain', FALSE, TRUE, 44);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 120, 'queen', 'mountain', FALSE, FALSE, 44);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 150, 'king', 'sea', TRUE, FALSE, 44);
+
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 290, 'single', 'sea', TRUE, FALSE, 45);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 310, 'double', 'sea', FALSE, FALSE, 45);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 350, 'queen', 'sea', TRUE, FALSE, 45);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 380, 'king', 'mountain', FALSE, FALSE, 45);
+
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 70, 'single', 'mountain', FALSE, FALSE, 46);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 100, 'Double', 'mountain', FALSE, TRUE, 46);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 120, 'queen', 'mountain', FALSE, FALSE, 46);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 150, 'king', 'sea', TRUE, FALSE, 46);
+
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 290, 'single', 'sea', TRUE, FALSE, 47);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 310, 'double', 'sea', FALSE, FALSE, 47);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 350, 'queen', 'sea', TRUE, FALSE, 47);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 380, 'king', 'mountain', FALSE, FALSE, 47);
+
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 70, 'single', 'mountain', FALSE, FALSE, 48);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 100, 'Double', 'mountain', FALSE, TRUE, 48);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 120, 'queen', 'mountain', FALSE, FALSE, 48);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 150, 'king', 'sea', TRUE, FALSE, 48);
+
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 290, 'single', 'sea', TRUE, FALSE, 49);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 310, 'double', 'sea', FALSE, FALSE, 49);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 350, 'queen', 'sea', TRUE, FALSE, 49);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 380, 'king', 'mountain', FALSE, FALSE, 49);
+
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 70, 'single', 'mountain', FALSE, FALSE, 50);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 100, 'Double', 'mountain', FALSE, TRUE, 50);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 120, 'queen', 'mountain', FALSE, FALSE, 50);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 150, 'king', 'sea', TRUE, FALSE, 50);
+
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 70, 'single', 'mountain', FALSE, FALSE, 51);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 100, 'Double', 'mountain', FALSE, TRUE, 51);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 120, 'queen', ‘sea’, FALSE, FALSE, 51);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 150, 'king', 'sea', TRUE, FALSE, 51);
+
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 70, 'single', 'mountain', FALSE, FALSE, 52);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 100, 'Double', 'mountain', FALSE, TRUE, 52);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 120, 'queen', 'mountain', FALSE, FALSE, 52);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 150, 'king', 'sea', TRUE, FALSE, 52);
+
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 70, 'single', 'mountain', FALSE, FALSE, 53);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 100, 'Double', ‘sea’, FALSE, TRUE, 53);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 120, 'queen', 'mountain', FALSE, FALSE, 53);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 150, 'king', 'sea', TRUE, FALSE, 53);
+
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 70, 'single', 'mountain', FALSE, FALSE, 54);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 100, 'Double', 'mountain', FALSE, TRUE, 54);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 120, 'queen', 'mountain', FALSE, FALSE, 54);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 150, 'king', 'sea', TRUE, FALSE, 54);
+
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 70, 'single', ‘sea’, FALSE, FALSE, 55);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 100, 'Double', 'mountain', FALSE, TRUE, 55);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 120, 'queen', 'mountain', FALSE, FALSE, 55);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 150, 'king', 'sea', TRUE, FALSE, 55);
+
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 100, 'single', 'mountain', FALSE, FALSE, 56);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 150, 'Double', ‘sea’, FALSE, TRUE, 56);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 180, 'queen', 'mountain', FALSE, FALSE, 56);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 200, 'king', 'sea', TRUE, FALSE, 56);
+
 
 -- ----------------------------Customers ---------------------------------
 INSERT INTO customer(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
@@ -587,6 +662,117 @@ VALUES (1, 'Ralph', '123 ex st', 'Ottawa', 'ON', 'K1J 5N2', 'Canada', '110234564
 -- --------------Employees---------------------------------------------
 INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
 VALUES (1, 'Tom', '123 ex st', 'Ottawa', 'ON', 'K1J 5N2', 'Canada', '15415112', 'tom@ex.com', 'pompei', 'receptionist', 1);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (2, 'Jennifer', '456 Main St', 'Toronto', 'ON', 'M5V 3K6', 'Canada', '963258741', 'jennifer@ex.com', '4tBk8sZr', '2023-04-01');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (3, 'John', '123 ex st', 'Ottawa', 'ON', 'K1J 5N2', 'Canada', '780452619', 'john@ex.com', 'u5Xn3vLq', '2023-04-02');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (4, 'Emily', '789 Elm St', 'Vancouver', 'BC', 'V6B 5J5', 'Canada', '214365870', 'emily@ex.com', '7mCp6hFy', '2023-04-05');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (5, 'Peter', '789 Street St', 'Montreal', 'QC', 'V6B 5P5', 'Canada', '679083542', 'peter@ex.com', 'a8Rt5gVb', '2023-04-05');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (6, 'Mark', '789 Maple St', 'Vancouver', 'BC', 'V7B 5J5', 'Canada', '509328716', 'mark@ex.com', '6yLp9kHj', '2023-05-30');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (7, 'Rachel', '123 Pine St', 'Toronto', 'ON', 'I9I 9I9', 'Canada', '893721456', 'rachel@ex.com', 's2Zc7bNx', '2023-06-01');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (8, 'Kevin', '456 Birch St', 'Montreal', 'QC', 'J0J 0J0', 'Canada', '201958637', 'kevin@ex.com', '5tVr2mBq', '2023-06-02');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (9, 'Julia', '789 Oak St', 'Vancouver', 'BC', 'K1K 1K1', 'Canada', '368507914', 'julia@ex.com', 'b3Df8kNp', '2023-06-05');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (10, 'Bryan', '123 Elm St', 'Toronto', 'ON', 'L2L 2L2', 'Canada', '927416385', 'bryan@ex.com', 'h7Gn5tRm', '2023-06-06');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (11, 'Sophia', '456 Oak St', 'Montreal', 'QC', 'M3M 3M3', 'Canada', '684209531', 'sophia@ex.com', 'j9Hb6xPc', '2023-06-07');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (12, 'Jacob', '789 Cedar St', 'Vancouver', 'BC', 'N4N 4N4', 'Canada', '741369825', 'jacob@ex.com', 'k8Jf5dVt', '2023-06-08');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (13, 'Sarah', '122 King St', 'Winnipeg', 'MB', 'O5O 5O5', 'Canada', '543870296', 'sarah@ex.com', 'r6Yg7bNc', '2023-04-14');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (14, 'Jake', '456 Bay St', 'Victoria', 'BC', 'P6P 6P6', 'Canada', '150987263', 'jake@ex.com', 'w9Lp4kTj', '2023-04-13');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (15, 'Amy', '890 Yonge St', 'Calgary', 'AB', 'Q7Q 7Q7', 'Canada', '236489571', 'amy@ex.com', '2nGd7sKf', '2023-04-12');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (16, 'David', '567 Queen St', 'Halifax', 'NS', 'R8R 8R8', 'Canada', '419238765', 'david@ex.com', '4mBv8pLc', '2023-04-11');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (17, 'William', '123 King St', 'Halifax', 'NS', 'S9S 9S9', 'Canada', '567894123', 'william@ex.com', '1tRn9sMx', '2023-04-15');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (18, 'Noah', '2929 Dogwood Blvd', 'Toronto', 'ON', 'T0T 0T0', 'Canada', '693215487', 'noah@ex.com', '3yTm4nLw', '2023-04-13');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (19, ‘Olivia, '4141 Juniper Blvd', 'Toronto', 'ON', 'U1U 1U1', 'Canada', '985674312', 'oli@ex.com', '8sBk9pHf', '2023-04-01');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (20, 'Chloe', '4545 Linden St', 'Ottawa', 'ON', 'V2V 2V2', 'Canada', '361904758', 'chloe@ex.com', '7vNc3xRj', '2023-04-02');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (21, 'Lily', '4747 Magnolia Ave', 'Vancouver', 'BC', 'W3W 3W3', 'Canada', '594836127', 'l@ex.com', '6hFb4tKq', '2023-04-05');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (22, ‘Daniel’, '4949 Oak Hill Rd', 'Montreal', 'QC', 'Y5Y 5Y5', 'Canada', '247810963', 'daniel@ex.com', '9jLm2gVx', '2023-04-05');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (23, ‘George’, '151 Piney Ln', 'Vancouver', 'BC', 'Z6Z 6Z6', 'Canada', '615729834', 'george@ex.com', '2dGc7nHf', '2023-05-30');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (24, 'Harper', '555 Redwood Blvd', 'Toronto', 'ON', 'A7A 7A7', 'Canada', '935076412', 'harper@ex.com', '1kRb8pMx', '2023-06-01');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (25, 'Lewis', '5959 Tulip Rd', 'Montreal', 'QC', 'B8B 8B8', 'Canada', '473162598', 'lewis@ex.com', '5tFm7vNc', '2023-06-02');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (26, 'Samuel', '161 Umbrella St', 'Vancouver', 'BC', 'C9C 9C9', 'Canada', '802693541', 'sam@ex.com', '3yHn6bLw', '2023-06-05');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (27, 'Isaac', '6363 Vine Ln', 'Toronto', 'ON', 'D0D 0D0', 'Canada', '647983215', 'isaac@ex.com', '4kPj9sRf', '2023-06-06');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (28, 'Taylor', '6767 Xylophone Rd', 'Montreal', 'QC', 'E1E 1E1', 'Canada', '289045176', 'taylor@ex.com', '7vNc3xRj', '2023-06-07');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (29, 'Cooper', '6969 Yellowbrick Blvd', 'Vancouver', 'BC', 'F2F 2F2', 'Canada', '731468529', 'cooper@ex.com', '9jLm2gVx', '2023-06-08');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (30, 'Scarlett', '7171 Zebra Dr', 'Winnipeg', 'MB', 'G3G 3G3', 'Canada', '452036891', 'scar@ex.com', '2dGc7nHf', '2023-04-14');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (31, 'Grace', '373 Alpha St', 'Victoria', 'BC', 'H4H 4H4', 'Canada', '397210846', 'grace@ex.com', '1kRb8pMx', '2023-04-13');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (32, 'Joshua', '7575 Bravo Ln', 'Calgary', 'AB', 'I5I 5I5', 'Canada', '549618723', 'joshua@ex.com', '5tFm7vNc', '2023-04-12');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (33, 'Victoria', '7777 Charlie Rd', 'Halifax', 'NS', 'J6J 6J6', 'Canada', '987123456', 'vic@ex.com', '3yHn6bLw', '2023-04-11');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (34, 'Alexander', '7979 Delta Ave', 'Halifax', 'NS', 'K7K 7K7', 'Canada', '631049287', 'alex@ex.com', '4kPj9sRf', '2023-04-15');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (35, 'Abigail', '8181 Echo Blvd', 'Toronto', 'ON', 'L8L 8L8', 'Canada', '805742691', 'abigail@ex.com', '2mBv8pLc', '2023-04-13');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (36, 'Amelia', '8383 Foxtrot Dr', 'Toronto', 'ON', 'M9M 9M9', 'Canada', '217930546', 'amelia@ex.com', '1tRn9sMx', '2023-04-01');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (37, 'Jackson', '8585 Golf Rd', 'Ottawa', 'ON', 'N0N 0N0', 'Canada', '839204715', 'jackson@ex.com', '3yTm4nLw', '2023-04-02');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (38, 'Thompson', '8787 Hotel St', 'Vancouver', 'BC', 'O1O 1O1', 'Canada', '156493728', 'thom@ex.com', '8sBk9pHf', '2023-04-05');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (39, 'Martin', '8989 India Ln', 'Montreal', 'QC', 'P2P 2P2', 'Canada', '569081432', 'martin@ex.com', '7vNc3xRj', '2023-04-05');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (40, 'Perez', '9191 Juliet Blvd', 'Vancouver', 'BC', 'Q3Q 3Q3', 'Canada', '481672935', 'perez@ex.com', '6hFb4tKq', '2023-05-30');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (41, 'Jones', '9393 Kilo Ave', 'Toronto', 'ON', 'R4R 4R4', 'Canada', '763258140', 'jo@ex.com', '9jLm2gVx', '2023-06-01');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (42, 'Ava', '9595 Lima Rd', 'Montreal', 'QC', 'S5S 5S5', 'Canada', '310257469', 'ava@ex.com', '2dGc7nHf', '2023-06-02');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (43, 'Ethan', '9797 Mike Dr', 'Vancouver', 'BC', 'T6T 6T6', 'Canada', '985037216', 'ethan@ex.com', '1kRb8pMx', '2023-06-05');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (44, 'Chen', '9999 November Blvd', 'Toronto', 'ON', 'U7U 7U7', 'Canada', '734026815', 'chen@ex.com', '5tFm7vNc', '2023-06-06');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (45, 'Wright', '1212 Oscar St', 'Montreal', 'QC', 'V8V 8V8', 'Canada', '129576483', 'wr@ex.com', '3yHn6bLw', '2023-06-07');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (46, 'Collins', '1414 Papa Ln', 'Vancouver', 'BC', 'W9W 9W9', 'Canada', '670329814', 'col@ex.com', '4kPj9sRf', '2023-06-08');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (47, 'Kim', '1616 Quebec Rd', 'Winnipeg', 'MB', 'Y1Y 1Y1', 'Canada', '390574216', 'kim@ex.com', '8dMx6jLw', '2023-04-14');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (48, 'Andrew', '1818 Romeo Ave', 'Victoria', 'BC', 'Z2Z 2Z2', 'Canada', '862407935', 'and@ex.com', 'e6Hv7pJy', '2023-04-13');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (49, 'Lily', '2020 Sierra Dr', 'Calgary', 'AB', 'A3A 3A3', 'Canada', '258143679', 'lily@ex.com', '9nKc4bRf', '2023-04-12');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (50, 'Gabriel', '2222 Tango Ave', 'Halifax', 'NS', 'B3J 2K8', 'Canada', '943815027', 'gab@ex.com', 'w3Gm2sTq', '2023-04-11');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (51, 'Owen', '2424 Uniform Rd', 'Halifax', 'NS', 'C5C 5C5', 'Canada', '516247839', 'owen@ex.com', '4tBk8sZr', '2023-04-15');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (52, 'Amir', '2626 Victor Blvd', 'Toronto', 'ON', 'D6D 6D6', 'Canada', '368509724', 'amir@ex.com', 'u5Xn3vLq', '2023-04-13');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (53, 'Addison', '2828 Whiskey Ln', 'Victoria', 'BC', 'E7E 7E7', 'Canada', '172835964', 'addison@ex.com', '7mCp6hFy', '2023-04-13');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (54, ‘Karim’, '3030 X-ray St', 'Calgary', 'AB', 'F8F 8F8', 'Canada', '647982315', 'k@ex.com', 'a8Rt5gVb', '2023-04-12');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (55, 'Julian', '3232 Yankee Dr', 'Halifax', 'NS', 'G9G 9G9', 'Canada', '935170482', 'j@ex.com', '6yLp9kHj', '2023-04-11');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
+VALUES (56, 'Zoey', '3434 Zulu Ave', 'Halifax', 'NS', 'H0H 0H0', 'Canada', '201957634', 'z@ex.com', 's2Zc7bNx', '2023-04-15');
+
 
 -- ----------------------------Amenities ---------------------------------
 INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 1, 'Wifi');
@@ -724,6 +910,371 @@ INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 3, 'Bathrobes an
 INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 3, 'Gym');
 
 INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 3, 'Smart TV');
+
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 4, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 4, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 4, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 4, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 4, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 4, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 4, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 4, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 4, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 4, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 4, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 4, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 4, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 4, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 4, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 4, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 5, 'Pets Allowed');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 5, 'Pets Allowed');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 5, 'Pets Allowed');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 5, 'Pets Allowed');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 5, 'Air conditioning');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 5, 'Air conditioning');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 5, 'Air conditioning');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 5, 'Air conditioning');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 6, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 6, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 6, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 6, 'Hot Tub');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 7, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 7, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 7, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 7, 'Mini Bar');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 8, 'Bathrobes and slippers');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 8, 'Bathrobes and slippers');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 8, 'Bathrobes and slippers');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 8, 'Bathrobes and slippers');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 9, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 9, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 9, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 9, 'Gym');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 10, 'Smart TV');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 10, 'Smart TV');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 10, 'Smart TV');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 10, 'Smart TV');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 11, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 11, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 11, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 11, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 12, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 12, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 12, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 12, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 13, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 13, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 13, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 13, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 14, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 14, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 14, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 14, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 15, 'Pets Allowed');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 15, 'Pets Allowed');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 15, 'Pets Allowed');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 15, 'Pets Allowed');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 16, 'Air conditioning');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 16, 'Air conditioning');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 16, 'Air conditioning');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 16, 'Air conditioning');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 17, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 17, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 17, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 17, 'Hot Tub');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 18, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 18, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 18, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 18, 'Mini Bar');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 19, 'Bathrobes and slippers');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 19, 'Bathrobes and slippers');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 19, 'Bathrobes and slippers');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 19, 'Bathrobes and slippers');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 20, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 20, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 20, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 20, 'Gym');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 21, 'Smart TV');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 21, 'Smart TV');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 21, 'Smart TV');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 21, 'Smart TV');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 22, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 22, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 22, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 22, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 23, 'Pets Allowed');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 23, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 23, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 23, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 24, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 24, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 24, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 24, 'Gym');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 25, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 25, 'Smart TV');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 25, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 25, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 26, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 26, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 26, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 26, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 27, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 27, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 27, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 27, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 28, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 28, 'Pets Allowed');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 28, 'Smart TV');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 28, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 29, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 29, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 29, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 29, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 30, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 30, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 30, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 30, 'Free Parking');
+
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 31, 'Smart TV');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 31, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 31, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 31, 'Hot Tub');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 32, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 32, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 32, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 32, 'Free Parking');
+
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 33, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 33, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 33, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 33, 'Free Parking');
+
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 34, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 34, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 34, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 34, 'Free Parking');
+
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 35, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 35, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 35, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 35, 'Pets Allowed');
+
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 36, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 36, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 36, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 36, 'Smart TV');
+
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 37, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 37, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 37, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 37, 'Free Parking');
+
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 38, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 38, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 38, 'Gym');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 38, 'Free Parking');
+
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 39, 'Smart TV');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 39, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 39, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 39, 'Free Parking');
+
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 40, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 40, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 40, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 40, 'Free Parking');
+
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 41, 'Pets Allowed');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 41, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 41, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 41, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 42, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 42, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 42, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 42, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 43, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 43, 'Smart TV');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 43, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 43, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 44, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 44, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 44, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 44, 'Free Parking');
+
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 45, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 45, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 45, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 45, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 46, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 46, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 46, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 46, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 47, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 47, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 47, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 47, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 48, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 48, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 48, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 48, 'Free Parking');
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 49, 'Pets Allowed');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 49, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 49, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 49, 'Free Parking');
+
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 50, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 50, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 50, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 50, 'Free Parking');
+
+
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 51, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 51, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 51, 'Pets Allowed');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 51, 'Mini Bar');
+
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 52, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 52, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 52, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 52, 'Free Parking');
+
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 53, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 53, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 53, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 53, 'Free Parking');
+
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 54, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 54, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 54, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 54, 'Free Parking');
+
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 55, 'Pets Allowed');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 55, 'Mini Bar');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 55, 'Pool');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 55, 'Free Parking');
+
+
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (1, 56, 'Wifi');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (2, 56, 'Free Breakfast');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (3, 56, 'Hot Tub');
+INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (4, 56, 'Free Parking');
+
+
+-----------Managers-------------
+
+INSERT INTO manages(employee_id, mgr_id) VALUES (1, 1);
+INSERT INTO manages(employee_id, mgr_id) VALUES (2, 2);
+INSERT INTO manages(employee_id, mgr_id) VALUES (3, 3);
+INSERT INTO manages(employee_id, mgr_id) VALUES (4, 4);
+INSERT INTO manages(employee_id, mgr_id) VALUES (5, 5);
+INSERT INTO manages(employee_id, mgr_id) VALUES (6, 6);
+INSERT INTO manages(employee_id, mgr_id) VALUES (7, 7);
+INSERT INTO manages(employee_id, mgr_id) VALUES (8, 8);
+INSERT INTO manages(employee_id, mgr_id) VALUES (9, 9);
+INSERT INTO manages(employee_id, mgr_id) VALUES (10, 10);
+INSERT INTO manages(employee_id, mgr_id) VALUES (11, 11);
+INSERT INTO manages(employee_id, mgr_id) VALUES (12, 12);
+INSERT INTO manages(employee_id, mgr_id) VALUES (13, 13);
+INSERT INTO manages(employee_id, mgr_id) VALUES (14, 14);
+INSERT INTO manages(employee_id, mgr_id) VALUES (15, 15);
+INSERT INTO manages(employee_id, mgr_id) VALUES (16, 16);
+INSERT INTO manages(employee_id, mgr_id) VALUES (17, 17);
+INSERT INTO manages(employee_id, mgr_id) VALUES (18, 18);
+INSERT INTO manages(employee_id, mgr_id) VALUES (19, 19);
+INSERT INTO manages(employee_id, mgr_id) VALUES (20, 20);
+INSERT INTO manages(employee_id, mgr_id) VALUES (21, 21);
+INSERT INTO manages(employee_id, mgr_id) VALUES (22, 22);
+INSERT INTO manages(employee_id, mgr_id) VALUES (23, 23);
+INSERT INTO manages(employee_id, mgr_id) VALUES (24, 24);
+INSERT INTO manages(employee_id, mgr_id) VALUES (25, 25);
+INSERT INTO manages(employee_id, mgr_id) VALUES (26, 26);
+INSERT INTO manages(employee_id, mgr_id) VALUES (27, 27);
+INSERT INTO manages(employee_id, mgr_id) VALUES (28, 28);
+INSERT INTO manages(employee_id, mgr_id) VALUES (29, 29);
+INSERT INTO manages(employee_id, mgr_id) VALUES (30, 30);
+INSERT INTO manages(employee_id, mgr_id) VALUES (31, 31);
+INSERT INTO manages(employee_id, mgr_id) VALUES (32, 32);
+INSERT INTO manages(employee_id, mgr_id) VALUES (33, 33);
+INSERT INTO manages(employee_id, mgr_id) VALUES (34, 34);
+INSERT INTO manages(employee_id, mgr_id) VALUES (35, 35);
+INSERT INTO manages(employee_id, mgr_id) VALUES (36, 36);
+INSERT INTO manages(employee_id, mgr_id) VALUES (37, 37);
+INSERT INTO manages(employee_id, mgr_id) VALUES (38, 38);
+INSERT INTO manages(employee_id, mgr_id) VALUES (39, 39);
+INSERT INTO manages(employee_id, mgr_id) VALUES (40, 40);
+INSERT INTO manages(employee_id, mgr_id) VALUES (41, 41);
+INSERT INTO manages(employee_id, mgr_id) VALUES (42, 42);
+INSERT INTO manages(employee_id, mgr_id) VALUES (43, 43);
+INSERT INTO manages(employee_id, mgr_id) VALUES (44, 44);
+INSERT INTO manages(employee_id, mgr_id) VALUES (45, 45);
+INSERT INTO manages(employee_id, mgr_id) VALUES (46, 46);
+INSERT INTO manages(employee_id, mgr_id) VALUES (47, 47);
+INSERT INTO manages(employee_id, mgr_id) VALUES (48, 48);
+INSERT INTO manages(employee_id, mgr_id) VALUES (49, 49);
+INSERT INTO manages(employee_id, mgr_id) VALUES (50, 50);
+INSERT INTO manages(employee_id, mgr_id) VALUES (51, 51);
+INSERT INTO manages(employee_id, mgr_id) VALUES (52, 52);
+INSERT INTO manages(employee_id, mgr_id) VALUES (53, 53);
+INSERT INTO manages(employee_id, mgr_id) VALUES (54, 54);
+INSERT INTO manages(employee_id, mgr_id) VALUES (55, 55);
+INSERT INTO manages(employee_id, mgr_id) VALUES (56, 56);
 
 
 -- ----------------------------hotel chain emails ---------------------------------
