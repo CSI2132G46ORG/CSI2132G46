@@ -114,18 +114,18 @@ const Payment = (props) => {
                         console.log("user already exists");
                     }
                     else {
-                    const userBody = {name, address, city, provOrState, postOrZip, country, ssn_sin, email, password};
-                    console.log(userBody);
-                
-                    const response = fetch(`http://localhost:${port}/signUp`, {
-                        method: 'POST',
-                        headers: {"content-type": "application/JSON"},
-                        body: JSON.stringify(userBody)
-                    });
+                        const userBody = {name, address, city, provOrState, postOrZip, country, ssn_sin, email, password};
+                        console.log(userBody);
                     
-    
-                    // console.log(response);
-                    return response;
+                        const response = fetch(`http://localhost:${port}/signUp`, {
+                            method: 'POST',
+                            headers: {"content-type": "application/JSON"},
+                            body: JSON.stringify(userBody)
+                        });
+                        
+        
+                        // console.log(response);
+                        return response;
                     }
                 })
                 .then(res => {

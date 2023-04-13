@@ -27,31 +27,31 @@ const RoomCard = (props) => {
         <br />
         <br />
         <br />
-        Price: {price} &nbsp;&nbsp;
+       <b> Price:</b> {price} &nbsp;&nbsp;
       </p>
       <p>
         <br />
         <br />
         <br />
-        Capacity: {capacity}&nbsp;&nbsp;
+        <b> Capacity: </b>{capacity}&nbsp;&nbsp;
       </p>
       <p>
         <br />
         <br />
         <br />
-        View: {view}&nbsp;&nbsp;
+        <b>View:</b> {view}&nbsp;&nbsp;
       </p>
       <p>
         <br />
         <br />
         <br />
-        Extended: {extended ? 'Yes' : 'No'}&nbsp;&nbsp;
+        <b>Extended:</b> {extended ? 'Yes' : 'No'}&nbsp;&nbsp;
       </p>
       <p>
         <br />
         <br />
         <br />
-        Problems: {problems ? 'Yes' : 'No'}&nbsp;&nbsp;
+        <b>Problems:</b> {problems ? 'Yes' : 'No'}&nbsp;&nbsp;
       </p>
       {amenities.length > 0 && (
         <p>

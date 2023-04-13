@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import './assets/styles/CustomerForm.css';
 
 const CustomerForm = () => {
 
@@ -73,7 +74,9 @@ const CustomerForm = () => {
 
 
     return (
-        <div>
+        <div className="customerForm">
+            <h2>Customer Form</h2>
+
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder="Enter your name" value={name} onChange={updateName}/>
                 <input type="text" placeholder="Enter your SSN/SIN" value={ssnSin} onChange={updateSSNSIN}/>

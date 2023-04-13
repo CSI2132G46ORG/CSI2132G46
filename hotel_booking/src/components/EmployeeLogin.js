@@ -5,6 +5,7 @@ const EmployeeLogin = () => {
     return (
         <div className="employeeLogin">
             <SignInForm type={'employees'}/>
+            <p>Don't have an account? <Link to='/employeeSignUp'> Create one </Link></p>
         </div>
     );
 };

@@ -11,7 +11,7 @@ const Navbar = (props) => {
     const menu = (
         <div id='navBarMenu' className="dropdown-content" >
             
-                <HashLink to="/">My Bookings</HashLink>
+                <HashLink to="/myBookings">My Bookings</HashLink>
                 <HashLink to="/">My Info</HashLink>
                 <HashLink to="/">Sign Out</HashLink>
             
@@ -24,8 +24,9 @@ const Navbar = (props) => {
                 <ul role="list">
                     <li className='parts' role="link" id='username'>{token.full_name}</li>
                     <li id='logo' style={{ fontWeight: "bold"}} className="logo" role="link"><Link to="/reservio">Reservio</Link></li>
-                    {menu}
                 </ul>
+                {menu}
+
             </div>
         );
     }

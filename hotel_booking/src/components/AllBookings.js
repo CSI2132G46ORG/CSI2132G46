@@ -34,7 +34,7 @@ const AllBookings = () => {
                     return(
                         <BookingCard key = {obj.booking_id} bookingId = {obj.booking_id} customerId = {obj.customer_id} 
                         checkInDate = {obj.checkin_date} hotelId={obj.hotel_id}
-                        checkOutDate = {obj.checkout_date} roomNumber = {obj.room_id} bookingDate={obj.booking_date}/>
+                        checkOutDate = {obj.checkout_date} roomNumber = {obj.room_id} bookingDate={obj.booking_date} token= {token}/>
                     );
                     
                 })

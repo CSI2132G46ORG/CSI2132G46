@@ -56,6 +56,18 @@ const BookingCard = (props) => {
         }});
     };
 
+    const modifyComponents = () => {
+        if (props.token) {
+            return (
+                <div className='cardBlock'>
+                    <div onClick={deleteBooking}><img src={require('./assets/img/trash.png')} alt='trash image' /></div>
+                    <div style={{display: 'block', textDecoration: 'underline'}} onClick={handleClick}>Create Rent</div>
+                </div>
+            );
+        }
+        
+    };
+
     useEffect(() => {
         findCustomerName();
     }, []);
@@ -69,10 +81,7 @@ const BookingCard = (props) => {
             <span><b>Check In:</b> {checkin_date} </span>
             <span><b>Check Out:</b> {checkout_date} </span>
             <p><b>Booking Date:</b> {booking_date} </p>
-            <div className='cardBlock'>
-                <div onClick={deleteBooking}><img src={require('./assets/img/trash.png')} alt='trash image' /></div>
-                <div style={{display: 'block', textDecoration: 'underline'}} onClick={handleClick}>Create Rent</div>
-            </div>
+            {modifyComponents()}
         </div>
     )
 };

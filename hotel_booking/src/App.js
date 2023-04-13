@@ -23,6 +23,8 @@ import AdminLogin from './components/AdminLogin';
 import AllRentings from './components/AllRentings';
 import AllCustomers from './components/AllCustomers';
 import CreateEmployee from './components/CreateEmployee';
+import MyBookings from './components/MyBookings';
+import CustomerForm from './components/CustomerForm';
 
 function App() {
   const [token, setToken] = useState();
@@ -51,7 +53,9 @@ function App() {
           <Route exact path='/modifyhotelchains' element={<HotelChainForm/>}/>
           <Route exact path='/modifyhotels' element={<HotelForm/>}/>
           <Route exact path='/modifyrooms' element={<RoomForm/>}/>
+          <Route exact path='/modifycustomers' element={<CustomerForm/>}/>
           <Route exact path='/employeeSignUp' element={<CreateEmployee/>}/>
+          <Route exact path='/myBookings' element={<MyBookings/>}/>
           
           {/* <Route path='/allhotels' element={<AllHotelChains/>}/>
           <Route path='/allrooms' element={<AllHotelChains/>}/> */}
