@@ -334,6 +334,18 @@ app.get("/bookings/:hotelid", async(req, res) => {
     }
 });
 
+//Get existing bookings for customer
+
+app.get("/bookingsForCustomer/:id", async(req, res) => {
+    try {
+        console.log(req.params);
+        const bookings = await pool.query(`SELECT * FROM Booking WHERE customer_id= ${req.params.id}`);
+        res.json(bookings.rows);
+    } catch (error) {
+        console.error(error);
+    }
+});
+
 //Get existing rentings
 
 app.get("/rentings", async(req, res) => {

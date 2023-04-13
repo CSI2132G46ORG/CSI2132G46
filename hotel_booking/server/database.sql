@@ -41,10 +41,7 @@ CREATE TABLE hotel (
     FOREIGN KEY (hotel_chain_id) REFERENCES hotelChain(ID) ON DELETE CASCADE
 );
 
-CREATE INDEX hotel_ad_idx on hotel(city, country);
-CREATE INDEX customer_email_password on customer(email, passwrd);
-CREATE INDEX employee_email_password on customer(email, passwrd);
-CREATE INDEX hotelchain_ad_idx on hotelChain(name);
+
 
 CREATE TABLE hotelPhoneNumber (
     hotel_id INT NOT NULL,
@@ -82,7 +79,7 @@ CREATE TABLE manages (
     employee_id SERIAL NOT NULL,
     mgr_id INT NOT NULL,
     PRIMARY KEY (employee_id),
-    FOREIGN KEY (mgr_id) REFERENCES employee(id) 
+    FOREIGN KEY (mgr_id) REFERENCES employee(id) ON DELETE CASCADE
 );
 CREATE TABLE room (
     room_number INT NOT NULL,
@@ -174,40 +171,40 @@ CREATE TABLE renting_archive (
 
 
 ---------------------Hotels Page Specific Test Insertions ------------------------------------
-INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
-VALUES (101, 100, 'single', 'sea', true, false, 1);
+-- INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
+-- VALUES (101, 100, 'single', 'sea', true, false, 1);
 
-INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
-VALUES (102, 150, 'double', 'mountain', true, false, 1);
+-- INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
+-- VALUES (102, 150, 'double', 'mountain', true, false, 1);
 
-INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
-VALUES (201, 200, 'queen', 'sea', true, false, 2);
+-- INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
+-- VALUES (201, 200, 'queen', 'sea', true, false, 2);
 
-INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
-VALUES (202, 250, 'king', 'mountain', true, false, 2);
+-- INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
+-- VALUES (202, 250, 'king', 'mountain', true, false, 2);
 
-INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
-VALUES (203, 250, 'king', 'sea', true, false, 2);
+-- INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
+-- VALUES (203, 250, 'king', 'sea', true, false, 2);
 
-INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
-VALUES (204, 100, 'single', 'mountain', true, false, 2);
+-- INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
+-- VALUES (204, 100, 'single', 'mountain', true, false, 2);
 
-INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
-VALUES (205, 200, 'queen', 'sea', true, false, 2);
+-- INSERT INTO room (room_number, price, capacity, View, Extended, Problems, hotel_id)
+-- VALUES (205, 200, 'queen', 'sea', true, false, 2);
 
-INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (201, 2, 'Wifi');
+-- INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (201, 2, 'Wifi');
 
-INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (203, 2, 'Free Breakfast');
+-- INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (203, 2, 'Free Breakfast');
 
-INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (205, 2, 'Pool');
+-- INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (205, 2, 'Pool');
 
-INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (205, 2, 'Free Breakfast');
+-- INSERT INTO amenity (room_number, hotel_id, amenity) VALUES (205, 2, 'Free Breakfast');
 
-INSERT INTO booking (customer_id, room_id, hotel_id, checkin_date, checkout_date)
-VALUES (1, 101, 1, '2023-04-05', '2023-04-10');
+-- INSERT INTO booking (customer_id, room_id, hotel_id, checkin_date, checkout_date)
+-- VALUES (1, 101, 1, '2023-04-05', '2023-04-10');
 
-INSERT INTO booking (customer_id, room_id, hotel_id, checkin_date, checkout_date)
-VALUES (2, 201, 2, '2023-05-01', '2023-05-06');
+-- INSERT INTO booking (customer_id, room_id, hotel_id, checkin_date, checkout_date)
+-- VALUES (2, 201, 2, '2023-05-01', '2023-05-06');
 
 
 
@@ -216,6 +213,18 @@ VALUES (2, 201, 2, '2023-05-01', '2023-05-06');
 CREATE VIEW ROOM_LOC_VIEW AS
 SELECT id, number_of_rooms, city, country
 FROM hotel;
+
+CREATE VIEW hotel_room_count AS
+SELECT hotel_id, COUNT(*) AS total_rooms
+FROM room
+GROUP BY hotel_id;
+
+-- -------------------------------INDEX-----------------------------------------------------
+
+CREATE INDEX hotel_ad_idx on hotel(city, country);
+CREATE INDEX customer_email_password on customer(email, passwrd);
+CREATE INDEX employee_email_password on employee(email, passwrd);
+CREATE INDEX hotelchain_ad_idx on hotelChain(name);
 
 -- -----------------------------------------------------Hotel chains------------------------
 
@@ -228,11 +237,11 @@ VALUES (3, 'Business Inn', '123 road', 'Los Angeles', 'CA', '60000', 'United Sta
 INSERT INTO hotelchain (id, name, street_address, city, province_or_state, Postal_code_or_zip_code, country)
 VALUES (4, 'Accor ', '123 road', 'Chicago', 'NY', '60000', 'United States of America');
 INSERT INTO hotelchain (id, name, street_address, city, province_or_state, Postal_code_or_zip_code, country)
-VALUES (5, 'Hyatt Hotels & Resorts', '123 road', 'Vancouver', 'BC', '60000', 'United States of America');
+VALUES (5, 'Hyatt Hotels and Resorts', '123 road', 'Vancouver', 'BC', '60000', 'United States of America');
 INSERT INTO hotelchain (id, name, street_address, city, province_or_state, Postal_code_or_zip_code, country)
-VALUES (6, 'Four Seasons Hotels & Resorts', '123 road', 'Montreal', 'QC', '60000', 'United States of America');
+VALUES (6, 'Four Seasons Hotels and Resorts', '123 road', 'Montreal', 'QC', '60000', 'United States of America');
 INSERT INTO hotelchain (id, name, street_address, city, province_or_state, Postal_code_or_zip_code, country)
-VALUES (7, 'Wyndham Hotels & Resorts', '123 road', 'Denver', 'CO', '60000', 'United States of America');
+VALUES (7, 'Wyndham Hotels and Resorts', '123 road', 'Denver', 'CO', '60000', 'United States of America');
 
 
 
@@ -249,127 +258,127 @@ INSERT INTO hotel(id, category, street_address, city, province_or_state, Postal_
 , country, contact_email, hotel_chain_id) 
 VALUES(3, 4,'1234 two rd', 'Ottawa', 'ON', 'A1X 5KX', 'Canada', 'a3@ex.com', 1);
 
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) 
 VALUES(4, 5,'143 two rd', 'Vancouver', 'BC', 'A1X 5KX', 'Canada', 'a3@ex.com', 1);
 
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) 
 VALUES(5, 5,'123 central rd', 'Austin', 'TX', '66544', 'United States of America', 'a4@ex.com', 1);
 
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) 
 VALUES(6, 5, '123 st louis rd', 'Houston', 'TX', '465652', 'United States of America', 'a5@ex.com', 1);
 
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code, country, contact_email, hotel_chain_id) 
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code, country, contact_email, hotel_chain_id) 
 VALUES(7, 3, '123 btoadway', 'New York City', 'NY', '45646', 'United States of America', 'a6@ex.com', 1);
 
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code, country, contact_email, hotel_chain_id)
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code, country, contact_email, hotel_chain_id)
  VALUES(8, 2, '123 town rd', 'Vancouver', 'BC', 'H1J 5KX', 'Canada', 'a7@ex.com', 1);
 
 
 
 
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(9, 3, '123 celine rd', 'New york City', 'NY', '50000', 'United States of America', 'b1@ex.com', 2);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(10, 3, '123 joyce rd', 'Boulder', 'CO', '10000', 'United States of America', 'b2@ex.com', 2);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(11, 2, '123 candy rd', 'Los Angeles', 'CA', '21200', 'United States of America', 'b3@ex.com', 2);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(12, 5, '123 Makepe', 'New york City', 'NY', '77777', 'United States of America', 'b4@ex.com', 2);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(13, 2, '123 Joy', 'Cleveland', 'OH', '54411', 'United States of America', 'b5@ex.com', 2);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(14, 1, '123 Hurdman', 'Vancouver', 'BC', 'T1X 5K4', 'Canada', 'b6@ex.com', 2);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(15, 4, '123 Lyon', 'Montreal', 'QC', 'L1X 5K4', 'Canada', 'b7@ex.com', 2);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(16, 4, '123 st Germain', 'Quebec City', 'QC', 'M1X 5K4', 'Canada', 'b8@ex.com', 2);
 
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(17, 3, '123 paris rd', 'Ottawa', 'ON', 'C1V 5K4', 'Canada', 'c@ex.com', 3);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(18, 3, '123 london rd', 'Toronto', 'ON', 'M1X 5K4', 'Canada', 'c2@ex.com', 3);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(19, 4, '123 boyca rd', 'Vancouver', 'BC', 'J1X 5K4', 'Canada', 'c3@ex.com', 3);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(20, 5, '123 douala rd', 'Vancouver', 'BC', 'N1X 4K4', 'Canada', 'c4@ex.com', 3);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(21, 1, '123 Dakar rd', 'Montreal', 'QC', 'V1V 4K1', 'Canada', 'c5@ex.com', 3);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(22, 2, '123 Huffman rd', 'Toronto', 'ON', 'J1Y 5K7', 'Canada', 'c6@ex.com', 3);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(23, 2, '123 Puffy rd', 'Toronto', 'ON', 'U1X 1KX', 'Canada', 'c7@ex.com', 3);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(24, 2, '123 corny rd', 'Vancouver', 'BC', 'A1T 5K3', 'Canada', 'c8@ex.com', 3);
 
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(25, 3, '123 July rd', 'Ottawa', 'ON', 'X1X 5K9', 'Canada', 'd@ex.com', 4);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(26, 4, '123 August rd', 'Toronto', 'ON', 'Z1X 7K8', 'Canada', 'd2@ex.com', 4);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(27, 5, '123 jane rd', 'Vancouver', 'BC', 'N1X 5K4', 'Canada', 'd3@ex.com', 4);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(28, 5, '123 korea rd', 'Vancouver', 'BC', 'J1X 5K5', 'Canada', 'd4@ex.com', 4);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(29, 5, '123 witness rd', 'Montreal', 'QC', 'B1X 5K1', 'Canada', 'd5@ex.com', 4);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(30, 5, '123 ford rd', 'Indianapolis', 'IN', '14666', 'United States of America', 'd6@ex.com', 4);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(31, 2, '123 Levesque rd', 'Los Angeles', 'CA', '11722', 'United States of America', 'd7@ex.com', 4);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(32, 2, '123 Jackson rd', 'Sacramento', 'CA', '56912', 'United States of America', 'd8@ex.com', 4);
 
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(33, 3, '123 Kanye rd', 'Chicago', 'IL', '22000', 'United States of America', 'e@ex.com', 5);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(34, 4, '123 Common rd', 'Toronto', 'ON', 'A1X 5K7', 'Canada', 'e2@ex.com', 5);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(35, 5, '123 street', 'Vancouver', 'BC', 'S1X 5KX', 'Canada', 'e3@ex.com', 5);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(36, 5, '123 other street', 'Vancouver', 'BC', 'C1X 5K1', 'Canada', 'e4@ex.com', 5);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(37, 2, '123 boomer rd', 'Ottawa', 'ON', 'A1X 5K1', 'Canada', 'e5@ex.com', 5);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(38, 2, '123 genz rd', 'New York City', 'NY', '78200', 'United States of America', 'e6@ex.com', 5);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(39, 2, '123 select ', 'Minnesota', 'WI', '54312', 'United States of America', 'e7@ex.com', 5);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(40, 2, '123 miles rd', 'Vancouver', 'ON', '54545', 'United States of America', 'e8@ex.com', 5);
 
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(41, 3, '123 john st', 'Ottawa', 'ON', 'G1G 5K1', 'Canada', 'f@ex.com', 6);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(42, 4, '123 igor st', 'Toronto', 'ON', 'K1G 5K7', 'Canada', 'f2@ex.com', 6);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(43, 5, '123 main rd', 'Vancouver', 'BC', 'V1X 5K4', 'Canada', 'f3@ex.com', 6);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(44, 1, '123 two rd', 'Vancouver', 'BC', 'V1X 5K4', 'Canada', 'f4@ex.com', 6);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(45, 1, '123 thre rd', 'Ottawa', 'ON', 'A1X 5K1', 'Canada', 'f5@ex.com', 6);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(46, 2, '123 four rd', 'New York City', 'NY', '12521', 'United States of America', 'f6@ex.com', 6);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(47, 2, '123 five rd', 'New York City', 'NY', '96122', 'United States of America', 'f7@ex.com', 6);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(48, 2, '123 six rd', 'New York City', 'NY', '41515', 'United States of America', 'f8@ex.com', 6);
 
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(49, 3, '123 seven rd', 'Ottawa', 'ON', 'K1X 5K1', 'Canada', 'g@ex.com', 7);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(50, 4, '123 kenny rd', 'Toronto', 'ON', 'J1X 5K4', 'Canada', 'g2@ex.com', 7);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(51, 5, '123 Lebum rd', 'Vancouver', 'BC', 'Y1X 5K7', 'Canada', 'g3@ex.com', 7);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(52, 5, '123 LeMickey rd', 'Vancouver', 'BC', 'J1X 7K9', 'Canada', 'g4@ex.com', 7);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(53, 4, '123 LeDisney rd', 'Ottawa', 'ON', 'N1X 5K8', 'Canada', 'g5@ex.com', 7);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(54, 4, '123 Le46 rd', 'Chicago', 'IL', '23233', 'United States of America', 'g6@ex.com', 7);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(55, 4, '123 Pessi rd', 'New York City', 'NY', '44545', 'United States of America', 'g7@ex.com', 7);
-insert into hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
+INSERT INTO hotel(id,category, street_address, city, province_or_state, Postal_code_or_zip_code
 , country, contact_email, hotel_chain_id) VALUES(56, 4, '123 Penaldo rd', 'Saint Louis', 'CA', '11212', 'United States of America', 'g8@ex.com', 7);
 
 -- -----------------------------------------Rooms -----------------------------------------------------
@@ -626,7 +635,7 @@ INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id)
 
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 70, 'single', 'mountain', FALSE, FALSE, 51);
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 100, 'Double', 'mountain', FALSE, TRUE, 51);
-INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 120, 'queen', ‘sea’, FALSE, FALSE, 51);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 120, 'queen', 'sea', FALSE, FALSE, 51);
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 150, 'king', 'sea', TRUE, FALSE, 51);
 
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 70, 'single', 'mountain', FALSE, FALSE, 52);
@@ -635,7 +644,7 @@ INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id)
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 150, 'king', 'sea', TRUE, FALSE, 52);
 
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 70, 'single', 'mountain', FALSE, FALSE, 53);
-INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 100, 'Double', ‘sea’, FALSE, TRUE, 53);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 100, 'Double', 'sea', FALSE, TRUE, 53);
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 120, 'queen', 'mountain', FALSE, FALSE, 53);
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 150, 'king', 'sea', TRUE, FALSE, 53);
 
@@ -644,13 +653,13 @@ INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id)
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 120, 'queen', 'mountain', FALSE, FALSE, 54);
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 150, 'king', 'sea', TRUE, FALSE, 54);
 
-INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 70, 'single', ‘sea’, FALSE, FALSE, 55);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 70, 'single', 'sea', FALSE, FALSE, 55);
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 100, 'Double', 'mountain', FALSE, TRUE, 55);
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 120, 'queen', 'mountain', FALSE, FALSE, 55);
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 150, 'king', 'sea', TRUE, FALSE, 55);
 
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (1, 100, 'single', 'mountain', FALSE, FALSE, 56);
-INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 150, 'Double', ‘sea’, FALSE, TRUE, 56);
+INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (2, 150, 'Double', 'sea', FALSE, TRUE, 56);
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (3, 180, 'queen', 'mountain', FALSE, FALSE, 56);
 INSERT INTO room (room_number,price,capacity,View, Extended, Problems, hotel_id) VALUES (4, 200, 'king', 'sea', TRUE, FALSE, 56);
 
@@ -662,116 +671,116 @@ VALUES (1, 'Ralph', '123 ex st', 'Ottawa', 'ON', 'K1J 5N2', 'Canada', '110234564
 -- --------------Employees---------------------------------------------
 INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
 VALUES (1, 'Tom', '123 ex st', 'Ottawa', 'ON', 'K1J 5N2', 'Canada', '15415112', 'tom@ex.com', 'pompei', 'receptionist', 1);
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (2, 'Jennifer', '456 Main St', 'Toronto', 'ON', 'M5V 3K6', 'Canada', '963258741', 'jennifer@ex.com', '4tBk8sZr', '2023-04-01');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (3, 'John', '123 ex st', 'Ottawa', 'ON', 'K1J 5N2', 'Canada', '780452619', 'john@ex.com', 'u5Xn3vLq', '2023-04-02');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (4, 'Emily', '789 Elm St', 'Vancouver', 'BC', 'V6B 5J5', 'Canada', '214365870', 'emily@ex.com', '7mCp6hFy', '2023-04-05');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (5, 'Peter', '789 Street St', 'Montreal', 'QC', 'V6B 5P5', 'Canada', '679083542', 'peter@ex.com', 'a8Rt5gVb', '2023-04-05');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (6, 'Mark', '789 Maple St', 'Vancouver', 'BC', 'V7B 5J5', 'Canada', '509328716', 'mark@ex.com', '6yLp9kHj', '2023-05-30');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (7, 'Rachel', '123 Pine St', 'Toronto', 'ON', 'I9I 9I9', 'Canada', '893721456', 'rachel@ex.com', 's2Zc7bNx', '2023-06-01');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (8, 'Kevin', '456 Birch St', 'Montreal', 'QC', 'J0J 0J0', 'Canada', '201958637', 'kevin@ex.com', '5tVr2mBq', '2023-06-02');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (9, 'Julia', '789 Oak St', 'Vancouver', 'BC', 'K1K 1K1', 'Canada', '368507914', 'julia@ex.com', 'b3Df8kNp', '2023-06-05');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (10, 'Bryan', '123 Elm St', 'Toronto', 'ON', 'L2L 2L2', 'Canada', '927416385', 'bryan@ex.com', 'h7Gn5tRm', '2023-06-06');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (11, 'Sophia', '456 Oak St', 'Montreal', 'QC', 'M3M 3M3', 'Canada', '684209531', 'sophia@ex.com', 'j9Hb6xPc', '2023-06-07');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (12, 'Jacob', '789 Cedar St', 'Vancouver', 'BC', 'N4N 4N4', 'Canada', '741369825', 'jacob@ex.com', 'k8Jf5dVt', '2023-06-08');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (13, 'Sarah', '122 King St', 'Winnipeg', 'MB', 'O5O 5O5', 'Canada', '543870296', 'sarah@ex.com', 'r6Yg7bNc', '2023-04-14');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (14, 'Jake', '456 Bay St', 'Victoria', 'BC', 'P6P 6P6', 'Canada', '150987263', 'jake@ex.com', 'w9Lp4kTj', '2023-04-13');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (15, 'Amy', '890 Yonge St', 'Calgary', 'AB', 'Q7Q 7Q7', 'Canada', '236489571', 'amy@ex.com', '2nGd7sKf', '2023-04-12');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (16, 'David', '567 Queen St', 'Halifax', 'NS', 'R8R 8R8', 'Canada', '419238765', 'david@ex.com', '4mBv8pLc', '2023-04-11');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (17, 'William', '123 King St', 'Halifax', 'NS', 'S9S 9S9', 'Canada', '567894123', 'william@ex.com', '1tRn9sMx', '2023-04-15');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (18, 'Noah', '2929 Dogwood Blvd', 'Toronto', 'ON', 'T0T 0T0', 'Canada', '693215487', 'noah@ex.com', '3yTm4nLw', '2023-04-13');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (19, ‘Olivia, '4141 Juniper Blvd', 'Toronto', 'ON', 'U1U 1U1', 'Canada', '985674312', 'oli@ex.com', '8sBk9pHf', '2023-04-01');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (20, 'Chloe', '4545 Linden St', 'Ottawa', 'ON', 'V2V 2V2', 'Canada', '361904758', 'chloe@ex.com', '7vNc3xRj', '2023-04-02');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (21, 'Lily', '4747 Magnolia Ave', 'Vancouver', 'BC', 'W3W 3W3', 'Canada', '594836127', 'l@ex.com', '6hFb4tKq', '2023-04-05');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (22, ‘Daniel’, '4949 Oak Hill Rd', 'Montreal', 'QC', 'Y5Y 5Y5', 'Canada', '247810963', 'daniel@ex.com', '9jLm2gVx', '2023-04-05');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (23, ‘George’, '151 Piney Ln', 'Vancouver', 'BC', 'Z6Z 6Z6', 'Canada', '615729834', 'george@ex.com', '2dGc7nHf', '2023-05-30');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (24, 'Harper', '555 Redwood Blvd', 'Toronto', 'ON', 'A7A 7A7', 'Canada', '935076412', 'harper@ex.com', '1kRb8pMx', '2023-06-01');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (25, 'Lewis', '5959 Tulip Rd', 'Montreal', 'QC', 'B8B 8B8', 'Canada', '473162598', 'lewis@ex.com', '5tFm7vNc', '2023-06-02');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (26, 'Samuel', '161 Umbrella St', 'Vancouver', 'BC', 'C9C 9C9', 'Canada', '802693541', 'sam@ex.com', '3yHn6bLw', '2023-06-05');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (27, 'Isaac', '6363 Vine Ln', 'Toronto', 'ON', 'D0D 0D0', 'Canada', '647983215', 'isaac@ex.com', '4kPj9sRf', '2023-06-06');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (28, 'Taylor', '6767 Xylophone Rd', 'Montreal', 'QC', 'E1E 1E1', 'Canada', '289045176', 'taylor@ex.com', '7vNc3xRj', '2023-06-07');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (29, 'Cooper', '6969 Yellowbrick Blvd', 'Vancouver', 'BC', 'F2F 2F2', 'Canada', '731468529', 'cooper@ex.com', '9jLm2gVx', '2023-06-08');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (30, 'Scarlett', '7171 Zebra Dr', 'Winnipeg', 'MB', 'G3G 3G3', 'Canada', '452036891', 'scar@ex.com', '2dGc7nHf', '2023-04-14');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (31, 'Grace', '373 Alpha St', 'Victoria', 'BC', 'H4H 4H4', 'Canada', '397210846', 'grace@ex.com', '1kRb8pMx', '2023-04-13');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (32, 'Joshua', '7575 Bravo Ln', 'Calgary', 'AB', 'I5I 5I5', 'Canada', '549618723', 'joshua@ex.com', '5tFm7vNc', '2023-04-12');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (33, 'Victoria', '7777 Charlie Rd', 'Halifax', 'NS', 'J6J 6J6', 'Canada', '987123456', 'vic@ex.com', '3yHn6bLw', '2023-04-11');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (34, 'Alexander', '7979 Delta Ave', 'Halifax', 'NS', 'K7K 7K7', 'Canada', '631049287', 'alex@ex.com', '4kPj9sRf', '2023-04-15');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (35, 'Abigail', '8181 Echo Blvd', 'Toronto', 'ON', 'L8L 8L8', 'Canada', '805742691', 'abigail@ex.com', '2mBv8pLc', '2023-04-13');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (36, 'Amelia', '8383 Foxtrot Dr', 'Toronto', 'ON', 'M9M 9M9', 'Canada', '217930546', 'amelia@ex.com', '1tRn9sMx', '2023-04-01');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (37, 'Jackson', '8585 Golf Rd', 'Ottawa', 'ON', 'N0N 0N0', 'Canada', '839204715', 'jackson@ex.com', '3yTm4nLw', '2023-04-02');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (38, 'Thompson', '8787 Hotel St', 'Vancouver', 'BC', 'O1O 1O1', 'Canada', '156493728', 'thom@ex.com', '8sBk9pHf', '2023-04-05');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (39, 'Martin', '8989 India Ln', 'Montreal', 'QC', 'P2P 2P2', 'Canada', '569081432', 'martin@ex.com', '7vNc3xRj', '2023-04-05');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (40, 'Perez', '9191 Juliet Blvd', 'Vancouver', 'BC', 'Q3Q 3Q3', 'Canada', '481672935', 'perez@ex.com', '6hFb4tKq', '2023-05-30');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (41, 'Jones', '9393 Kilo Ave', 'Toronto', 'ON', 'R4R 4R4', 'Canada', '763258140', 'jo@ex.com', '9jLm2gVx', '2023-06-01');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (42, 'Ava', '9595 Lima Rd', 'Montreal', 'QC', 'S5S 5S5', 'Canada', '310257469', 'ava@ex.com', '2dGc7nHf', '2023-06-02');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (43, 'Ethan', '9797 Mike Dr', 'Vancouver', 'BC', 'T6T 6T6', 'Canada', '985037216', 'ethan@ex.com', '1kRb8pMx', '2023-06-05');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (44, 'Chen', '9999 November Blvd', 'Toronto', 'ON', 'U7U 7U7', 'Canada', '734026815', 'chen@ex.com', '5tFm7vNc', '2023-06-06');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (45, 'Wright', '1212 Oscar St', 'Montreal', 'QC', 'V8V 8V8', 'Canada', '129576483', 'wr@ex.com', '3yHn6bLw', '2023-06-07');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (46, 'Collins', '1414 Papa Ln', 'Vancouver', 'BC', 'W9W 9W9', 'Canada', '670329814', 'col@ex.com', '4kPj9sRf', '2023-06-08');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (47, 'Kim', '1616 Quebec Rd', 'Winnipeg', 'MB', 'Y1Y 1Y1', 'Canada', '390574216', 'kim@ex.com', '8dMx6jLw', '2023-04-14');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (48, 'Andrew', '1818 Romeo Ave', 'Victoria', 'BC', 'Z2Z 2Z2', 'Canada', '862407935', 'and@ex.com', 'e6Hv7pJy', '2023-04-13');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (49, 'Lily', '2020 Sierra Dr', 'Calgary', 'AB', 'A3A 3A3', 'Canada', '258143679', 'lily@ex.com', '9nKc4bRf', '2023-04-12');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (50, 'Gabriel', '2222 Tango Ave', 'Halifax', 'NS', 'B3J 2K8', 'Canada', '943815027', 'gab@ex.com', 'w3Gm2sTq', '2023-04-11');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (51, 'Owen', '2424 Uniform Rd', 'Halifax', 'NS', 'C5C 5C5', 'Canada', '516247839', 'owen@ex.com', '4tBk8sZr', '2023-04-15');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (52, 'Amir', '2626 Victor Blvd', 'Toronto', 'ON', 'D6D 6D6', 'Canada', '368509724', 'amir@ex.com', 'u5Xn3vLq', '2023-04-13');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (53, 'Addison', '2828 Whiskey Ln', 'Victoria', 'BC', 'E7E 7E7', 'Canada', '172835964', 'addison@ex.com', '7mCp6hFy', '2023-04-13');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (54, ‘Karim’, '3030 X-ray St', 'Calgary', 'AB', 'F8F 8F8', 'Canada', '647982315', 'k@ex.com', 'a8Rt5gVb', '2023-04-12');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (55, 'Julian', '3232 Yankee Dr', 'Halifax', 'NS', 'G9G 9G9', 'Canada', '935170482', 'j@ex.com', '6yLp9kHj', '2023-04-11');
-INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, registration_date) 
-VALUES (56, 'Zoey', '3434 Zulu Ave', 'Halifax', 'NS', 'H0H 0H0', 'Canada', '201957634', 'z@ex.com', 's2Zc7bNx', '2023-04-15');
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (2, 'Jennifer', '456 Main St', 'Toronto', 'ON', 'M5V 3K6', 'Canada', '963258741', 'jennifer@ex.com', '4tBk8sZr', 'receptionist', 2);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (3, 'John', '123 ex st', 'Ottawa', 'ON', 'K1J 5N2', 'Canada', '780452619', 'john@ex.com', 'u5Xn3vLq', 'receptionist', 3);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (4, 'Emily', '789 Elm St', 'Vancouver', 'BC', 'V6B 5J5', 'Canada', '214365870', 'emily@ex.com', '7mCp6hFy', 'receptionist', 4);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (5, 'Peter', '789 Street St', 'Montreal', 'QC', 'V6B 5P5', 'Canada', '679083542', 'peter@ex.com', 'a8Rt5gVb', 'receptionist', 5);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (6, 'Mark', '789 Maple St', 'Vancouver', 'BC', 'V7B 5J5', 'Canada', '509328716', 'mark@ex.com', '6yLp9kHj', 'receptionist', 6);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (7, 'Rachel', '123 Pine St', 'Toronto', 'ON', 'I9I 9I9', 'Canada', '893721456', 'rachel@ex.com', 's2Zc7bNx', 'receptionist', 7);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (8, 'Kevin', '456 Birch St', 'Montreal', 'QC', 'J0J 0J0', 'Canada', '201958637', 'kevin@ex.com', '5tVr2mBq', 'receptionist', 8);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (9, 'Julia', '789 Oak St', 'Vancouver', 'BC', 'K1K 1K1', 'Canada', '368507914', 'julia@ex.com', 'b3Df8kNp', 'receptionist', 9);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (10, 'Bryan', '123 Elm St', 'Toronto', 'ON', 'L2L 2L2', 'Canada', '927416385', 'bryan@ex.com', 'h7Gn5tRm', 'receptionist', 10);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (11, 'Sophia', '456 Oak St', 'Montreal', 'QC', 'M3M 3M3', 'Canada', '684209531', 'sophia@ex.com', 'j9Hb6xPc', 'receptionist', 11);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (12, 'Jacob', '789 Cedar St', 'Vancouver', 'BC', 'N4N 4N4', 'Canada', '741369825', 'jacob@ex.com', 'k8Jf5dVt', 'receptionist', 12);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (13, 'Sarah', '122 King St', 'Winnipeg', 'MB', 'O5O 5O5', 'Canada', '543870296', 'sarah@ex.com', 'r6Yg7bNc', 'receptionist', 13);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (14, 'Jake', '456 Bay St', 'Victoria', 'BC', 'P6P 6P6', 'Canada', '150987263', 'jake@ex.com', 'w9Lp4kTj', 'receptionist', 14);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (15, 'Amy', '890 Yonge St', 'Calgary', 'AB', 'Q7Q 7Q7', 'Canada', '236489571', 'amy@ex.com', '2nGd7sKf', 'receptionist', 15);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (16, 'David', '567 Queen St', 'Halifax', 'NS', 'R8R 8R8', 'Canada', '419238765', 'david@ex.com', '4mBv8pLc', 'receptionist', 16);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (17, 'William', '123 King St', 'Halifax', 'NS', 'S9S 9S9', 'Canada', '567894123', 'william@ex.com', '1tRn9sMx', 'receptionist', 17);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (18, 'Noah', '2929 Dogwood Blvd', 'Toronto', 'ON', 'T0T 0T0', 'Canada', '693215487', 'noah@ex.com', '3yTm4nLw', 'receptionist', 18);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (19, 'Olivia', '4141 Juniper Blvd', 'Toronto', 'ON', 'U1U 1U1', 'Canada', '985674312', 'oli@ex.com', '8sBk9pHf', 'receptionist', 19);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (20, 'Chloe', '4545 Linden St', 'Ottawa', 'ON', 'V2V 2V2', 'Canada', '361904758', 'chloe@ex.com', '7vNc3xRj', 'receptionist', 20);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (21, 'Lily', '4747 Magnolia Ave', 'Vancouver', 'BC', 'W3W 3W3', 'Canada', '594836127', 'l@ex.com', '6hFb4tKq', 'receptionist', 21);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (22, 'Daniel', '4949 Oak Hill Rd', 'Montreal', 'QC', 'Y5Y 5Y5', 'Canada', '247810963', 'daniel@ex.com', '9jLm2gVx', 'receptionist', 22);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (23, 'George', '151 Piney Ln', 'Vancouver', 'BC', 'Z6Z 6Z6', 'Canada', '615729834', 'george@ex.com', '2dGc7nHf', 'receptionist', 23);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (24, 'Harper', '555 Redwood Blvd', 'Toronto', 'ON', 'A7A 7A7', 'Canada', '935076412', 'harper@ex.com', '1kRb8pMx', 'receptionist', 24);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (25, 'Lewis', '5959 Tulip Rd', 'Montreal', 'QC', 'B8B 8B8', 'Canada', '473162598', 'lewis@ex.com', '5tFm7vNc', 'receptionist', 25);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (26, 'Samuel', '161 Umbrella St', 'Vancouver', 'BC', 'C9C 9C9', 'Canada', '802693541', 'sam@ex.com', '3yHn6bLw', 'receptionist', 26);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (27, 'Isaac', '6363 Vine Ln', 'Toronto', 'ON', 'D0D 0D0', 'Canada', '647983215', 'isaac@ex.com', '4kPj9sRf', 'receptionist', 27);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (28, 'Taylor', '6767 Xylophone Rd', 'Montreal', 'QC', 'E1E 1E1', 'Canada', '289045176', 'taylor@ex.com', '7vNc3xRj', 'receptionist', 28);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (29, 'Cooper', '6969 Yellowbrick Blvd', 'Vancouver', 'BC', 'F2F 2F2', 'Canada', '731468529', 'cooper@ex.com', '9jLm2gVx', 'receptionist', 29);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (30, 'Scarlett', '7171 Zebra Dr', 'Winnipeg', 'MB', 'G3G 3G3', 'Canada', '452036891', 'scar@ex.com', '2dGc7nHf', 'receptionist', 29);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (31, 'Grace', '373 Alpha St', 'Victoria', 'BC', 'H4H 4H4', 'Canada', '397210846', 'grace@ex.com', '1kRb8pMx', 'receptionist', 30);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (32, 'Joshua', '7575 Bravo Ln', 'Calgary', 'AB', 'I5I 5I5', 'Canada', '549618723', 'joshua@ex.com', '5tFm7vNc', 'receptionist', 31);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (33, 'Victoria', '7777 Charlie Rd', 'Halifax', 'NS', 'J6J 6J6', 'Canada', '987123456', 'vic@ex.com', '3yHn6bLw', 'receptionist', 33);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (34, 'Alexander', '7979 Delta Ave', 'Halifax', 'NS', 'K7K 7K7', 'Canada', '631049287', 'alex@ex.com', '4kPj9sRf', 'receptionist', 34);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (35, 'Abigail', '8181 Echo Blvd', 'Toronto', 'ON', 'L8L 8L8', 'Canada', '805742691', 'abigail@ex.com', '2mBv8pLc', 'receptionist', 35);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (36, 'Amelia', '8383 Foxtrot Dr', 'Toronto', 'ON', 'M9M 9M9', 'Canada', '217930546', 'amelia@ex.com', '1tRn9sMx', 'receptionist', 36);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (37, 'Jackson', '8585 Golf Rd', 'Ottawa', 'ON', 'N0N 0N0', 'Canada', '839204715', 'jackson@ex.com', '3yTm4nLw', 'receptionist', 37);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (38, 'Thompson', '8787 Hotel St', 'Vancouver', 'BC', 'O1O 1O1', 'Canada', '156493728', 'thom@ex.com', '8sBk9pHf', 'receptionist', 38);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (39, 'Martin', '8989 India Ln', 'Montreal', 'QC', 'P2P 2P2', 'Canada', '569081432', 'martin@ex.com', '7vNc3xRj', 'receptionist', 39);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (40, 'Perez', '9191 Juliet Blvd', 'Vancouver', 'BC', 'Q3Q 3Q3', 'Canada', '481672935', 'perez@ex.com', '6hFb4tKq', 'receptionist', 40);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (41, 'Jones', '9393 Kilo Ave', 'Toronto', 'ON', 'R4R 4R4', 'Canada', '763258140', 'jo@ex.com', '9jLm2gVx', 'receptionist', 41);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (42, 'Ava', '9595 Lima Rd', 'Montreal', 'QC', 'S5S 5S5', 'Canada', '310257469', 'ava@ex.com', '2dGc7nHf', 'receptionist', 42);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (43, 'Ethan', '9797 Mike Dr', 'Vancouver', 'BC', 'T6T 6T6', 'Canada', '985037216', 'ethan@ex.com', '1kRb8pMx', 'receptionist', 43);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (44, 'Chen', '9999 November Blvd', 'Toronto', 'ON', 'U7U 7U7', 'Canada', '734026815', 'chen@ex.com', '5tFm7vNc', 'receptionist', 44);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (45, 'Wright', '1212 Oscar St', 'Montreal', 'QC', 'V8V 8V8', 'Canada', '129576483', 'wr@ex.com', '3yHn6bLw', 'receptionist', 45);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (46, 'Collins', '1414 Papa Ln', 'Vancouver', 'BC', 'W9W 9W9', 'Canada', '670329814', 'col@ex.com', '4kPj9sRf', 'receptionist', 46);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (47, 'Kim', '1616 Quebec Rd', 'Winnipeg', 'MB', 'Y1Y 1Y1', 'Canada', '390574216', 'kim@ex.com', '8dMx6jLw', 'receptionist', 47);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (48, 'Andrew', '1818 Romeo Ave', 'Victoria', 'BC', 'Z2Z 2Z2', 'Canada', '862407935', 'and@ex.com', 'e6Hv7pJy', 'receptionist', 48);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (49, 'Lily', '2020 Sierra Dr', 'Calgary', 'AB', 'A3A 3A3', 'Canada', '258143679', 'lily@ex.com', '9nKc4bRf', 'receptionist', 49);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (50, 'Gabriel', '2222 Tango Ave', 'Halifax', 'NS', 'B3J 2K8', 'Canada', '943815027', 'gab@ex.com', 'w3Gm2sTq', 'receptionist', 50);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (51, 'Owen', '2424 Uniform Rd', 'Halifax', 'NS', 'C5C 5C5', 'Canada', '516247839', 'owen@ex.com', '4tBk8sZr', 'receptionist', 51);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (52, 'Amir', '2626 Victor Blvd', 'Toronto', 'ON', 'D6D 6D6', 'Canada', '368509724', 'amir@ex.com', 'u5Xn3vLq', 'receptionist', 52);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (53, 'Addison', '2828 Whiskey Ln', 'Victoria', 'BC', 'E7E 7E7', 'Canada', '172835964', 'addison@ex.com', '7mCp6hFy', 'receptionist', 53);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (54, 'Karim', '3030 X-ray St', 'Calgary', 'AB', 'F8F 8F8', 'Canada', '647982315', 'k@ex.com', 'a8Rt5gVb', 'receptionist', 54);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (55, 'Julian', '3232 Yankee Dr', 'Halifax', 'NS', 'G9G 9G9', 'Canada', '935170482', 'j@ex.com', '6yLp9kHj', 'receptionist', 55);
+INSERT INTO employee(id, full_name, street_address, city, province_or_state, Postal_code_zip_code, country, SSN_SIN, email, passwrd, role, hotel_id) 
+VALUES (56, 'Zoey', '3434 Zulu Ave', 'Halifax', 'NS', 'H0H 0H0', 'Canada', '201957634', 'z@ex.com', 's2Zc7bNx', 'receptionist', 56);
 
 
 -- ----------------------------Amenities ---------------------------------
